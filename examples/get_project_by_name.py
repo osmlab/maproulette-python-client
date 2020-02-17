@@ -3,10 +3,11 @@ import json
 
 # Create a configuration object using an API key
 config = mr.Configuration(api_key='YOUR_API_KEY')
+
 # Create an API object using your config object
 api = mr.Api(config)
 
-# We want to fetch a project with name 'test_intersection_analysis_1'
+# We want to fetch a project with name 'Health Facilities in India'
 my_project_name = 'Health Facilities in India'
 
 # Print the API response

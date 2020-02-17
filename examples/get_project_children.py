@@ -3,10 +3,11 @@ import json
 
 # Create a configuration object using an API key
 config = mr.Configuration(api_key='YOUR_API_KEY')
+
 # Create an API object using your config object
 api = mr.Api(config)
 
-# My project ID is 83
+# The ID of the project whose children I want to fetch is 4719
 my_project_id = '4719'
 
 # Print the API response
