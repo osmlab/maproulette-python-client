@@ -9,7 +9,7 @@ QUERY_PARAMETER_LIMIT = "limit"
 QUERY_PARAMETER_PAGE = "page"
 QUERY_PARAMETER_ONLY_ENABLED = "onlyEnabled"
 # Common URIs
-URI_FIND = "s/find?"
+URI_FIND = "s/find"
 URI_PROJECT_GET_BY_NAME = "/projectByName"
 URI_PROJECT_POST = "/project"
 URI_CHILDREN = "/children"
