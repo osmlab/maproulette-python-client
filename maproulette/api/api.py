@@ -3,7 +3,6 @@ This module contains the methods that the user will use directly to interact wit
 """
 import json
 from maproulette.api.maproulette_server import MapRouletteServer
-from maproulette.api import query_constants
 from maproulette.models.project import ProjectModel
 from maproulette.models.challenge import ChallengeModel
 from maproulette.models.task import TaskModel
@@ -22,7 +21,7 @@ class Api:
         :return: the response from the API
         """
         response = self.server.get(
-            endpoint=query_constants.URI_PROJECT_BASE % project_id
+            endpoint=f"/project/{str(project_id)}"
         )
         return response
 
@@ -33,7 +32,7 @@ class Api:
         :return: the response from the API
         """
         response = self.server.get(
-            endpoint=query_constants.URI_PROJECT_GET_BY_NAME % project_name
+            endpoint=f"/projectByName/{str(project_name)}"
         )
         return response
 
@@ -47,13 +46,16 @@ class Api:
         :param only_enabled: flag to set if only wanting enabled projects returned. Default is True.
         :return: the response from the API in a list form
         """
+        query_params = {
+            "q": matcher,
+            "parentId": parent,
+            "limit": limit,
+            "page": page,
+            "onlyEnabled": only_enabled
+        }
         response = self.server.get(
-            endpoint=query_constants.URI_PROJECT_FIND +
-            query_constants.QUERY_PARAMETER_Q + matcher + "&" +
-            query_constants.QUERY_PARAMETER_PARENT_IDENTIFIER + str(parent) + "&" +
-            query_constants.QUERY_PARAMETER_LIMIT + str(limit) + "&" +
-            query_constants.QUERY_PARAMETER_PAGE + str(page) + "&" +
-            query_constants.QUERY_PARAMETER_ONLY_ENABLED + only_enabled
+            endpoint="/projects/find",
+            params=query_params
         )
         return response
 
@@ -67,10 +69,13 @@ class Api:
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
         :return: the response from the API
         """
+        query_params = {
+            "limit": limit,
+            "page": page
+        }
         response = self.server.get(
-            endpoint=query_constants.URI_PROJECT_CHILDREN % project_id + "?" +
-            query_constants.QUERY_PARAMETER_LIMIT + str(limit) + "&" +
-            query_constants.QUERY_PARAMETER_PAGE + str(page)
+            endpoint=f"/project/{project_id}/children",
+            params=query_params
         )
         return response
 
@@ -82,10 +87,13 @@ class Api:
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
         :return: the response from the API in list form
         """
+        query_params = {
+            "limit": limit,
+            "page": page
+        }
         response = self.server.get(
-            endpoint=query_constants.URI_CHALLENGES % project_id + "?" +
-            query_constants.QUERY_PARAMETER_LIMIT + str(limit) + "&" +
-            query_constants.QUERY_PARAMETER_PAGE + str(page)
+            endpoint=f"/project/{project_id}/challenges",
+            params=query_params
         )
         return response
 
@@ -96,11 +104,9 @@ class Api:
         :return:
         """
         if self.is_model(data):
-            data = ProjectModel.to_json(data)
-        elif self.is_json(data):
-            pass
+            data = ProjectModel.to_dict(data)
         response = self.server.post(
-            endpoint=query_constants.URI_PROJECT_POST,
+            endpoint="/project",
             body=data)
         return response
 

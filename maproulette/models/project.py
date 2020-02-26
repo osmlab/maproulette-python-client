@@ -2,6 +2,7 @@
 This module contains the definition of a Project object in MapRoulette.
 """
 
+import json
 import os
 
 
@@ -77,7 +78,7 @@ class ProjectModel:
         self._display_name = display_name
         self._is_virtual = is_virtual
 
-    def to_json(self):
+    def to_dict(self):
         properties = {
             "id": self._id,
             "name": self._name,
@@ -89,3 +90,5 @@ class ProjectModel:
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
+    def to_json(self):
+        return json.dumps(self.to_dict())

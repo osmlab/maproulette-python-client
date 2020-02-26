@@ -15,15 +15,15 @@ class MapRouletteServer:
         self.url = configuration.url
         self.headers = configuration.headers
 
-    def get(self, endpoint, body=None):
+    def get(self, endpoint, params=None):
         """Method that completes a GET request to the MapRoulette API
         :param endpoint: the server endpoint to use for the GET request
-        :param body: the body of the request (optional)
+        :param params: the parameters that pertain to the request (optional)
         :return: a JSON object containing the API response
         """
         response = requests.get(
             self.url + endpoint,
-            json=body,
+            params=params,
             headers=self.headers,
             verify=False)
         try:

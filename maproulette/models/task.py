@@ -2,6 +2,7 @@
 This module contains the definition of a Task object in MapRoulette.
 """
 
+import json
 import os
 
 
@@ -159,7 +160,7 @@ class TaskModel:
         self._is_bundle_primary = is_bundle_primary
         self._mapillary_images = mapillary_images
 
-    def to_json(self):
+    def to_dict(self):
         properties = {
             "id": self._id,
             "name": self._name,
@@ -178,3 +179,6 @@ class TaskModel:
             "mapillaryImages": self._mapillary_images
         }
         return {k: v for (k, v) in properties.items() if v is not None}
+
+    def to_json(self):
+        return json.dumps(self.to_dict())

@@ -1,6 +1,8 @@
 """
 This module contains the definition of a Challenge object in MapRoulette.
 """
+
+import json
 import os
 
 
@@ -139,7 +141,7 @@ class ChallengeModel:
         self._min_zoom = min_zoom
         self._max_zoom = max_zoom
 
-    def to_json(self):
+    def to_dict(self):
         properties = {
             "id": self._id,
             "name": self._name,
@@ -157,3 +159,6 @@ class ChallengeModel:
             "maxZoom": self._max_zoom
         }
         return {k: v for (k, v) in properties.items() if v is not None}
+
+    def to_json(self):
+        return json.dumps(self.to_dict())
