@@ -3,11 +3,11 @@ This module holds string constants to be used in conjunction with API calls to M
 """
 
 # Query string parameters
-QUERY_PARAMETER_Q = "q="
-QUERY_PARAMETER_PARENT_IDENTIFIER = "parentId="
-QUERY_PARAMETER_LIMIT = "limit="
-QUERY_PARAMETER_PAGE = "page="
-QUERY_PARAMETER_ONLY_ENABLED = "onlyEnabled="
+QUERY_PARAMETER_Q = "q"
+QUERY_PARAMETER_PARENT_IDENTIFIER = "parentId"
+QUERY_PARAMETER_LIMIT = "limit"
+QUERY_PARAMETER_PAGE = "page"
+QUERY_PARAMETER_ONLY_ENABLED = "onlyEnabled"
 # Common URIs
 URI_FIND = "s/find?"
 URI_PROJECT_GET_BY_NAME = "/projectByName"
