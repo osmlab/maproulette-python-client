@@ -1,11 +1,11 @@
-import maproulette as mr
+import maproulette
 import json
 
 # Create a configuration object using a url and API key
-config = mr.Configuration(api_key='{YOUR_API_KEY}')
+config = maproulette.Configuration(api_key='{YOUR_API_KEY}')
 
 # Create an API object using your config object
-api = mr.Api(config)
+api = maproulette.Api(config)
 
 # We want to fetch a project with name 'Health Facilities in India'
 my_project_name = 'Health Facilities in India'
