@@ -20,10 +20,10 @@ class Api:
         :param project_id: the unique project ID
         :return: the response from the API
         """
-        response, status_code = self.server.get(
+        response = self.server.get(
             endpoint=f"/project/{str(project_id)}"
         )
-        return response, status_code
+        return response
 
     def get_project_by_name(self, project_name):
         """
@@ -31,10 +31,10 @@ class Api:
         :param project_name: the unique project name
         :return: the response from the API
         """
-        response, status_code = self.server.get(
+        response = self.server.get(
             endpoint=f"/projectByName/{str(project_name)}"
         )
-        return response, status_code
+        return response
 
     def find_project(self, matcher="", parent=-1, limit=10, page=0, only_enabled="true"):
         """
@@ -53,11 +53,11 @@ class Api:
             "page": str(page),
             "onlyEnabled": only_enabled
         }
-        response, status_code = self.server.get(
+        response = self.server.get(
             endpoint="/projects/find",
             params=query_params
         )
-        return response, status_code
+        return response
 
     def get_project_children(self, project_id, limit=10, page=0):
         """
@@ -73,11 +73,11 @@ class Api:
             "limit": str(limit),
             "page": str(page)
         }
-        response, status_code = self.server.get(
+        response = self.server.get(
             endpoint=f"/project/{project_id}/children",
             params=query_params
         )
-        return response, status_code
+        return response
 
     def get_project_challenges(self, project_id, limit=10, page=0):
         """
@@ -91,11 +91,11 @@ class Api:
             "limit": str(limit),
             "page": str(page)
         }
-        response, status_code = self.server.get(
+        response = self.server.get(
             endpoint=f"/project/{project_id}/challenges",
             params=query_params
         )
-        return response, status_code
+        return response
 
     def create_project(self, data):
         """
@@ -105,10 +105,10 @@ class Api:
         """
         if self.is_model(data):
             data = ProjectModel.to_dict(data)
-        response, status_code = self.server.post(
+        response = self.server.post(
             endpoint="/project",
             body=data)
-        return response, status_code
+        return response
 
     @staticmethod
     def is_json(input_object):
