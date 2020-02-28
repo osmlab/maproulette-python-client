@@ -30,7 +30,7 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return response.json()
+        return response.json(), response.status_code
 
     def post(self, endpoint, body=None):
         """Method that completes a POST request to the MapRoulette API
@@ -47,7 +47,7 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return response.json()
+        return response.json(), response.status_code
 
     def put(self, endpoint, body=None):
         """Method that completes a PUT request to the MapRoulette API
@@ -64,7 +64,7 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return response.json()
+        return response.json(), response.status_code
 
     def delete(self, endpoint):
         """Method that completes a DELETE request to the MapRoulette API
@@ -78,4 +78,4 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return response.json()
+        return response.json(), response.status_code

@@ -20,10 +20,10 @@ class Api:
         :param project_id: the unique project ID
         :return: the response from the API
         """
-        response = self.server.get(
+        response, status_code = self.server.get(
             endpoint=f"/project/{str(project_id)}"
         )
-        return response
+        return response, status_code
 
     def get_project_by_name(self, project_name):
         """
@@ -31,12 +31,12 @@ class Api:
         :param project_name: the unique project name
         :return: the response from the API
         """
-        response = self.server.get(
+        response, status_code = self.server.get(
             endpoint=f"/projectByName/{str(project_name)}"
         )
-        return response
+        return response, status_code
 
-    def find_project(self, matcher="", parent="-1", limit="10", page="0", only_enabled="true"):
+    def find_project(self, matcher="", parent=-1, limit=10, page=0, only_enabled="true"):
         """
         Method to search for projects based on a specific search criteria
         :param matcher: the search string used to match the project names. Default is empty string
@@ -48,18 +48,18 @@ class Api:
         """
         query_params = {
             "q": matcher,
-            "parentId": parent,
-            "limit": limit,
-            "page": page,
+            "parentId": str(parent),
+            "limit": str(limit),
+            "page": str(page),
             "onlyEnabled": only_enabled
         }
-        response = self.server.get(
+        response, status_code = self.server.get(
             endpoint="/projects/find",
             params=query_params
         )
-        return response
+        return response, status_code
 
-    def get_project_children(self, project_id, limit="10", page="0"):
+    def get_project_children(self, project_id, limit=10, page=0):
         """
         Method to fetch a project's children in an expanded list. Unlike the GET request /project/{id}/challenges, this
         function will wrap the JSON array list inside of the parent project object, showing the full hierarchy. It will
@@ -70,16 +70,16 @@ class Api:
         :return: the response from the API
         """
         query_params = {
-            "limit": limit,
-            "page": page
+            "limit": str(limit),
+            "page": str(page)
         }
-        response = self.server.get(
+        response, status_code = self.server.get(
             endpoint=f"/project/{project_id}/children",
             params=query_params
         )
-        return response
+        return response, status_code
 
-    def get_project_challenges(self, project_id, limit="10", page="0"):
+    def get_project_challenges(self, project_id, limit=10, page=0):
         """
         Method to fetch a list of a project's challenges.
         :param project_id: the id of the parent project
@@ -88,14 +88,14 @@ class Api:
         :return: the response from the API in list form
         """
         query_params = {
-            "limit": limit,
-            "page": page
+            "limit": str(limit),
+            "page": str(page)
         }
-        response = self.server.get(
+        response, status_code = self.server.get(
             endpoint=f"/project/{project_id}/challenges",
             params=query_params
         )
-        return response
+        return response, status_code
 
     def create_project(self, data):
         """
@@ -105,10 +105,10 @@ class Api:
         """
         if self.is_model(data):
             data = ProjectModel.to_dict(data)
-        response = self.server.post(
+        response, status_code = self.server.post(
             endpoint="/project",
             body=data)
-        return response
+        return response, status_code
 
     @staticmethod
     def is_json(input_object):
@@ -120,9 +120,9 @@ class Api:
         try:
             json_object = json.loads(input_object)
             del json_object
+            return True
         except ValueError:
-            pass
-        return True
+            return False
 
     @staticmethod
     def is_model(input_object):
