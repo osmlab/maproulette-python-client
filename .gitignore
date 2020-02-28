@@ -1,0 +1,8 @@
+tox.ini
+venv
+.eggs
+.idea
+.tox
+*.pyc
+__pycache__
+maproulette.egg-info
