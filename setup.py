@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 
-exclude_dirs = ['examples', 'tests', 'venv']
-
 with open("README.md", "r") as readme:
     long_description = readme.read()
 
