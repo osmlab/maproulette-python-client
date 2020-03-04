@@ -1,4 +1,5 @@
-from maproulette.api import MapRouletteServer
+import maproulette
+
 
 def test_example():
     assert 1 == 1
