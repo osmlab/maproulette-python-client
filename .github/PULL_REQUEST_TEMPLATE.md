@@ -4,7 +4,7 @@ Add description here.
 
 ### Potential Impact:
 
-List potential impact to downstream libraries here (ex. atlas-checks, atlas-generator)
+List potential impact to downstream libraries here
 
 ### Unit Test Approach:
 
