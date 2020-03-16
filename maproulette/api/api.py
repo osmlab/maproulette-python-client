@@ -110,6 +110,56 @@ class Api:
             body=data)
         return response
 
+    def get_challenge_by_id(self, challenge_id):
+        """
+        Method to retrieve challenge information via the corresponding challenge ID
+        :param challenge_id: the ID corresponding to the challenge
+        :return: the API response from the GET request
+        """
+        response = self.server.get(endpoint=f"/challenge/{challenge_id}")
+        return response
+
+
+    def get_challenge_tasks(self, challenge_id, limit=10, page=0):
+        """
+        Method to retrieve all tasks from a given challenge by ID
+        :param challenge_id: the ID corresponding to the challenge
+        :return: the API response from the GET request
+        """
+        query_params = {
+            "limit": str(limit),
+            "page": str(page)
+        }
+        response = self.server.get(
+            endpoint=f"/challenge/{challenge_id}/tasks",
+            params=query_params
+        )
+        return response
+
+    def add_tasks_to_challenge(self, data, challenge_id):
+        """
+        Method to add tasks to an existing challenge
+        :param data: a geojson containing geometry of tasks to be added to a challenge
+        :param challenge_id: the ID corresponding to the challenge that tasks will be added to
+        :return: the API response from the PUT request
+        """
+        if self.is_model(data):
+            data = TaskModel.to_dict(data)
+        response = self.server.put(
+            endpoint=f"/challenge/{challenge_id}/addTasks",
+            body=data)
+        return response
+
+    def get_task_by_id(self, task_id):
+        """"
+        Method to retrieve task information using the corresponding task ID
+        :param task_id: the  ID  corresponding with the task
+        :return: the  API response from the GET request
+        """
+        response = self.server.get(
+            endpoint=f"/task/{task_id}")
+        return response
+
     @staticmethod
     def is_json(input_object):
         """
