@@ -119,6 +119,14 @@ class Api:
         response = self.server.get(endpoint=f"/challenge/{challenge_id}")
         return response
 
+    def get_challenge_metadata_by_id(self, challenge_id):
+        """
+        Method to retrieve metadata for a challenge using its corresponding ID
+        :param challenge_id:
+        :return:
+        """
+        response = self.server.get(endpoint=f"/data/challenge/{challenge_id}")
+        return response
 
     def get_challenge_tasks(self, challenge_id, limit=10, page=0):
         """
@@ -143,8 +151,6 @@ class Api:
         :param challenge_id: the ID corresponding to the challenge that tasks will be added to
         :return: the API response from the PUT request
         """
-        if self.is_model(data):
-            data = TaskModel.to_dict(data)
         response = self.server.put(
             endpoint=f"/challenge/{challenge_id}/addTasks",
             body=data)
