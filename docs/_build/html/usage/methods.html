@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Functionality &#8212; maproulette-python-client 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="functionality">
+<h1>Functionality<a class="headerlink" href="#functionality" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-maproulette.api.api">
+<span id="module-api"></span><h2>Module: api<a class="headerlink" href="#module-maproulette.api.api" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the methods that the user will use directly to interact with the MapRoulette API.</p>
+<dl class="class">
+<dt id="maproulette.api.api.Api">
+<em class="property">class </em><code class="sig-prename descclassname">maproulette.api.api.</code><code class="sig-name descname">Api</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to handle the API requests</p>
+<dl class="method">
+<dt id="maproulette.api.api.Api.create_project">
+<code class="sig-name descname">create_project</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.create_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a new project</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – the data to use to create the new project</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.find_project">
+<code class="sig-name descname">find_project</code><span class="sig-paren">(</span><em class="sig-param">matcher=''</em>, <em class="sig-param">parent=-1</em>, <em class="sig-param">limit=10</em>, <em class="sig-param">page=0</em>, <em class="sig-param">only_enabled='true'</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.find_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to search for projects based on a specific search criteria</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matcher</strong> – the search string used to match the project names. Default is empty string</p></li>
+<li><p><strong>parent</strong> – the parent ID. This field is ignored for this request. Default is -1.</p></li>
+<li><p><strong>limit</strong> – the limit to the number of results returned in the response. Default is 10</p></li>
+<li><p><strong>page</strong> – used in conjunction with the limit parameter to page through X number of responses. Default is 0.</p></li>
+<li><p><strong>only_enabled</strong> – flag to set if only wanting enabled projects returned. Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the response from the API in a list form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_project_by_id">
+<code class="sig-name descname">get_project_by_id</code><span class="sig-paren">(</span><em class="sig-param">project_id</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_project_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to fetch a project by unique MapRoulette project ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>project_id</strong> – the unique project ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the response from the API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_project_by_name">
+<code class="sig-name descname">get_project_by_name</code><span class="sig-paren">(</span><em class="sig-param">project_name</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_project_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to fetch a project by unique MapRoulette project name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>project_name</strong> – the unique project name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the response from the API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_project_challenges">
+<code class="sig-name descname">get_project_challenges</code><span class="sig-paren">(</span><em class="sig-param">project_id</em>, <em class="sig-param">limit=10</em>, <em class="sig-param">page=0</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_project_challenges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to fetch a list of a project’s challenges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_id</strong> – the id of the parent project</p></li>
+<li><p><strong>limit</strong> – the limit to the number of results returned in the response. Default is 10</p></li>
+<li><p><strong>page</strong> – used in conjunction with the limit parameter to page through X number of responses. Default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the response from the API in list form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_project_children">
+<code class="sig-name descname">get_project_children</code><span class="sig-paren">(</span><em class="sig-param">project_id</em>, <em class="sig-param">limit=10</em>, <em class="sig-param">page=0</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_project_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to fetch a project’s children in an expanded list. Unlike the GET request /project/{id}/challenges,
+this function will wrap the JSON array list inside of the parent project object, showing the full hierarchy. It
+will not include the children tasks of the challenges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_id</strong> – the id of the parent project</p></li>
+<li><p><strong>limit</strong> – the limit to the number of results returned in the response. Default is 10</p></li>
+<li><p><strong>page</strong> – used in conjunction with the limit parameter to page through X number of responses. Default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the response from the API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.is_json">
+<em class="property">static </em><code class="sig-name descname">is_json</code><span class="sig-paren">(</span><em class="sig-param">input_object</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.is_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to determine whether user input is valid JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_object</strong> – the user’s input to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if valid json object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.is_model">
+<em class="property">static </em><code class="sig-name descname">is_model</code><span class="sig-paren">(</span><em class="sig-param">input_object</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.is_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to determine whether user input is a valid project/challenge/task model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_object</strong> – the user’s input to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if instance of model</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-maproulette.api.configuration">
+<span id="module-configuration"></span><h2>Module: configuration<a class="headerlink" href="#module-maproulette.api.configuration" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the basic configuration object that is used to communicate with the MapRoulette API.</p>
+<dl class="class">
+<dt id="maproulette.api.configuration.Configuration">
+<em class="property">class </em><code class="sig-prename descclassname">maproulette.api.configuration.</code><code class="sig-name descname">Configuration</code><span class="sig-paren">(</span><em class="sig-param">url='maproulette.org'</em>, <em class="sig-param">protocol='https'</em>, <em class="sig-param">api_version='/api/v2'</em>, <em class="sig-param">api_key=None</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.configuration.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing the configuration of the MapRoulette server</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-maproulette.api.maproulette_server">
+<span id="module-maproulette-server"></span><h2>Module: maproulette_server<a class="headerlink" href="#module-maproulette.api.maproulette_server" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the basic methods that handle API calls to the MapRoulette API. It uses the requests library to
+accomplish this.</p>
+<dl class="class">
+<dt id="maproulette.api.maproulette_server.MapRouletteServer">
+<em class="property">class </em><code class="sig-prename descclassname">maproulette.api.maproulette_server.</code><code class="sig-name descname">MapRouletteServer</code><span class="sig-paren">(</span><em class="sig-param">configuration</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.maproulette_server.MapRouletteServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that holds the basic requests that can be made to the MapRoulette API.</p>
+<dl class="method">
+<dt id="maproulette.api.maproulette_server.MapRouletteServer.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.maproulette_server.MapRouletteServer.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that completes a DELETE request to the MapRoulette API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>endpoint</strong> – the server endpoint to use for the DELETE request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a JSON object containing the API response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.maproulette_server.MapRouletteServer.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.maproulette_server.MapRouletteServer.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that completes a GET request to the MapRoulette API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – the server endpoint to use for the GET request</p></li>
+<li><p><strong>params</strong> – the parameters that pertain to the request (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a JSON object containing the API response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.maproulette_server.MapRouletteServer.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.maproulette_server.MapRouletteServer.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that completes a POST request to the MapRoulette API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – the server endpoint to use for the POST request</p></li>
+<li><p><strong>body</strong> – the body of the request (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a JSON object containing the API response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.maproulette_server.MapRouletteServer.put">
+<code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">endpoint</em>, <em class="sig-param">body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.maproulette_server.MapRouletteServer.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that completes a PUT request to the MapRoulette API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – the server endpoint to use for the PUT request</p></li>
+<li><p><strong>body</strong> – the body of the request (optional)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a JSON object containing the API response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">maproulette-python-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functionality</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-maproulette.api.api">Module: api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-maproulette.api.configuration">Module: configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-maproulette.api.maproulette_server">Module: maproulette_server</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="getting_started.html" title="previous chapter">Getting Started</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage/methods.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

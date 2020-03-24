@@ -1,15 +1,11 @@
-"""
-This module contains the definition of a Task object in MapRoulette.
-"""
+"""This module contains the definition of a Task object in MapRoulette."""
 
 import json
 import os
 
 
 class TaskModel:
-    """
-    Definition for a MapRoulette Task
-    """
+    """Definition for a MapRoulette Task"""
     READONLY = ["id"]
 
     @property

@@ -1,15 +1,11 @@
-"""
-This module contains the definition of a Project object in MapRoulette.
-"""
+"""This module contains the definition of a Project object in MapRoulette."""
 
 import json
 import os
 
 
 class ProjectModel:
-    """
-    Definition for a MapRoulette Project
-    """
+    """Definition for a MapRoulette Project"""
 
     READONLY = ["id"]
 
