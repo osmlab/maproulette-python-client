@@ -3,22 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-maproulette - a Python client for the MapRoulette API
+Maproulette - a Python client for the MapRoulette API
 =====================================================
+
+Welcome to MapRoulette's documentation!
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    usage/getting_started
-   usage/methods
+   usage/functionality
 
 ---------------
 
 This client makes it easy for users to communicate with the MapRoulette API from within
-their Python environment.
+their Python environment. In the example below, we are able to access a MapRoulette project in just four lines of code:
 
-**Sample Usage**:
    >>> import maproulette
    >>> config = maproulette.Configuration()
    >>> api = maproulette.Api(config)
