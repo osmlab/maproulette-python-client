@@ -122,7 +122,7 @@ class Api:
     def get_challenge_metadata_by_id(self, challenge_id):
         """
         Method to retrieve metadata for a challenge using its corresponding ID
-        :param challenge_id:
+        :param challenge_id: the ID corresponding to the challenge
         :return:
         """
         response = self.server.get(endpoint=f"/data/challenge/{challenge_id}")
