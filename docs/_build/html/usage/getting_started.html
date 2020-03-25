@@ -150,7 +150,80 @@
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Coming soon!</p>
+<p>Install the package (or add it to your requirements.txt file):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install maproulette
+</pre></div>
+</div>
+<p>Import the package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">maproulette</span>
+</pre></div>
+</div>
+<p>From there, create a configuration object. Depending on your use case, you may need to pass your API key. Specify
+that when you create your configuration. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">maproulette</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{YOUR_API_KEY}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have your configuration object, we can create our API object. This gives us access to all of the functionality
+in the MapRoulette package.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">maproulette</span><span class="o">.</span><span class="n">Api</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we have access to the MapRoulette API methods. In the example below, I want to find a project by name using a search
+string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We want to fetch a project with name &#39;Health Facilities in India&#39;</span>
+<span class="n">my_project_name</span> <span class="o">=</span> <span class="s1">&#39;Health Facilities in India&#39;</span>
+
+<span class="c1"># Pretty-print the API response</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">find_project</span><span class="p">(</span><span class="n">my_project_name</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This returns a nicely printed JSON object representing the project named ‘Health Facilities in India’:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-08-26T06:34:28.655Z&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;deleted&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Adding the Hospitals &quot;</span><span class="p">,</span>
+            <span class="nt">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Health Facilities in India&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;featured&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;groupType&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9273</span><span class="p">,</span>
+                    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4719_Admin&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;projectId&quot;</span><span class="p">:</span> <span class="mi">4719</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;groupType&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9274</span><span class="p">,</span>
+                    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4719_Write&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;projectId&quot;</span><span class="p">:</span> <span class="mi">4719</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;groupType&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">9275</span><span class="p">,</span>
+                    <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-25T16:23:04.360Z&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4719_Read&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;projectId&quot;</span><span class="p">:</span> <span class="mi">4719</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4719</span><span class="p">,</span>
+            <span class="nt">&quot;isVirtual&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nt">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-01-30T11:05:44.466Z&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;health_facilities_in_india&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;owner&quot;</span><span class="p">:</span> <span class="mi">4785024</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 
 
