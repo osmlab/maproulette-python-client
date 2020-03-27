@@ -92,6 +92,14 @@ class ChallengeModel:
         self._featured = value
 
     @property
+    def overpassQL(self):
+        return self._overpassQL
+
+    @overpassQL.setter
+    def overpassQL(self, value):
+        self._overpassQL = value
+
+    @property
     def default_priority(self):
         return self._default_priority
 
@@ -124,7 +132,7 @@ class ChallengeModel:
         self._max_zoom = value
 
     def __init__(self, name, id=None, description=None, parent=None, instruction=None, difficulty=None, blurb=None,
-                 enabled=None, challenge_type=None, featured=None, default_priority=None, default_zoom=None,
+                 enabled=None, challenge_type=None, featured=None, overpassQL=None, default_priority=None, default_zoom=None,
                  min_zoom=None, max_zoom=None):
         self._id = id
         self._name = name
@@ -136,6 +144,7 @@ class ChallengeModel:
         self._enabled = enabled
         self._challenge_type = challenge_type
         self._featured = featured
+        self._overpassQL = overpassQL
         self._default_priority = default_priority
         self._default_zoom = default_zoom
         self._min_zoom = min_zoom
@@ -153,6 +162,7 @@ class ChallengeModel:
             "enabled": self._enabled,
             "challengeType": self._challenge_type,
             "featured": self._featured,
+            "overpassQL": self._overpassQL,
             "defaultPriority": self._default_priority,
             "defaultZoom": self._default_zoom,
             "minZoom": self._min_zoom,

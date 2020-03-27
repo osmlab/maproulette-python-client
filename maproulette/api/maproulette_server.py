@@ -37,10 +37,7 @@ class MapRouletteServer:
                 "status": response.status_code
             }
         except json.decoder.JSONDecodeError:
-            return {
-                "data": response,
-                "status": response.status_code
-            }
+            return response.status_code
 
     def post(self, endpoint, body=None):
         """Method that completes a POST request to the MapRoulette API
@@ -63,10 +60,8 @@ class MapRouletteServer:
                 "status": response.status_code
             }
         except json.decoder.JSONDecodeError:
-            return {
-                "data": response,
-                "status": response.status_code
-            }
+            return response.status_code
+
 
     def put(self, endpoint, body=None):
         """Method that completes a PUT request to the MapRoulette API
@@ -89,10 +84,7 @@ class MapRouletteServer:
                 "status": response.status_code
             }
         except json.decoder.JSONDecodeError:
-            return {
-                "data": response,
-                "status": response.status_code
-            }
+            return response.status_code
 
     def delete(self, endpoint):
         """Method that completes a DELETE request to the MapRoulette API
@@ -112,7 +104,4 @@ class MapRouletteServer:
                 "status": response.status_code
             }
         except json.decoder.JSONDecodeError:
-            return {
-                "data": response,
-                "status": response.status_code
-            }
+            return response.status_code

@@ -110,6 +110,19 @@ class Api:
             body=data)
         return response
 
+    def create_challenge_from_model(self, data):
+        """
+        Method to create a new challenge
+        :param data: a JSON input containing challenge details
+        :return:
+        """
+        if self.is_model(data):
+            data = ChallengeModel.to_dict(data)
+        response = self.server.post(
+            endpoint="/challenge",
+            body=data)
+        return response
+
     def get_challenge_by_id(self, challenge_id):
         """
         Method to retrieve challenge information via the corresponding challenge ID
@@ -119,10 +132,10 @@ class Api:
         response = self.server.get(endpoint=f"/challenge/{challenge_id}")
         return response
 
-    def get_challenge_metadata_by_id(self, challenge_id):
+    def get_challenge_statistics_by_id(self, challenge_id):
         """
-        Method to retrieve metadata for a challenge using its corresponding ID
-        :param challenge_id:
+        Method to retrieve statistics for a challenge using its corresponding ID
+        :param challenge_id: the ID corresponding to the challenge
         :return:
         """
         response = self.server.get(endpoint=f"/data/challenge/{challenge_id}")
