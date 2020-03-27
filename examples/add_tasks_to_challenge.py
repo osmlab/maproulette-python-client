@@ -16,13 +16,5 @@ with open('LOCAL_GEOJSON_FILE', 'r') as data_file:
 
 print(data)
 
-# Printing response (note: response is not valid JSON; raises JSONDecodeError):
+# Printing response:
 print(api.add_tasks_to_challenge(data, challenge_id))
-
-
-# Getting task model:
-task_id = '42914448'
-task = api.get_task_by_id(task_id)
-
-# Testing with task model:
-print(api.add_tasks_to_challenge(task, challenge_id))
