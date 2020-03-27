@@ -8,7 +8,7 @@ config = maproulette.Configuration(api_key="API_KEY")
 api = maproulette.Api(config)
 
 # Specify the ID of the challenge you want up add tasks to:
-challenge_id = 'TEST_ID'
+challenge_id = '12978'
 
 # Printing response
 print(json.dumps(api.get_challenge_tasks(challenge_id)))
