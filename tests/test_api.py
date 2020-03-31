@@ -1,6 +1,8 @@
 import maproulette
 import json
 import unittest
+import os
+import examples.data
 import pytest
 from unittest.mock import patch
 
@@ -9,10 +11,13 @@ def test_example():
     assert 1 == 1
 
 
-class TestRequests(unittest.TestCase):
+class TestAPI(unittest.TestCase):
 
     config = maproulette.Configuration(api_key="API_KEY")
     api = maproulette.Api(config)
+    test_data_dir = os.path.join(os.path.dirname(__file__), '../examples/data')
+    test_geom = json.loads(open(os.path.join(test_data_dir, 'Example_Geometry.geojson'), 'r').read())
+    test_query = open(os.path.join(test_data_dir, 'Example_OverpassQL_Query'), 'r').read()
 
     @patch('maproulette.api.maproulette_server.requests.get')
     def test_get_task_by_id(self, mock_request, api_instance=api):
@@ -47,8 +52,7 @@ class TestRequests(unittest.TestCase):
         test_challenge_model = maproulette.ChallengeModel(name='Test_Challenge_Name',
                                                           instruction='Do something',
                                                           description='This is a test challenge',
-                                                          overpassQL="""way["name"="Københavns Lufthavn"];
-                                                                        out body geom qt;""")
+                                                          overpassQL=self.test_query)
         mock_request.return_value.status_code = '200'
         response = api_instance.create_challenge_from_model(test_challenge_model)
         self.assertEqual(response['status'], '200')
@@ -56,29 +60,6 @@ class TestRequests(unittest.TestCase):
     @patch('maproulette.api.maproulette_server.requests.put')
     def test_add_tasks_to_challenge(self, mock_request, api_instance=api):
         test_challenge_id = '12978'
-        test_challenge_geometry = json.loads("""{
-                                        "type": "FeatureCollection",
-                                        "generator": "JOSM",
-                                        "features": [
-                                            {
-                                                "type": "Feature",
-                                                "properties": null,
-                                                "geometry": {
-                                                    "type": "LineString",
-                                                    "coordinates": [
-                                                        [
-                                                            -0.13698190844,
-                                                            50.81561190201
-                                                        ],
-                                                        [
-                                                            -0.13702256313,
-                                                            50.81534476302
-                                                        ]
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }""")
         mock_request.return_value.status_code = '200'
-        response = api_instance.add_tasks_to_challenge(test_challenge_geometry, test_challenge_id)
+        response = api_instance.add_tasks_to_challenge(self.test_geom, test_challenge_id)
         self.assertEqual(response['status'], '200')

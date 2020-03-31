@@ -17,12 +17,11 @@ challenge_data.description = "This is a test challenge"
 challenge_data.instruction = "Do something"
 
 # Adding example overpass QL input for challenge
-challenge_data.overpassQL = """way["name"="Københavns Lufthavn"];
-out body geom qt;"""
+challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()
 
 print(challenge_data.overpassQL)
 
 # Create challenge
-print(json.dumps(api.create_challenge(challenge_data)))
+print(json.dumps(api.create_challenge_from_model(challenge_data)))
 
 
