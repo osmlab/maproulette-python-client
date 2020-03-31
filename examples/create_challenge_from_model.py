@@ -23,5 +23,3 @@ print(challenge_data.overpassQL)
 
 # Create challenge
 print(json.dumps(api.create_challenge_from_model(challenge_data)))
-
-
