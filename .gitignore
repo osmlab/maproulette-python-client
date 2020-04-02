@@ -5,3 +5,4 @@ venv
 *.pyc
 __pycache__
 maproulette.egg-info
+docs/_build
