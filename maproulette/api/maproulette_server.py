@@ -3,6 +3,7 @@ accomplish this."""
 
 import logging
 import requests
+import json
 
 
 class MapRouletteServer:
@@ -27,10 +28,15 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return {
-            "data": response.json(),
-            "status": response.status_code
-        }
+        try:
+            return {
+                "data": response.json(),
+                "status": response.status_code
+            }
+        except json.decoder.JSONDecodeError:
+            return {
+                "status": response.status_code
+            }
 
     def post(self, endpoint, body=None):
         """Method that completes a POST request to the MapRoulette API
@@ -48,10 +54,16 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return {
-            "data": response.json(),
-            "status": response.status_code
-        }
+        try:
+            return {
+                "data": response.json(),
+                "status": response.status_code
+            }
+        except json.decoder.JSONDecodeError:
+            return {
+                "status": response.status_code
+            }
+
 
     def put(self, endpoint, body=None):
         """Method that completes a PUT request to the MapRoulette API
@@ -69,10 +81,15 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return {
-            "data": response.json(),
-            "status": response.status_code
-        }
+        try:
+            return {
+                "data": response.json(),
+                "status": response.status_code
+            }
+        except json.decoder.JSONDecodeError:
+            return {
+                "status": response.status_code
+            }
 
     def delete(self, endpoint):
         """Method that completes a DELETE request to the MapRoulette API
@@ -87,7 +104,13 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             logging.critical(str(e))
-        return {
-            "data": response.json(),
-            "status": response.status_code
-        }
+        try:
+            return {
+                "data": response.json(),
+                "status": response.status_code
+            }
+        except json.decoder.JSONDecodeError:
+            return {
+                "status": response.status_code
+            }
+
