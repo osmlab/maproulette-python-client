@@ -5,11 +5,6 @@ import pytest
 from unittest.mock import patch
 
 
-
-def test_example():
-    assert 1 == 1
-
-
 class TestAPI(unittest.TestCase):
 
     config = maproulette.Configuration(api_key="API_KEY")
