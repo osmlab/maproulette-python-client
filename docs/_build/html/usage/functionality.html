@@ -161,6 +161,37 @@
 <em class="property">class </em><code class="sig-prename descclassname">maproulette.api.api.</code><code class="sig-name descname">Api</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to handle the API requests</p>
 <dl class="method">
+<dt id="maproulette.api.api.Api.add_tasks_to_challenge">
+<code class="sig-name descname">add_tasks_to_challenge</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">challenge_id</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.add_tasks_to_challenge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add tasks to an existing challenge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – a geojson containing geometry of tasks to be added to a challenge</p></li>
+<li><p><strong>challenge_id</strong> – the ID corresponding to the challenge that tasks will be added to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the API response from the PUT request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.create_challenge_from_model">
+<code class="sig-name descname">create_challenge_from_model</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.create_challenge_from_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a new challenge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – a JSON input containing challenge details</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the API response to the POST request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="maproulette.api.api.Api.create_project">
 <code class="sig-name descname">create_project</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.create_project" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to create a new project</p>
@@ -169,7 +200,7 @@
 <dd class="field-odd"><p><strong>data</strong> – the data to use to create the new project</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>the API response to the POST request</p>
 </dd>
 </dl>
 </dd></dl>
@@ -189,7 +220,53 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the response from the API in a list form</p>
+<dd class="field-even"><p>the API response from the GET request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_challenge_by_id">
+<code class="sig-name descname">get_challenge_by_id</code><span class="sig-paren">(</span><em class="sig-param">challenge_id</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_challenge_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to retrieve challenge information via the corresponding challenge ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>challenge_id</strong> – the ID corresponding to the challenge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the API response from the GET request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_challenge_statistics_by_id">
+<code class="sig-name descname">get_challenge_statistics_by_id</code><span class="sig-paren">(</span><em class="sig-param">challenge_id</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_challenge_statistics_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to retrieve statistics for a challenge using its corresponding ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>challenge_id</strong> – the ID corresponding to the challenge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the API response to the GET request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_challenge_tasks">
+<code class="sig-name descname">get_challenge_tasks</code><span class="sig-paren">(</span><em class="sig-param">challenge_id</em>, <em class="sig-param">limit=10</em>, <em class="sig-param">page=0</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_challenge_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to retrieve all tasks from a given challenge by ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>challenge_id</strong> – the ID corresponding to the challenge</p></li>
+<li><p><strong>limit</strong> – the limit to the number of results returned in the response. Default is 10</p></li>
+<li><p><strong>page</strong> – used in conjunction with the limit parameter to page through X number of responses. Default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the API response from the GET request</p>
 </dd>
 </dl>
 </dd></dl>
@@ -203,7 +280,7 @@
 <dd class="field-odd"><p><strong>project_id</strong> – the unique project ID</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the response from the API</p>
+<dd class="field-even"><p>the API response from the GET request</p>
 </dd>
 </dl>
 </dd></dl>
@@ -217,7 +294,7 @@
 <dd class="field-odd"><p><strong>project_name</strong> – the unique project name</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the response from the API</p>
+<dd class="field-even"><p>the API response from the GET request</p>
 </dd>
 </dl>
 </dd></dl>
@@ -235,7 +312,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the response from the API in list form</p>
+<dd class="field-even"><p>the API response from the GET request</p>
 </dd>
 </dl>
 </dd></dl>
@@ -255,7 +332,21 @@ will not include the children tasks of the challenges</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the response from the API</p>
+<dd class="field-even"><p>the API response from the GET request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maproulette.api.api.Api.get_task_by_id">
+<code class="sig-name descname">get_task_by_id</code><span class="sig-paren">(</span><em class="sig-param">task_id</em><span class="sig-paren">)</span><a class="headerlink" href="#maproulette.api.api.Api.get_task_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>“Method to retrieve task information using the corresponding task ID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>task_id</strong> – the  ID  corresponding with the task</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the  API response from the GET request</p>
 </dd>
 </dl>
 </dd></dl>

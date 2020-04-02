@@ -64,13 +64,12 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
-
     def put(self, endpoint, body=None):
         """Method that completes a PUT request to the MapRoulette API
 
         :param endpoint: the server endpoint to use for the PUT request
         :param body: the body of the request (optional)
-        :returns: a JSON object containing the API response
+        :returns: a JSON object containing the response code and the API response if
         """
         response = requests.put(
             self.url + endpoint,
@@ -113,4 +112,3 @@ class MapRouletteServer:
             return {
                 "status": response.status_code
             }
-

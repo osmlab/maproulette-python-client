@@ -17,7 +17,7 @@ class Api:
         """Method to fetch a project by unique MapRoulette project ID
 
         :param project_id: the unique project ID
-        :returns: the response from the API
+        :returns: the API response from the GET request
         """
         response = self.server.get(
             endpoint=f"/project/{str(project_id)}"
@@ -28,7 +28,7 @@ class Api:
         """Method to fetch a project by unique MapRoulette project name
 
         :param project_name: the unique project name
-        :returns: the response from the API
+        :returns: the API response from the GET request
         """
         response = self.server.get(
             endpoint=f"/projectByName/{str(project_name)}"
@@ -43,7 +43,7 @@ class Api:
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
         :param only_enabled: flag to set if only wanting enabled projects returned. Default is True.
-        :returns: the response from the API in a list form
+        :returns: the API response from the GET request
         """
         query_params = {
             "q": matcher,
@@ -66,7 +66,7 @@ class Api:
         :param project_id: the id of the parent project
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
-        :returns: the response from the API
+        :returns: the API response from the GET request
         """
         query_params = {
             "limit": str(limit),
@@ -84,7 +84,7 @@ class Api:
         :param project_id: the id of the parent project
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
-        :returns: the response from the API in list form
+        :returns: the API response from the GET request
         """
         query_params = {
             "limit": str(limit),
@@ -100,7 +100,7 @@ class Api:
         """Method to create a new project
 
         :param data: the data to use to create the new project
-        :returns:
+        :returns: the API response to the POST request
         """
         if self.is_model(data):
             data = ProjectModel.to_dict(data)
@@ -110,10 +110,10 @@ class Api:
         return response
 
     def create_challenge_from_model(self, data):
-        """
-        Method to create a new challenge
+        """Method to create a new challenge
+
         :param data: a JSON input containing challenge details
-        :return:
+        :returns: the API response to the POST request
         """
         if self.is_model(data):
             data = ChallengeModel.to_dict(data)
@@ -123,28 +123,30 @@ class Api:
         return response
 
     def get_challenge_by_id(self, challenge_id):
-        """
-        Method to retrieve challenge information via the corresponding challenge ID
+        """Method to retrieve challenge information via the corresponding challenge ID
+
         :param challenge_id: the ID corresponding to the challenge
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         response = self.server.get(endpoint=f"/challenge/{challenge_id}")
         return response
 
     def get_challenge_statistics_by_id(self, challenge_id):
-        """
-        Method to retrieve statistics for a challenge using its corresponding ID
+        """Method to retrieve statistics for a challenge using its corresponding ID
+
         :param challenge_id: the ID corresponding to the challenge
-        :return:
+        :returns: the API response to the GET request
         """
         response = self.server.get(endpoint=f"/data/challenge/{challenge_id}")
         return response
 
     def get_challenge_tasks(self, challenge_id, limit=10, page=0):
-        """
-        Method to retrieve all tasks from a given challenge by ID
+        """Method to retrieve all tasks from a given challenge by ID
+
         :param challenge_id: the ID corresponding to the challenge
-        :return: the API response from the GET request
+        :param limit: the limit to the number of results returned in the response. Default is 10
+        :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
+        :returns: the API response from the GET request
         """
         query_params = {
             "limit": str(limit),
@@ -157,11 +159,11 @@ class Api:
         return response
 
     def add_tasks_to_challenge(self, data, challenge_id):
-        """
-        Method to add tasks to an existing challenge
+        """Method to add tasks to an existing challenge
+
         :param data: a geojson containing geometry of tasks to be added to a challenge
         :param challenge_id: the ID corresponding to the challenge that tasks will be added to
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         response = self.server.put(
             endpoint=f"/challenge/{challenge_id}/addTasks",
@@ -169,10 +171,10 @@ class Api:
         return response
 
     def get_task_by_id(self, task_id):
-        """"
-        Method to retrieve task information using the corresponding task ID
+        """"Method to retrieve task information using the corresponding task ID
+
         :param task_id: the  ID  corresponding with the task
-        :return: the  API response from the GET request
+        :returns: the  API response from the GET request
         """
         response = self.server.get(
             endpoint=f"/task/{task_id}")
