@@ -7,4 +7,4 @@ install:
 # command to run unit tests
 script:
   - tox
-  - cd docs; sphinx-build -nWT . _build/html
+  - cd docs; make html
