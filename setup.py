@@ -4,7 +4,7 @@ with open("README.md", "r") as readme:
     long_description = readme.read()
 
 setup(name="maproulette",
-      version="1.0.0-alpha.2",
+      version="1.0.0-alpha.3",
       description="A Python API wrapper for MapRoulette",
       long_description=long_description,
       url="https://github.com/osmlab/maproulette-python-client",
