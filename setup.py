@@ -4,7 +4,7 @@ with open("README.md", "r") as readme:
     long_description = readme.read()
 
 setup(name="maproulette",
-      version="1.0.0-alpha.4",
+      version="0.0.1",
       description="A Python API wrapper for MapRoulette",
       license="Apache License 2.0",
       long_description=long_description,
