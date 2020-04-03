@@ -2,7 +2,7 @@ import maproulette
 import json
 
 # Create a configuration object using a url and API key
-config = maproulette.Configuration()
+config = maproulette.Configuration(api_key='{YOUR_API_KEY}')
 
 # Create an API object using your config object
 api = maproulette.Api(config)
