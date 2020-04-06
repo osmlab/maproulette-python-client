@@ -1,10 +1,13 @@
 from setuptools import setup, find_packages
+from maproulette import __version__
 
 with open("README.md", "r") as readme:
     long_description = readme.read()
 
-setup(name="maproulette",
-      version="0.0.1",
+name = "maproulette"
+version = __version__
+setup(name=name,
+      version=version,
       description="A Python API wrapper for MapRoulette",
       license="Apache License 2.0",
       long_description=long_description,
@@ -13,4 +16,5 @@ setup(name="maproulette",
       python_requires='>=3.6',
       setup_requires=["pytest-runner"],
       tests_require=["pytest"],
-      install_requires=['requests'])
+      install_requires=['requests']
+      )
