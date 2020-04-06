@@ -16,5 +16,4 @@ setup(name=name,
       python_requires='>=3.6',
       setup_requires=["pytest-runner"],
       tests_require=["pytest"],
-      install_requires=['requests']
-      )
+      install_requires=['requests'])
