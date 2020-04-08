@@ -101,7 +101,29 @@ This returns a nicely printed JSON object representing the project named 'Health
     "status": 200
 }
 ```
+## Development
 
-## Contributing
+### Contributing
 
 Open an issue! Thanks for contributing!
+
+### Testing
+
+This package uses [Tox](https://tox.readthedocs.io/en/latest/) to perform testing. In order to run Tox, execute the
+`tox` command from the root directory. 
+
+
+### Building the Documentation
+
+The documentation for this package is built with [Sphinx](https://www.sphinx-doc.org/en/master/index.html). In order to
+build the documentation for this package: 
+
+```
+$ cd docs
+``` 
+and then: 
+```
+$ make html
+```
+That command will generate the HTML documentation files for the project. We've hosted these docs at
+[Read the Docs](https://readthedocs.org/). 
