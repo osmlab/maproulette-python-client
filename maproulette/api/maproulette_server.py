@@ -1,26 +1,23 @@
-"""
-This module contains the basic methods that handle API calls to the MapRoulette API. It uses the requests library to
-accomplish this.
-"""
+"""This module contains the basic methods that handle API calls to the MapRoulette API. It uses the requests library to
+accomplish this."""
+
 import logging
 import requests
 import json
 
 
 class MapRouletteServer:
-    """
-    Class that holds the basic requests that can be made to the MapRoulette API.
-
-    """
+    """Class that holds the basic requests that can be made to the MapRoulette API."""
     def __init__(self, configuration):
         self.url = configuration.url
         self.headers = configuration.headers
 
     def get(self, endpoint, params=None):
         """Method that completes a GET request to the MapRoulette API
+
         :param endpoint: the server endpoint to use for the GET request
         :param params: the parameters that pertain to the request (optional)
-        :return: a JSON object containing the API response
+        :returns: a JSON object containing the API response
         """
         response = requests.get(
             self.url + endpoint,
@@ -43,9 +40,10 @@ class MapRouletteServer:
 
     def post(self, endpoint, body=None):
         """Method that completes a POST request to the MapRoulette API
+
         :param endpoint: the server endpoint to use for the POST request
         :param body: the body of the request (optional)
-        :return: a JSON object containing the API response
+        :returns: a JSON object containing the API response
         """
         response = requests.post(
             self.url + endpoint,
@@ -66,12 +64,12 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
-
     def put(self, endpoint, body=None):
         """Method that completes a PUT request to the MapRoulette API
+
         :param endpoint: the server endpoint to use for the PUT request
         :param body: the body of the request (optional)
-        :return: a JSON object containing the API response
+        :returns: a JSON object containing the response code and the API response if
         """
         response = requests.put(
             self.url + endpoint,
@@ -94,8 +92,9 @@ class MapRouletteServer:
 
     def delete(self, endpoint):
         """Method that completes a DELETE request to the MapRoulette API
+
         :param endpoint: the server endpoint to use for the DELETE request
-        :return: a JSON object containing the API response
+        :returns: a JSON object containing the API response
         """
         response = requests.delete(
             self.url + endpoint,
@@ -113,4 +112,3 @@ class MapRouletteServer:
             return {
                 "status": response.status_code
             }
-

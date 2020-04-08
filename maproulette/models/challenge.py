@@ -1,15 +1,11 @@
-"""
-This module contains the definition of a Challenge object in MapRoulette.
-"""
+"""This module contains the definition of a Challenge object in MapRoulette."""
 
 import json
 import os
 
 
 class ChallengeModel:
-    """
-    Definition for a MapRoulette Challenge
-    """
+    """Definition for a MapRoulette Challenge"""
 
     @property
     def path(self):
