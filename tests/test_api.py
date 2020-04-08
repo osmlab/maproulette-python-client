@@ -19,7 +19,7 @@ class TestAPI(unittest.TestCase):
 
     @patch('maproulette.api.maproulette_server.requests.get')
     def test_get_project_by_name(self, mock_request, api_instance=api):
-        test_project_name = 'It\'s MapaTime!'
+        test_project_name = 'Maptime!'
         mock_request.return_value.status_code = '200'
         response = api_instance.get_project_by_name(test_project_name)
         self.assertEqual(response['status'], '200')
@@ -48,7 +48,7 @@ class TestAPI(unittest.TestCase):
     @patch('maproulette.api.maproulette_server.requests.post')
     def test_create_project(self, mock_request, api_instance=api):
         test_project_model = maproulette.ProjectModel(name='Test_Project_Name',
-                                                      description='This is a test challenge')
+                                                      description='This is a test project')
         mock_request.return_value.status_code = '200'
         response = api_instance.create_project(test_project_model)
         self.assertEqual(response['status'], '200')
