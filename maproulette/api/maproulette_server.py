@@ -1,9 +1,9 @@
 """This module contains the basic methods that handle API calls to the MapRoulette API. It uses the requests library to
 accomplish this."""
 
-import logging
 import requests
 import json
+from .errors import HttpError, ConnectionUnavailableError
 
 
 class MapRouletteServer:
@@ -27,7 +27,9 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            raise HttpError(e) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
@@ -53,7 +55,9 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            raise HttpError(e) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
@@ -79,7 +83,9 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            raise HttpError(e) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
@@ -102,7 +108,10 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            raise HttpError(e) from None
+
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),

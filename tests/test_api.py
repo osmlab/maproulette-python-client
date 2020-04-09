@@ -1,7 +1,6 @@
 import maproulette
 import unittest
 from tests.sample_data import test_geojson, test_overpassQL_query
-import pytest
 from unittest.mock import patch
 
 
@@ -29,13 +28,6 @@ class TestAPI(unittest.TestCase):
         test_search = 'Health Facilities in India'
         mock_request.return_value.status_code = '200'
         response = api_instance.find_project(test_search)
-        self.assertEqual(response['status'], '200')
-
-    @patch('maproulette.api.maproulette_server.requests.get')
-    def test_get_project_children(self, mock_request, api_instance=api):
-        test_project_id = '32922'
-        mock_request.return_value.status_code = '200'
-        response = api_instance.get_project_children(test_project_id)
         self.assertEqual(response['status'], '200')
 
     @patch('maproulette.api.maproulette_server.requests.get')
