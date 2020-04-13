@@ -109,7 +109,6 @@ class MapRouletteServer:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
             raise HttpError(e) from None
-
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
         try:
