@@ -3,7 +3,7 @@ accomplish this."""
 
 import requests
 import json
-from .errors import HttpError, ConnectionUnavailableError
+from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError
 
 
 class MapRouletteServer:
@@ -27,9 +27,24 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            raise HttpError(e) from None
+            if e.response.status_code == 404:
+                raise NotFoundError(
+                    message='Resource not found',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
-            raise ConnectionUnavailableError(e) from None
+            raise ConnectionUnavailableError(
+                message="Connection Unavailable",
+                status=e.response.status_code,
+                payload=response
+            ) from None
         try:
             return {
                 "data": response.json(),
@@ -55,7 +70,24 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            raise HttpError(e) from None
+            if e.response.status_code == 400:
+                raise InvalidJsonError(
+                    message='Invalid JSON payload',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
         try:
@@ -83,7 +115,24 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            raise HttpError(e) from None
+            if e.response.status_code == 400:
+                raise InvalidJsonError(
+                    message='Invalid JSON payload',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
         try:
@@ -108,7 +157,18 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            raise HttpError(e) from None
+            if e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 404:
+                raise HttpError(
+                    message='Resource not found',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
         try:
