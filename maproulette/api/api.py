@@ -87,7 +87,7 @@ class Api:
             body=data)
         return response
 
-    def create_challenge_from_model(self, data):
+    def create_challenge(self, data):
         """Method to create a new challenge
 
         :param data: a JSON input containing challenge details

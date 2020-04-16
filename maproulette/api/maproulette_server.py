@@ -169,6 +169,12 @@ class MapRouletteServer:
                     status=e.response.status_code,
                     payload=e.response
                 ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
         try:

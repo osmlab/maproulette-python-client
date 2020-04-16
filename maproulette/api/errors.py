@@ -4,7 +4,7 @@ import json
 
 class MapRouletteBaseException(Exception):
     """MapRoulette Base Exception"""
-    def __init__(self, message, status, payload=None):
+    def __init__(self, message, status=None, payload=None):
         self.message = message
         self.status = status
         self.payload = payload

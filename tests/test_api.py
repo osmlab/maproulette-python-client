@@ -74,13 +74,13 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response['status'], '200')
 
     @patch('maproulette.api.maproulette_server.requests.post')
-    def test_create_challenge_from_model(self, mock_request, api_instance=api):
+    def test_create_challenge(self, mock_request, api_instance=api):
         test_challenge_model = maproulette.ChallengeModel(name='Test_Challenge_Name',
                                                           instruction='Do something',
                                                           description='This is a test challenge',
                                                           overpassQL=test_overpassQL_query)
         mock_request.return_value.status_code = '200'
-        response = api_instance.create_challenge_from_model(test_challenge_model)
+        response = api_instance.create_challenge(test_challenge_model)
         self.assertEqual(response['status'], '200')
 
     @patch('maproulette.api.maproulette_server.requests.put')
