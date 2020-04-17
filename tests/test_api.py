@@ -1,6 +1,8 @@
 import maproulette
+import requests
 import unittest
 from tests.sample_data import test_geojson, test_overpassQL_query
+from maproulette.api import errors
 from unittest.mock import patch
 
 
@@ -89,3 +91,12 @@ class TestAPI(unittest.TestCase):
         mock_request.return_value.status_code = '200'
         response = api_instance.add_tasks_to_challenge(test_geojson, test_challenge_id)
         self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.get')
+    def test_challenge_not_found(self, mock_request, api_instance=api):
+        test_challenge_id = '12974'
+        mock_request.return_value.status_code = '404'
+        mock_request.side_effect = errors.NotFoundError(message='Resource not found')
+        with self.assertRaises(errors.NotFoundError):
+            response = api_instance.get_challenge_by_id(test_challenge_id)
+            self.assertEqual(response['status'], '402')
