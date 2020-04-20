@@ -1,9 +1,6 @@
 import maproulette
-import requests
 import unittest
 from tests.sample_data import test_geojson, test_overpassQL_query
-from maproulette.api import errors
-from unittest import mock
 from unittest.mock import patch
 
 
@@ -11,7 +8,6 @@ class TestAPI(unittest.TestCase):
 
     config = maproulette.Configuration(api_key="API_KEY")
     api = maproulette.Api(config)
-    server = maproulette.MapRouletteServer(configuration=config)
 
     @patch('maproulette.api.maproulette_server.requests.get')
     def test_get_project_by_id(self, mock_request, api_instance=api):
@@ -93,51 +89,3 @@ class TestAPI(unittest.TestCase):
         mock_request.return_value.status_code = '200'
         response = api_instance.add_tasks_to_challenge(test_geojson, test_challenge_id)
         self.assertEqual(response['status'], '200')
-
-    @patch('maproulette.api.maproulette_server.requests.get')
-    def test_get_http_error(self, mock_get):
-        mock_get.side_effect = requests.exceptions.HTTPError()
-        with self.assertRaises(requests.exceptions.HTTPError):
-            self.server.get(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.get')
-    def test_get_connection_error(self, mock_get):
-        mock_get.side_effect = requests.exceptions.ConnectionError()
-        with self.assertRaises(requests.exceptions.ConnectionError):
-            self.server.get(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.post')
-    def test_post_http_error(self, mock_post):
-        mock_post.side_effect = requests.exceptions.HTTPError()
-        with self.assertRaises(requests.exceptions.HTTPError):
-            self.server.post(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.post')
-    def test_post_connection_error(self, mock_post):
-        mock_post.side_effect = requests.exceptions.ConnectionError()
-        with self.assertRaises(requests.exceptions.ConnectionError):
-            self.server.post(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.put')
-    def test_put_http_error(self, mock_put):
-        mock_put.side_effect = requests.exceptions.HTTPError()
-        with self.assertRaises(requests.exceptions.HTTPError):
-            self.server.put(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.put')
-    def test_put_connection_error(self, mock_put):
-        mock_put.side_effect = requests.exceptions.ConnectionError()
-        with self.assertRaises(requests.exceptions.ConnectionError):
-            self.server.put(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.delete')
-    def test_delete_http_error(self, mock_delete):
-        mock_delete.side_effect = requests.exceptions.HTTPError()
-        with self.assertRaises(requests.exceptions.HTTPError):
-            self.server.delete(endpoint='')
-
-    @patch('maproulette.api.maproulette_server.requests.delete')
-    def test_delete_connection_error(self, mock_delete):
-        mock_delete.side_effect = requests.exceptions.ConnectionError()
-        with self.assertRaises(requests.exceptions.ConnectionError):
-            self.server.delete(endpoint='')

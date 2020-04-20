@@ -164,7 +164,7 @@ class MapRouletteServer:
                     payload=e.response
                 ) from None
             elif e.response.status_code == 404:
-                raise HttpError(
+                raise NotFoundError(
                     message='Resource not found',
                     status=e.response.status_code,
                     payload=e.response
