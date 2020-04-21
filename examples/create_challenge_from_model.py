@@ -22,4 +22,4 @@ challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()
 print(challenge_data.overpassQL)
 
 # Create challenge
-print(json.dumps(api.create_challenge_from_model(challenge_data)))
+print(json.dumps(api.create_challenge(challenge_data)))

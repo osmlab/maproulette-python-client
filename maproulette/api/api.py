@@ -35,45 +35,23 @@ class Api:
         )
         return response
 
-    def find_project(self, matcher="", parent=-1, limit=10, page=0, only_enabled="true"):
+    def find_project(self, matcher="", limit=10, page=0, only_enabled="true"):
         """Method to search for projects based on a specific search criteria
 
         :param matcher: the search string used to match the project names. Default is empty string
-        :param parent: the parent ID. This field is ignored for this request. Default is -1.
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
         :param only_enabled: flag to set if only wanting enabled projects returned. Default is True.
         :returns: the API response from the GET request
         """
         query_params = {
-            "q": matcher,
-            "parentId": str(parent),
+            "search": matcher,
             "limit": str(limit),
             "page": str(page),
             "onlyEnabled": only_enabled
         }
         response = self.server.get(
-            endpoint="/projects/find",
-            params=query_params
-        )
-        return response
-
-    def get_project_children(self, project_id, limit=10, page=0):
-        """Method to fetch a project's children in an expanded list. Unlike the GET request /project/{id}/challenges,
-        this function will wrap the JSON array list inside of the parent project object, showing the full hierarchy. It
-        will not include the children tasks of the challenges
-
-        :param project_id: the id of the parent project
-        :param limit: the limit to the number of results returned in the response. Default is 10
-        :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
-        :returns: the API response from the GET request
-        """
-        query_params = {
-            "limit": str(limit),
-            "page": str(page)
-        }
-        response = self.server.get(
-            endpoint=f"/project/{project_id}/children",
+            endpoint="/projects",
             params=query_params
         )
         return response
@@ -109,7 +87,7 @@ class Api:
             body=data)
         return response
 
-    def create_challenge_from_model(self, data):
+    def create_challenge(self, data):
         """Method to create a new challenge
 
         :param data: a JSON input containing challenge details

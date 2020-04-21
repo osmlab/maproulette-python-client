@@ -1,9 +1,9 @@
 """This module contains the basic methods that handle API calls to the MapRoulette API. It uses the requests library to
 accomplish this."""
 
-import logging
 import requests
 import json
+from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError
 
 
 class MapRouletteServer:
@@ -27,7 +27,24 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            if e.response.status_code == 404:
+                raise NotFoundError(
+                    message='Resource not found',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(
+                message="Connection Unavailable",
+                status=e.response.status_code,
+                payload=response
+            ) from None
         try:
             return {
                 "data": response.json(),
@@ -53,7 +70,26 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            if e.response.status_code == 400:
+                raise InvalidJsonError(
+                    message='Invalid JSON payload',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
@@ -79,7 +115,26 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            if e.response.status_code == 400:
+                raise InvalidJsonError(
+                    message='Invalid JSON payload',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
@@ -102,7 +157,26 @@ class MapRouletteServer:
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            logging.critical(str(e))
+            if e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message='The user is not authorized to make this request',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            elif e.response.status_code == 404:
+                raise NotFoundError(
+                    message='Resource not found',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+            else:
+                raise HttpError(
+                    message='An HTTP error occurred',
+                    status=e.response.status_code,
+                    payload=e.response
+                ) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
         try:
             return {
                 "data": response.json(),
