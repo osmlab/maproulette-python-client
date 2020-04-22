@@ -14,6 +14,7 @@ Welcome to MapRoulette's documentation!
 
    usage/getting_started
    usage/functionality
+   usage/exceptions
 
 ---------------
 
