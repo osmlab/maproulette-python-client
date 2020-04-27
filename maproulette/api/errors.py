@@ -1,4 +1,3 @@
-import json
 """This module contains the set of MapRoulette's exceptions"""
 
 

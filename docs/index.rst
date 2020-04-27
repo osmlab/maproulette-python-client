@@ -14,6 +14,10 @@ Welcome to MapRoulette's documentation!
 
    usage/getting_started
    usage/functionality
+   usage/models/project
+   usage/models/challenge
+   usage/models/task
+   usage/exceptions
 
 ---------------
 
