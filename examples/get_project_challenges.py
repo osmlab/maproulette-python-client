@@ -5,7 +5,7 @@ import json
 config = maproulette.Configuration(api_key='YOUR_API_KEY')
 
 # Create an API object using your config object
-api = maproulette.Api(config)
+api = maproulette.Project(config)
 
 # The ID of the project whose challenges I want to fetch is 4719
 my_project_id = '4719'

@@ -5,7 +5,7 @@ import maproulette
 configuration = maproulette.Configuration(api_key='{YOUR_API_KEY}')
 
 # Create an API object using your config object
-api = maproulette.Api(configuration)
+api = maproulette.Project(configuration)
 
 # Initialize a project model using the project name
 my_project = maproulette.ProjectModel(name='my_new_project_name_20200120_abc')

@@ -5,7 +5,7 @@ import json
 config = maproulette.Configuration(api_key='{YOUR_API_KEY}')
 
 # Create an API object using your config object
-api = maproulette.Api(config)
+api = maproulette.Project(config)
 
 # We want to fetch a project with ID '4719'
 my_project_id = '4719'

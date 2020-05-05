@@ -12,7 +12,7 @@ class TestAPI(unittest.TestCase):
     server = maproulette.MapRouletteServer(configuration=config)
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.get')
-    @patch('requests.get')
+    @patch('requests.Session.get')
     def test_get_not_found_error(self, mock_get, mock_server_get, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -29,7 +29,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.get')
-    @patch('requests.get')
+    @patch('requests.Session.get')
     def test_get_generic_http_error(self, mock_get, mock_server_get, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -46,7 +46,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.get')
-    @patch('requests.get')
+    @patch('requests.Session.get')
     def test_get_connection_error(self, mock_get, mock_server_get, server_instance=server):
         mock_response = mock.Mock()
         requests_connection_error = requests.exceptions.ConnectionError()
@@ -63,7 +63,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.post')
-    @patch('requests.post')
+    @patch('requests.Session.post')
     def test_post_invalid_json_error(self, mock_post, mock_server_post, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -80,7 +80,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.post')
-    @patch('requests.post')
+    @patch('requests.Session.post')
     def test_post_generic_http_error(self, mock_post, mock_server_post, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -97,7 +97,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.post')
-    @patch('requests.post')
+    @patch('requests.Session.post')
     def test_post_unauthorized_error(self, mock_post, mock_server_post, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -114,7 +114,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.post')
-    @patch('requests.post')
+    @patch('requests.Session.post')
     def test_post_connection_error(self, mock_post, mock_server_post, server_instance=server):
         mock_response = mock.Mock()
         requests_connection_error = requests.exceptions.ConnectionError()
@@ -131,7 +131,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.put')
-    @patch('requests.put')
+    @patch('requests.Session.put')
     def test_put_invalid_json_error(self, mock_put, mock_server_put, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -148,7 +148,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.put')
-    @patch('requests.put')
+    @patch('requests.Session.put')
     def test_put_generic_http_error(self, mock_put, mock_server_put, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -165,7 +165,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.put')
-    @patch('requests.put')
+    @patch('requests.Session.put')
     def test_put_unauthorized_error(self, mock_put, mock_server_put, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -182,7 +182,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.put')
-    @patch('requests.put')
+    @patch('requests.Session.put')
     def test_put_connection_error(self, mock_put, mock_server_put, server_instance=server):
         mock_response = mock.Mock()
         requests_connection_error = requests.exceptions.ConnectionError()
@@ -199,7 +199,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.delete')
-    @patch('requests.delete')
+    @patch('requests.Session.delete')
     def test_delete_unauthorized_error(self, mock_delete, mock_server_delete, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -216,7 +216,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.delete')
-    @patch('requests.delete')
+    @patch('requests.Session.delete')
     def test_delete_not_found_error(self, mock_delete, mock_server_delete, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -233,7 +233,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.delete')
-    @patch('requests.delete')
+    @patch('requests.Session.delete')
     def test_delete_generic_http_error(self, mock_delete, mock_server_delete, server_instance=server):
         mock_response = mock.Mock()
         requests_http_error = requests.exceptions.HTTPError()
@@ -250,7 +250,7 @@ class TestAPI(unittest.TestCase):
         assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.delete')
-    @patch('requests.delete')
+    @patch('requests.Session.delete')
     def test_delete_connection_error(self, mock_delete, mock_server_delete, server_instance=server):
         mock_response = mock.Mock()
         requests_connection_error = requests.exceptions.ConnectionError()
