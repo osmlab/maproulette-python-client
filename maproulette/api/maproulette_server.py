@@ -3,7 +3,9 @@ accomplish this."""
 
 import requests
 import json
-from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError
+import time
+from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError,\
+    ExceededRetriesError
 
 
 class MapRouletteServer:
@@ -15,21 +17,32 @@ class MapRouletteServer:
         if self.check_health():
             self.session = requests.Session()
 
-    def check_health(self):
-        """Checks health of connection to host by pinging the URL set in the configuration"""
-        response = requests.get(
-            self.base_url + '/ping',
-            headers=self.headers,
-            verify=False
+    def check_health(self, retries=3, delay=5):
+        """Checks health of connection to host by pinging the URL set in the configuration
+
+        :param retries: the number of reties to use to successfully ping the URL. Default is 3
+        :param delay: the number of seconds to wait between retries
+        :returns: True if GET request to ping endpoint is successful
+        """
+        for i in range(retries):
+
+            try:
+                response = requests.get(
+                    self.base_url + '/ping',
+                    headers=self.headers,
+                    verify=False
+                )
+                if not response.ok:
+                    print(f"Unsuccessful connection. Retrying in {str(delay)} seconds")
+                    time.sleep(delay)
+                else:
+                    return True
+            except requests.exceptions.ConnectionError:
+                print(f"Connection not available. Attempt {str(i+1)} out of {str(retries)}")
+
+        raise ExceededRetriesError(
+            message='Specified server unavailable'
         )
-        if response.ok:
-            return True
-        else:
-            raise ConnectionUnavailableError(
-                message='Specified server unavailable',
-                status=response.status_code,
-                payload=response
-            )
 
     def get(self, endpoint, params=None):
         """Method that completes a GET request to the MapRoulette API
