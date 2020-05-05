@@ -16,6 +16,8 @@ class MapRouletteServer:
         self.headers = configuration.headers
         if self.check_health():
             self.session = requests.Session()
+            self.session.headers = self.headers
+            self.session.verify = False
 
     def check_health(self, retries=3, delay=5):
         """Checks health of connection to host by pinging the URL set in the configuration
@@ -25,7 +27,6 @@ class MapRouletteServer:
         :returns: True if GET request to ping endpoint is successful
         """
         for i in range(retries):
-
             try:
                 response = requests.get(
                     self.base_url + '/ping',
@@ -53,9 +54,7 @@ class MapRouletteServer:
         """
         response = self.session.get(
             self.url + endpoint,
-            params=params,
-            headers=self.headers,
-            verify=False)
+            params=params)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -96,9 +95,7 @@ class MapRouletteServer:
         """
         response = self.session.post(
             self.url + endpoint,
-            json=body,
-            headers=self.headers,
-            verify=False)
+            json=body)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -141,9 +138,7 @@ class MapRouletteServer:
         """
         response = self.session.put(
             self.url + endpoint,
-            json=body,
-            headers=self.headers,
-            verify=False)
+            json=body)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -183,9 +178,7 @@ class MapRouletteServer:
         :param endpoint: the server endpoint to use for the DELETE request
         :returns: a JSON object containing the API response
         """
-        response = self.session.delete(
-            self.url + endpoint,
-            headers=self.headers)
+        response = self.session.delete(self.url + endpoint)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
