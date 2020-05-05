@@ -4,8 +4,7 @@ accomplish this."""
 import requests
 import json
 import time
-from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError,\
-    ExceededRetriesError
+from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError
 
 
 class MapRouletteServer:
@@ -14,12 +13,12 @@ class MapRouletteServer:
         self.url = configuration.url
         self.base_url = configuration.base_url
         self.headers = configuration.headers
-        if self.check_health():
+        if self.__check_health():
             self.session = requests.Session()
             self.session.headers = self.headers
             self.session.verify = False
 
-    def check_health(self, retries=3, delay=5):
+    def __check_health(self, retries=3, delay=5):
         """Checks health of connection to host by pinging the URL set in the configuration
 
         :param retries: the number of reties to use to successfully ping the URL. Default is 3
@@ -41,7 +40,7 @@ class MapRouletteServer:
             except requests.exceptions.ConnectionError:
                 print(f"Connection not available. Attempt {str(i+1)} out of {str(retries)}")
 
-        raise ExceededRetriesError(
+        raise ConnectionUnavailableError(
             message='Specified server unavailable'
         )
 

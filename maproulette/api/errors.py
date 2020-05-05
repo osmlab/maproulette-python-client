@@ -34,7 +34,3 @@ class HttpError(MapRouletteBaseException):
 
 class InvalidJsonError(MapRouletteBaseException):
     """Errors produced from an invalid JSON object"""
-
-
-class ExceededRetriesError(MapRouletteBaseException):
-    """The number of retries has been exceeded"""
