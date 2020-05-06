@@ -5,7 +5,7 @@ import json
 config = maproulette.Configuration(api_key="API_KEY")
 
 # Create an API objects with the above config object:
-api = maproulette.Api(config)
+api = maproulette.Challenge(config)
 
 # Creating a test challenge model with name and child task
 challenge_data = maproulette.ChallengeModel(name='Test_Challenge_Name')

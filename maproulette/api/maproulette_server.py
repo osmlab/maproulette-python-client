@@ -3,6 +3,7 @@ accomplish this."""
 
 import requests
 import json
+import time
 from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, UnauthorizedError, NotFoundError
 
 
@@ -10,7 +11,38 @@ class MapRouletteServer:
     """Class that holds the basic requests that can be made to the MapRoulette API."""
     def __init__(self, configuration):
         self.url = configuration.url
+        self.base_url = configuration.base_url
         self.headers = configuration.headers
+        if self.__check_health():
+            self.session = requests.Session()
+            self.session.headers = self.headers
+            self.session.verify = False
+
+    def __check_health(self, retries=3, delay=5):
+        """Checks health of connection to host by pinging the URL set in the configuration
+
+        :param retries: the number of reties to use to successfully ping the URL. Default is 3
+        :param delay: the number of seconds to wait between retries
+        :returns: True if GET request to ping endpoint is successful
+        """
+        for i in range(retries):
+            try:
+                response = requests.get(
+                    self.base_url + '/ping',
+                    headers=self.headers,
+                    verify=False
+                )
+                if not response.ok:
+                    print(f"Unsuccessful connection. Retrying in {str(delay)} seconds")
+                    time.sleep(delay)
+                else:
+                    return True
+            except requests.exceptions.ConnectionError:
+                print(f"Connection not available. Attempt {str(i+1)} out of {str(retries)}")
+
+        raise ConnectionUnavailableError(
+            message='Specified server unavailable'
+        )
 
     def get(self, endpoint, params=None):
         """Method that completes a GET request to the MapRoulette API
@@ -19,11 +51,9 @@ class MapRouletteServer:
         :param params: the parameters that pertain to the request (optional)
         :returns: a JSON object containing the API response
         """
-        response = requests.get(
+        response = self.session.get(
             self.url + endpoint,
-            params=params,
-            headers=self.headers,
-            verify=False)
+            params=params)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -62,11 +92,9 @@ class MapRouletteServer:
         :param body: the body of the request (optional)
         :returns: a JSON object containing the API response
         """
-        response = requests.post(
+        response = self.session.post(
             self.url + endpoint,
-            json=body,
-            headers=self.headers,
-            verify=False)
+            json=body)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -107,11 +135,9 @@ class MapRouletteServer:
         :param body: the body of the request (optional)
         :returns: a JSON object containing the response code and the API response if
         """
-        response = requests.put(
+        response = self.session.put(
             self.url + endpoint,
-            json=body,
-            headers=self.headers,
-            verify=False)
+            json=body)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -151,9 +177,7 @@ class MapRouletteServer:
         :param endpoint: the server endpoint to use for the DELETE request
         :returns: a JSON object containing the API response
         """
-        response = requests.delete(
-            self.url + endpoint,
-            headers=self.headers)
+        response = self.session.delete(self.url + endpoint)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -186,3 +210,17 @@ class MapRouletteServer:
             return {
                 "status": response.status_code
             }
+
+    @staticmethod
+    def is_json(input_object):
+        """Method to determine whether user input is valid JSON.
+
+        :param input_object: the user's input to check
+        :returns: True if valid json object
+        """
+        try:
+            json_object = json.loads(input_object)
+            del json_object
+            return True
+        except ValueError:
+            return False
