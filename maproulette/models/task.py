@@ -1,27 +1,26 @@
-"""
-This module contains the definition of a Task object in MapRoulette.
-"""
+"""This module contains the definition of a Task object in MapRoulette."""
 
 import json
 import os
 
 
 class TaskModel:
-    """
-    Definition for a MapRoulette Task
-    """
+    """Definition for a MapRoulette Task"""
     READONLY = ["id"]
 
     @property
     def path(self):
+        """The path to the task"""
         return os.path.join("task", str(self._id))
 
     @property
     def id(self):
+        """The ID of the task"""
         return self._id
 
     @property
     def name(self):
+        """The internal name of the task"""
         return self._name
 
     @name.setter
@@ -30,6 +29,7 @@ class TaskModel:
 
     @property
     def parent(self):
+        """The parent ID for the task"""
         return self._parent
 
     @parent.setter
@@ -38,6 +38,7 @@ class TaskModel:
 
     @property
     def geometries(self):
+        """The geometries of the task"""
         return self._geometries
 
     @geometries.setter
@@ -46,6 +47,7 @@ class TaskModel:
 
     @property
     def instruction(self):
+        """The instruction for the task"""
         return self._instruction
 
     @instruction.setter
@@ -54,6 +56,7 @@ class TaskModel:
 
     @property
     def location(self):
+        """The location of the task"""
         return self._location
 
     @location.setter
@@ -62,6 +65,7 @@ class TaskModel:
 
     @property
     def suggested_fix(self):
+        """The suggested fix for the task"""
         return self._suggested_fix
 
     @suggested_fix.setter
@@ -70,6 +74,7 @@ class TaskModel:
 
     @property
     def status(self):
+        """The status of the task"""
         return self._status
 
     @status.setter
@@ -78,6 +83,7 @@ class TaskModel:
 
     @property
     def mapped_on(self):
+        """The mapped on date for the task"""
         return self._mapped_on
 
     @mapped_on.setter
@@ -86,6 +92,7 @@ class TaskModel:
 
     @property
     def review(self):
+        """Whether this task needs to be reviewed or not"""
         return self._review
 
     @review.setter
@@ -94,6 +101,7 @@ class TaskModel:
 
     @property
     def priority(self):
+        """The priority of this task"""
         return self._priority
 
     @priority.setter
@@ -102,6 +110,7 @@ class TaskModel:
 
     @property
     def changeset_id(self):
+        """The changeset ID for this task"""
         return self._changeset_id
 
     @changeset_id.setter
@@ -110,6 +119,7 @@ class TaskModel:
 
     @property
     def completion_responses(self):
+        """The completion response for this task"""
         return self._completion_responses
 
     @completion_responses.setter
@@ -118,6 +128,7 @@ class TaskModel:
 
     @property
     def bundle_id(self):
+        """The bundle ID for this task"""
         return self._bundle_id
 
     @bundle_id.setter
@@ -126,6 +137,7 @@ class TaskModel:
 
     @property
     def is_bundle_primary(self):
+        """Whether or not this task is the bundle primary"""
         return self._is_bundle_primary
 
     @is_bundle_primary.setter
@@ -134,6 +146,7 @@ class TaskModel:
 
     @property
     def mapillary_images(self):
+        """The mapillary images for this task"""
         return self._mapillary_images
 
     @mapillary_images.setter
@@ -161,6 +174,7 @@ class TaskModel:
         self._mapillary_images = mapillary_images
 
     def to_dict(self):
+        """Converts all non-null properties of a task object into a dictionary"""
         properties = {
             "id": self._id,
             "name": self._name,
@@ -181,4 +195,5 @@ class TaskModel:
         return {k: v for (k, v) in properties.items() if v is not None}
 
     def to_json(self):
+        """Converts all non-null properties of a task object into a JSON object"""
         return json.dumps(self.to_dict())

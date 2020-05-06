@@ -1,26 +1,25 @@
-"""
-This module contains the definition of a Challenge object in MapRoulette.
-"""
+"""This module contains the definition of a Challenge object in MapRoulette."""
 
 import json
 import os
 
 
 class ChallengeModel:
-    """
-    Definition for a MapRoulette Challenge
-    """
+    """Definition for a MapRoulette Challenge"""
 
     @property
     def path(self):
+        """The path to the challenge"""
         return os.path.join("challenge", self._id)
 
     @property
     def id(self):
+        """The ID of the challenge"""
         return self._id
 
     @property
     def name(self):
+        """The internal name of the challenge"""
         return self._name
 
     @name.setter
@@ -29,6 +28,7 @@ class ChallengeModel:
 
     @property
     def description(self):
+        """The description for the challenge"""
         return self._description
 
     @description.setter
@@ -37,6 +37,7 @@ class ChallengeModel:
 
     @property
     def parent(self):
+        """The parent ID for the challenge"""
         return self._parent
 
     @parent.setter
@@ -45,6 +46,7 @@ class ChallengeModel:
 
     @property
     def instruction(self):
+        """The instruction for the challenge"""
         return self._instruction
 
     @instruction.setter
@@ -53,6 +55,7 @@ class ChallengeModel:
 
     @property
     def difficulty(self):
+        """The difficulty setting for the challenge"""
         return self._difficulty
 
     @difficulty.setter
@@ -61,6 +64,7 @@ class ChallengeModel:
 
     @property
     def blurb(self):
+        """The blurb for the challenge"""
         return self._blurb
 
     @blurb.setter
@@ -69,6 +73,7 @@ class ChallengeModel:
 
     @property
     def enabled(self):
+        """Whether this challenge is enabled for use or not"""
         return self._enabled
 
     @enabled.setter
@@ -77,6 +82,7 @@ class ChallengeModel:
 
     @property
     def challenge_type(self):
+        """The type for this challenge"""
         return self._challenge_type
 
     @challenge_type.setter
@@ -85,6 +91,7 @@ class ChallengeModel:
 
     @property
     def featured(self):
+        """Whether or not this challenge is featured"""
         return self._featured
 
     @featured.setter
@@ -92,7 +99,17 @@ class ChallengeModel:
         self._featured = value
 
     @property
+    def overpassQL(self):
+        """The Overpass query for this challenge"""
+        return self._overpassQL
+
+    @overpassQL.setter
+    def overpassQL(self, value):
+        self._overpassQL = value
+
+    @property
     def default_priority(self):
+        """The default priority for this challenge"""
         return self._default_priority
 
     @default_priority.setter
@@ -101,6 +118,7 @@ class ChallengeModel:
 
     @property
     def default_zoom(self):
+        """The default zoom level for this challenge"""
         return self._default_zoom
 
     @default_zoom.setter
@@ -109,6 +127,7 @@ class ChallengeModel:
 
     @property
     def min_zoom(self):
+        """The minimum zoom level for this challenge"""
         return self._min_zoom
 
     @min_zoom.setter
@@ -117,6 +136,7 @@ class ChallengeModel:
 
     @property
     def max_zoom(self):
+        """The maximum zoom level for this challenge"""
         return self._max_zoom
 
     @max_zoom.setter
@@ -124,7 +144,7 @@ class ChallengeModel:
         self._max_zoom = value
 
     def __init__(self, name, id=None, description=None, parent=None, instruction=None, difficulty=None, blurb=None,
-                 enabled=None, challenge_type=None, featured=None, default_priority=None, default_zoom=None,
+                 enabled=None, challenge_type=None, featured=None, overpassQL=None, default_priority=None, default_zoom=None,
                  min_zoom=None, max_zoom=None):
         self._id = id
         self._name = name
@@ -136,12 +156,14 @@ class ChallengeModel:
         self._enabled = enabled
         self._challenge_type = challenge_type
         self._featured = featured
+        self._overpassQL = overpassQL
         self._default_priority = default_priority
         self._default_zoom = default_zoom
         self._min_zoom = min_zoom
         self._max_zoom = max_zoom
 
     def to_dict(self):
+        """Converts all non-null properties of a challenge object into a dictionary"""
         properties = {
             "id": self._id,
             "name": self._name,
@@ -153,6 +175,7 @@ class ChallengeModel:
             "enabled": self._enabled,
             "challengeType": self._challenge_type,
             "featured": self._featured,
+            "overpassQL": self._overpassQL,
             "defaultPriority": self._default_priority,
             "defaultZoom": self._default_zoom,
             "minZoom": self._min_zoom,
@@ -161,4 +184,5 @@ class ChallengeModel:
         return {k: v for (k, v) in properties.items() if v is not None}
 
     def to_json(self):
+        """Converts all non-null properties of a challenge object into a JSON object"""
         return json.dumps(self.to_dict())

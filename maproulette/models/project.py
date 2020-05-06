@@ -1,28 +1,27 @@
-"""
-This module contains the definition of a Project object in MapRoulette.
-"""
+"""This module contains the definition of a Project object in MapRoulette."""
 
 import json
 import os
 
 
 class ProjectModel:
-    """
-    Definition for a MapRoulette Project
-    """
+    """Definition for a MapRoulette Project"""
 
     READONLY = ["id"]
 
     @property
     def path(self):
+        """The path to the project"""
         return os.path.join("project", str(self._id))
 
     @property
     def id(self):
+        """The ID of the project"""
         return self._id
 
     @property
     def name(self):
+        """The internal name of the project"""
         return self._name
 
     @name.setter
@@ -31,6 +30,7 @@ class ProjectModel:
 
     @property
     def description(self):
+        """The description for the project"""
         return self._description
 
     @description.setter
@@ -39,6 +39,7 @@ class ProjectModel:
 
     @property
     def groups(self):
+        """The groups that are associated with the project"""
         return self._groups
 
     @groups.setter
@@ -47,6 +48,7 @@ class ProjectModel:
 
     @property
     def enabled(self):
+        """Whether this project is enabled for use or not"""
         return self._enabled
 
     @enabled.setter
@@ -55,6 +57,7 @@ class ProjectModel:
 
     @property
     def display_name(self):
+        """The friendly name that can be displayed to users"""
         return self._display_name
 
     @display_name.setter
@@ -63,6 +66,7 @@ class ProjectModel:
 
     @property
     def is_virtual(self):
+        """Whether or not this project is virtual"""
         return self._is_virtual
 
     @is_virtual.setter
@@ -79,6 +83,7 @@ class ProjectModel:
         self._is_virtual = is_virtual
 
     def to_dict(self):
+        """Converts all non-null properties of a project object into a dictionary"""
         properties = {
             "id": self._id,
             "name": self._name,
@@ -91,4 +96,5 @@ class ProjectModel:
         return {k: v for (k, v) in properties.items() if v is not None}
 
     def to_json(self):
+        """Converts all non-null properties of a project object into a JSON object"""
         return json.dumps(self.to_dict())

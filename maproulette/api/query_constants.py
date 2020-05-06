@@ -1,6 +1,4 @@
-"""
-This module holds string constants to be used in conjunction with API calls to MapRoulette.
-"""
+"""This module holds string constants to be used in conjunction with API calls to MapRoulette."""
 
 # Query string parameters
 QUERY_PARAMETER_Q = "q"
