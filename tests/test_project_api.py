@@ -44,3 +44,30 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.return_value.status_code = '200'
         response = api_instance.create_project(test_project_model)
         self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_add_challenge_to_project(self, mock_request, api_instance=api):
+        test_virtual_project_model = maproulette.ProjectModel(name='Test Virtual Project Name',
+                                                              id=1234,
+                                                              is_virtual=True)
+        test_challenge_model = maproulette.ChallengeModel(name='Test Challenge Name',
+                                                          id=246)
+        test_virtual_project_id = test_virtual_project_model.id
+        test_challenge_id = test_challenge_model.id
+        mock_request.return_value.status_code = '200'
+        response = api_instance.add_challenge_to_project(test_virtual_project_id, test_challenge_id)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_remove_challenge_from_project(self, mock_request, api_instance=api):
+        test_virtual_project_model = maproulette.ProjectModel(name='Test Virtual Project Name',
+                                                              id=1234,
+                                                              is_virtual=True)
+        test_challenge_model = maproulette.ChallengeModel(name='Test Challenge Name',
+                                                          id=246,
+                                                          virtual_parents=[1234])
+        test_virtual_project_id = test_virtual_project_model.id
+        test_challenge_id = test_challenge_model.id
+        mock_request.return_value.status_code = '200'
+        response = api_instance.remove_challenge_from_project(test_virtual_project_id, test_challenge_id)
+        self.assertEqual(response['status'], '200')

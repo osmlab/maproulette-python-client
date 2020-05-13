@@ -85,6 +85,32 @@ class Project(MapRouletteServer):
             body=data)
         return response
 
+    def add_challenge_to_project(self, project_id, challenge_id):
+        """
+        Method to add a challenge to a virtual project.
+
+        :param project_id: the id of the virtual project
+        :param challenge_id: the id of the challenge
+        :return: the API response from the GET request
+        """
+        response = self.get(
+            endpoint=f"/project/{project_id}/challenge/{challenge_id}/add"
+        )
+        return response
+
+    def remove_challenge_from_project(self, project_id, challenge_id):
+        """
+        Method to remove a challenge from a virtual project.
+
+        :param project_id: the id of the virtual project
+        :param challenge_id: the id of the challenge
+        :return: the API response from the GET request
+        """
+        response = self.get(
+            endpoint=f"/project/{project_id}/challenge/{challenge_id}/remove"
+        )
+        return response
+
     @staticmethod
     def is_project_model(input_object):
         """Method to determine whether user input is a valid project model
