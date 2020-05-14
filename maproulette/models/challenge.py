@@ -143,17 +143,9 @@ class ChallengeModel:
     def max_zoom(self, value):
         self._max_zoom = value
 
-    @property
-    def virtual_parents(self):
-        return self._virtual_parents
-
-    @virtual_parents.setter
-    def virtual_parents(self, value):
-        self._virtual_parents = value
-
     def __init__(self, name, id=None, description=None, parent=None, instruction=None, difficulty=None, blurb=None,
                  enabled=None, challenge_type=None, featured=None, overpassQL=None, default_priority=None, default_zoom=None,
-                 min_zoom=None, max_zoom=None, virtual_parents=None):
+                 min_zoom=None, max_zoom=None):
         self._id = id
         self._name = name
         self._description = description
@@ -169,7 +161,6 @@ class ChallengeModel:
         self._default_zoom = default_zoom
         self._min_zoom = min_zoom
         self._max_zoom = max_zoom
-        self._virtual_parents = virtual_parents
 
     def to_dict(self):
         """Converts all non-null properties of a challenge object into a dictionary"""
