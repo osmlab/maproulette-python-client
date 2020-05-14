@@ -27,4 +27,4 @@ Module: configuration
 
 .. automodule:: maproulette.api.configuration
     :members:
-    :show-inheritance:
+    :special-members:

@@ -14,8 +14,9 @@ Import the package:
     import maproulette
 
 
-From there, create a configuration object. Depending on your use case, you may need to pass your API key. Specify
-that when you create your configuration. For example:
+From there, create a configuration object. When creating the configuration you can specify a number of of parameters
+depending on your needs including the hostname, protocol, and client-side certificates. Depending on your use case, you
+may need to obtain and pass your API key as well. For example:
 
 .. code-block:: python
 
