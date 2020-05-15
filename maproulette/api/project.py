@@ -141,6 +141,7 @@ class Project(MapRouletteServer):
     def get_projects_by_ids(self, project_ids):
         """
         Method to retrieve projects from comma separated list of ids
+
         :param project_ids: comma separated list of project ids to be retrieved
         :return: the API response from the GET request
         """
@@ -156,6 +157,7 @@ class Project(MapRouletteServer):
     def get_random_tasks(self, project_id, limit=1, proximity=-1, search=''):
         """
         Method to retrieve random tasks from a project.
+
         :param project_id: the id of the parent project of tasks
         :param limit: limit amount of results returned
         :param proximity: task to find based on proximity of that task
