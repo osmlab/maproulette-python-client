@@ -45,7 +45,7 @@ class TestProjectAPI(unittest.TestCase):
         response = api_instance.create_project(test_project_model)
         self.assertEqual(response['status'], '200')
 
-    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_add_challenge_to_project(self, mock_request, api_instance=api):
         test_virtual_project_model = maproulette.ProjectModel(name='Test Virtual Project Name',
                                                               id=1234,
@@ -58,7 +58,7 @@ class TestProjectAPI(unittest.TestCase):
         response = api_instance.add_challenge_to_project(test_virtual_project_id, test_challenge_id)
         self.assertEqual(response['status'], '200')
 
-    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_remove_challenge_from_project(self, mock_request, api_instance=api):
         test_virtual_project_model = maproulette.ProjectModel(name='Test Virtual Project Name',
                                                               id=1234,
