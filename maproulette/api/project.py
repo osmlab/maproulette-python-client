@@ -1,6 +1,5 @@
 """This module contains the methods that the user will use directly to interact with MapRoulette projects"""
 
-import json
 from maproulette.api.maproulette_server import MapRouletteServer
 from maproulette.models.project import ProjectModel
 

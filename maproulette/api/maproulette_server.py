@@ -10,13 +10,16 @@ from .errors import HttpError, InvalidJsonError, ConnectionUnavailableError, Una
 class MapRouletteServer:
     """Class that holds the basic requests that can be made to the MapRoulette API."""
     def __init__(self, configuration):
-        self.url = configuration.url
+        self.url = configuration.api_url
         self.base_url = configuration.base_url
         self.headers = configuration.headers
+        self.certs = configuration.certs
+        self.verify = configuration.verify
         if self.__check_health():
             self.session = requests.Session()
             self.session.headers = self.headers
-            self.session.verify = False
+            self.session.verify = self.verify
+            self.session.cert = self.certs
 
     def __check_health(self, retries=3, delay=5):
         """Checks health of connection to host by pinging the URL set in the configuration
@@ -30,7 +33,8 @@ class MapRouletteServer:
                 response = requests.get(
                     self.base_url + '/ping',
                     headers=self.headers,
-                    verify=False
+                    verify=self.verify,
+                    cert=self.certs
                 )
                 if not response.ok:
                     print(f"Unsuccessful connection. Retrying in {str(delay)} seconds")
