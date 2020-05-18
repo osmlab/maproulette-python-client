@@ -228,7 +228,10 @@ class ChallengeModel:
         properties = {
             "id": self._id,
             "name": self._name,
+            "created": self._created,
+            "modified": self._modified,
             "description": self._description,
+            "deleted": self.description,
             "parent": self._parent,
             "instruction": self._instruction,
             "difficulty": self._difficulty,
@@ -236,11 +239,14 @@ class ChallengeModel:
             "enabled": self._enabled,
             "challengeType": self._challenge_type,
             "featured": self._featured,
+            "virtualParents": self._virtual_parents,
             "overpassQL": self._overpassQL,
             "defaultPriority": self._default_priority,
             "defaultZoom": self._default_zoom,
             "minZoom": self._min_zoom,
-            "maxZoom": self._max_zoom
+            "maxZoom": self._max_zoom,
+            "lastTaskRefresh": self._last_task_refresh,
+            "dataOriginDate": self._data_origin_date
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
