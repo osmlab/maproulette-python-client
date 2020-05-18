@@ -84,6 +84,96 @@ class Project(MapRouletteServer):
             body=data)
         return response
 
+    def add_challenge_to_project(self, project_id, challenge_id):
+        """
+        Method to add a challenge to a virtual project.
+
+        :param project_id: the id of the virtual project
+        :param challenge_id: the id of the challenge being added
+        :return: the API response from the POST request
+        """
+        response = self.post(
+            endpoint=f"/project/{project_id}/challenge/{challenge_id}/add"
+        )
+        return response
+
+    def remove_challenge_from_project(self, project_id, challenge_id):
+        """
+        Method to remove a challenge from a virtual project.
+
+        :param project_id: the id of the virtual project
+        :param challenge_id: the id of the challenge being removed
+        :return: the API response from the POST request
+        """
+        response = self.post(
+            endpoint=f"/project/{project_id}/challenge/{challenge_id}/remove"
+        )
+        return response
+
+    def delete_project(self, project_id):
+        """
+        Method to delete a project.
+
+        :param project_id: the id of the project being deleted
+        :return: the API response form the DELETE request
+        """
+        response = self.delete(
+            endpoint=f"/project/{project_id}"
+        )
+        return response
+
+    def update_project(self, project_id, data):
+        """
+        Method to update an existing project
+
+        :param project_id: the id of the project being updated
+        :param data: the data to use to update the project
+        :return: the API response from the PUT request
+        """
+        if self.is_project_model(data):
+            data = ProjectModel.to_dict(data)
+        response = self.put(
+            endpoint=f"/project/{project_id}",
+            body=data)
+        return response
+
+    def get_projects_by_ids(self, project_ids):
+        """
+        Method to retrieve projects from comma separated list of ids
+
+        :param project_ids: comma separated list of project ids to be retrieved
+        :return: the API response from the GET request
+        """
+        query_params = {
+            "projectIds": project_ids
+        }
+        response = self.get(
+            endpoint=f"/projectsById",
+            params=query_params
+        )
+        return response
+
+    def get_random_tasks(self, project_id, limit=1, proximity=-1, search=''):
+        """
+        Method to retrieve random tasks from a project.
+
+        :param project_id: the id of the parent project of tasks
+        :param limit: limit amount of results returned
+        :param proximity: task to find based on proximity of that task
+        :param search: a search parameter object stored in a cookie
+        :return: the API response form the GET request
+        """
+        query_params = {
+            "limit": str(limit),
+            "proximity": str(proximity),
+            "search": str(search)
+        }
+        response = self.get(
+            endpoint=f"/project/{project_id}/tasks",
+            params=query_params
+        )
+        return response
+
     @staticmethod
     def is_project_model(input_object):
         """Method to determine whether user input is a valid project model
