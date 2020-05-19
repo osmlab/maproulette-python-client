@@ -22,6 +22,13 @@ Module: task
     :members:
     :show-inheritance:
 
+Module: user
+-----------------------------------------------------
+
+.. automodule:: maproulette.api.user
+    :members:
+    :show-inheritance:
+
 Module: configuration
 -----------------------------------------------------
 
