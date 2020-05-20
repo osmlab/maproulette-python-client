@@ -12,4 +12,4 @@ from .api.challenge import Challenge
 from .api.task import Task
 from .api.user import User
 
-__version__ = '0.1.0rc3'
+__version__ = '1.0.0'
