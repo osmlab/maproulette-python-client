@@ -57,7 +57,8 @@ class MapRouletteServer:
         """
         response = self.session.get(
             self.url + endpoint,
-            params=params)
+            params=params
+        )
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -89,16 +90,19 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
-    def post(self, endpoint, body=None):
+    def post(self, endpoint, body=None, params=None):
         """Method that completes a POST request to the MapRoulette API
 
         :param endpoint: the server endpoint to use for the POST request
         :param body: the body of the request (optional)
+        :param params: the parameters that pertain to the request (optional)
         :returns: a JSON object containing the API response
         """
         response = self.session.post(
             self.url + endpoint,
-            json=body)
+            params=params,
+            json=body
+        )
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
@@ -132,16 +136,19 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
-    def put(self, endpoint, body=None):
+    def put(self, endpoint, body=None, params=None):
         """Method that completes a PUT request to the MapRoulette API
 
         :param endpoint: the server endpoint to use for the PUT request
         :param body: the body of the request (optional)
+        :param params: the parameters that pertain to the request (optional)
         :returns: a JSON object containing the response code and the API response if
         """
         response = self.session.put(
             self.url + endpoint,
-            json=body)
+            params=params,
+            json=body
+        )
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
