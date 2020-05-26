@@ -17,6 +17,6 @@ project_id = '147'
 group = '2'
 
 # Print the API response
-print(json.dumps(api.add_list_of_users_to_project_group(user_ids=user_ids,
-                                                        project_id=project_id,
-                                                        group_type=group), indent=4, sort_keys=True))
+print(json.dumps(api.add_user_list_to_project(user_ids=user_ids,
+                                              project_id=project_id,
+                                              group_type=group), indent=4, sort_keys=True))

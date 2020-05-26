@@ -27,7 +27,7 @@ class User(MapRouletteServer):
         )
         return response
 
-    def add_user_to_project_group(self, user_id, project_id, group_type, is_osm_user_id='true'):
+    def add_user_to_project(self, user_id, project_id, group_type, is_osm_user_id='true'):
         """Method to add a user to a project group
 
         :param user_id: the user ID to add to the specified project group
@@ -45,7 +45,7 @@ class User(MapRouletteServer):
         )
         return response
 
-    def add_list_of_users_to_project_group(self, user_ids, project_id, group_type, is_osm_user_id='true'):
+    def add_user_list_to_project(self, user_ids, project_id, group_type, is_osm_user_id='true'):
         """Method to add a user to a project group
 
         :param user_ids: a list of user IDs to add to the specified project group. IDs should be integers.
