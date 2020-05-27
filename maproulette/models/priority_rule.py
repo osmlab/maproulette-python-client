@@ -3,7 +3,9 @@
 import json
 import os
 
-VALID_TYPES = {'string', 'integer', 'double', 'long', 'nested rule'}
+VALID_TYPES = {'string', 'integer', 'double', 'long'}
+VALID_STRING_OPERATORS = {'equal', 'not_equal', 'contains', 'not_contains', 'is_empty', 'is_not_empty'}
+VALID_NUMERIC_OPERATORS = {'==', '!=', '<', '<=', '>', '>='}
 
 
 class PriorityRuleModel:
@@ -26,7 +28,7 @@ class PriorityRuleModel:
     @priority_type.setter
     def priority_type(self, value):
         if value not in VALID_TYPES:
-            raise ValueError("Priority type must be one of %s.", VALID_TYPES)
+            raise ValueError(f"Priority type must be one of {VALID_TYPES}.")
         self._priority_type = value
 
     @property
@@ -36,9 +38,15 @@ class PriorityRuleModel:
 
     @priority_operator.setter
     def priority_operator(self, value):
+        if self.priority_type == 'string':
+            if value not in VALID_STRING_OPERATORS:
+                raise ValueError(f"Priority operator must be one of {VALID_STRING_OPERATORS}.")
+        else:
+            if value not in VALID_NUMERIC_OPERATORS:
+                raise ValueError(f"Priority operator must be one of {VALID_NUMERIC_OPERATORS}.")
         self._priority_operator = value
 
-    def __init__(self, priority_value, priority_type, priority_operator):
+    def __init__(self, priority_value=None, priority_type=None, priority_operator=None):
         self._priority_value = priority_value
         self._priority_type = priority_type
         self._priority_operator = priority_operator
