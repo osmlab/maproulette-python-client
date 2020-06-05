@@ -65,22 +65,22 @@ class ProjectModel:
         self._display_name = value
 
     @property
-    def is_virtual(self):
-        """Whether or not this project is virtual"""
-        return self._is_virtual
+    def featured(self):
+        """Whether or not the project is featured"""
+        return self._featured
 
-    @is_virtual.setter
-    def is_virtual(self, value):
-        self._is_virtual = value
+    @featured.setter
+    def featured(self, value):
+        self._featured = value
 
-    def __init__(self, name, id=None, description=None, groups=None, enabled=None, display_name=None, is_virtual=None):
+    def __init__(self, name, id=None, description=None, groups=None, enabled=None, display_name=None, featured=None):
         self._id = id
         self._name = name
         self._description = description
         self._groups = groups
         self._enabled = enabled
         self._display_name = display_name
-        self._is_virtual = is_virtual
+        self._featured = featured
 
     def to_dict(self):
         """Converts all non-null properties of a project object into a dictionary"""
@@ -91,7 +91,7 @@ class ProjectModel:
             "groups": self._groups,
             "enabled": self._enabled,
             "display_name": self._display_name,
-            "is_virtual": self._is_virtual
+            "featured": self._featured
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
