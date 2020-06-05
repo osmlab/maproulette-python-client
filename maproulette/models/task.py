@@ -28,24 +28,6 @@ class TaskModel:
         self._name = value
 
     @property
-    def created(self):
-        """Timestamp of when the task was created"""
-        return self._created
-
-    @created.setter
-    def created(self, value):
-        self._created = value
-
-    @property
-    def modified(self):
-        """Timestamp of when the task was modified"""
-        return self._modified
-
-    @modified.setter
-    def modified(self, value):
-        self._modified = value
-
-    @property
     def parent(self):
         """The parent ID for the task"""
         return self._parent
@@ -171,13 +153,11 @@ class TaskModel:
     def mapillary_images(self, value):
         self._mapillary_images = value
 
-    def __init__(self, name, parent, geometries, created=None, modified=None, id=None, instruction=None, location=None,
-                 suggested_fix=None, status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
+    def __init__(self, name, parent, geometries, id=None, instruction=None, location=None, suggested_fix=None,
+                 status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None):
         self._id = id
         self._name = name
-        self._created = created
-        self._modified = modified
         self._parent = parent
         self._geometries = geometries
         self._instruction = instruction
@@ -198,8 +178,6 @@ class TaskModel:
         properties = {
             "id": self._id,
             "name": self._name,
-            "created": self._created,
-            "modified": self._modified,
             "parent": self._parent,
             "instruction": self._instruction,
             "location": self._location,
