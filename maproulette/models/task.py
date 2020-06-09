@@ -153,9 +153,19 @@ class TaskModel:
     def mapillary_images(self, value):
         self._mapillary_images = value
 
+    @property
+    def cooperative_work(self):
+        """A tag that is or will be used for a new type of task resolution"""
+        return self._cooperative_work
+
+    @cooperative_work.setter
+    def cooperative_work(self, value):
+        self._cooperative_work = value
+
     def __init__(self, name, parent, geometries, id=None, instruction=None, location=None, suggested_fix=None,
                  status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
-                 completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None):
+                 completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
+                 cooperative_work=None):
         self._id = id
         self._name = name
         self._parent = parent
@@ -172,6 +182,7 @@ class TaskModel:
         self._bundle_id = bundle_id
         self._is_bundle_primary = is_bundle_primary
         self._mapillary_images = mapillary_images
+        self._cooperative_work = cooperative_work
 
     def to_dict(self):
         """Converts all non-null properties of a task object into a dictionary"""
@@ -190,7 +201,8 @@ class TaskModel:
             "completionResponses": self._completion_responses,
             "bundleId": self._bundle_id,
             "isBundlePrimary": self._is_bundle_primary,
-            "mapillaryImages": self._mapillary_images
+            "mapillaryImages": self._mapillary_images,
+            "cooperativeWork": self._cooperative_work
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
