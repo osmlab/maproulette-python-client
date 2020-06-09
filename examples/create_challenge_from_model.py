@@ -2,7 +2,7 @@ import maproulette
 import json
 
 # Create a configuration object for MapRoulette using your API key:
-config = maproulette.Configuration()
+config = maproulette.Configuration(api_key="API_KEY")
 
 # Create an API objects with the above config object:
 api = maproulette.Challenge(config)
