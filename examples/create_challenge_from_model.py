@@ -2,8 +2,7 @@ import maproulette
 import json
 
 # Create a configuration object for MapRoulette using your API key:
-config = maproulette.Configuration(api_key="2909|40fee283-0d8c-4b9d-ae4a-28850c132e66",
-                                   verify=False)
+config = maproulette.Configuration()
 
 # Create an API objects with the above config object:
 api = maproulette.Challenge(config)
@@ -25,6 +24,8 @@ challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition='OR'
 
 # Adding example overpass QL input for challenge
 challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()
+
+print(challenge_data.overpassQL)
 
 # Create challenge
 print(json.dumps(api.create_challenge(challenge_data)))
