@@ -20,7 +20,7 @@ challenge_data.instruction = "Do something"
 rule_1 = maproulette.PriorityRule(priority_value='highway.footway', priority_type='string', priority_operator='equal')
 
 # Create a formal priority rule for the challenge
-challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition='OR', rules=[rule_1]).to_json()
+challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition='OR', rules=rule_1).to_json()
 
 # Adding example overpass QL input for challenge
 challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()

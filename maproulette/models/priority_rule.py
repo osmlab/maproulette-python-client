@@ -40,8 +40,10 @@ class PriorityRuleModel:
                     self.rules.append(i.to_dict())
                 else:
                     raise ValueError("Rules must be PriorityRule instances")
+        elif isinstance(rules, PriorityRule):
+            self.rules.append(rules.to_dict())
         else:
-            raise ValueError("Rules must be a list of PriorityRule instances")
+            raise ValueError("Rules must PriorityRule instances")
 
     def to_dict(self):
         """Converts all properties of a priority rule model object into a dictionary"""
