@@ -1,8 +1,8 @@
 """This module contains the definition of a priority rule object in MapRoulette."""
 
 import json
-import os
 
+VALID_CONDITIONS = {'OR', 'AND'}
 VALID_TYPES = {'string', 'integer', 'double', 'long'}
 VALID_STRING_OPERATORS = {'equal', 'not_equal', 'contains', 'not_contains', 'is_empty', 'is_not_empty'}
 VALID_NUMERIC_OPERATORS = {'==', '!=', '<', '<=', '>', '>='}
@@ -10,6 +10,53 @@ VALID_NUMERIC_OPERATORS = {'==', '!=', '<', '<=', '>', '>='}
 
 class PriorityRuleModel:
     """Definition for a MapRoulette priority rule"""
+
+    @property
+    def condition(self):
+        """The condition (AND/OR) to use to chain together multiple priority rules"""
+        return self._condition
+
+    @condition.setter
+    def condition(self, value):
+        if value not in VALID_CONDITIONS:
+            raise ValueError(f"Priority condition must be one of {VALID_CONDITIONS}.")
+        self._condition = value
+
+    @property
+    def rules(self):
+        """The list of priority rules to be used in the priority rule model"""
+        return self._rules
+
+    @rules.setter
+    def rules(self, value):
+        self._rules = value
+
+    def __init__(self, condition, rules):
+        self.condition = condition
+        self.rules = list()
+        if isinstance(rules, list):
+            for i in rules:
+                if isinstance(i, PriorityRule):
+                    self.rules.append(i.to_dict())
+                else:
+                    raise ValueError("Rules must be PriorityRule instances")
+        else:
+            raise ValueError("Rules must be a list of PriorityRule instances")
+
+    def to_dict(self):
+        """Converts all properties of a priority rule model object into a dictionary"""
+        return {
+            "condition": self._condition,
+            "rules": self._rules
+        }
+
+    def to_json(self):
+        """Converts all properties of a priority rule model object into a JSON object"""
+        return json.dumps(self.to_dict())
+
+
+class PriorityRule:
+    """Definition for a single priority rule"""
 
     @property
     def priority_value(self):
@@ -52,7 +99,7 @@ class PriorityRuleModel:
         self._priority_operator = priority_operator
 
     def to_dict(self):
-        """Converts all non-null properties of a project object into a dictionary"""
+        """Converts all properties of a priority rule object into a dictionary"""
         return {
             "value": self._priority_value,
             "type": self._priority_type,
@@ -60,5 +107,5 @@ class PriorityRuleModel:
         }
 
     def to_json(self):
-        """Converts all non-null properties of a project object into a JSON object"""
+        """Converts all properties of a priority rule object into a JSON object"""
         return json.dumps(self.to_dict())

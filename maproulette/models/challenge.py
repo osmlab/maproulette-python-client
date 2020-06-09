@@ -332,7 +332,6 @@ class ChallengeModel:
             "id": self._id,
             "name": self._name,
             "description": self._description,
-            "deleted": self.description,
             "parent": self._parent,
             "instruction": self._instruction,
             "difficulty": self._difficulty,
