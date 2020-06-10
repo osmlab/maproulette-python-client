@@ -7,8 +7,7 @@ from .api.configuration import Configuration
 from .models.project import ProjectModel
 from .models.challenge import ChallengeModel
 from .models.task import TaskModel
-from .models.priority_rule import PriorityRuleModel
-from .models.priority_rule import PriorityRule
+from .models.priority_rule import *
 from .api.project import Project
 from .api.challenge import Challenge
 from .api.task import Task

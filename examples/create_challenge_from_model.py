@@ -17,10 +17,14 @@ challenge_data.description = "This is a test challenge"
 challenge_data.instruction = "Do something"
 
 # Let's create a basic rule to classify features with tags 'highway' = 'footway' to be high priority
-rule_1 = maproulette.PriorityRule(priority_value='highway.footway', priority_type='string', priority_operator='equal')
+rule_1 = maproulette.PriorityRule(priority_value='highway.footway',
+                                  priority_type=maproulette.Types.STRING,
+                                  priority_operator=maproulette.StringOperators.EQUAL)
 
 # Create a formal priority rule for the challenge
-challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition='OR', rules=rule_1).to_json()
+challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition=maproulette.Conditions.OR,
+                                                                  rules=rule_1
+                                                                  ).to_json()
 
 # Adding example overpass QL input for challenge
 challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()

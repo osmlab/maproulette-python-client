@@ -1,26 +1,73 @@
 """This module contains the definition of a priority rule object in MapRoulette."""
 
 import json
+import enum
 
-VALID_CONDITIONS = {'OR', 'AND'}
-VALID_TYPES = {'string', 'integer', 'double', 'long'}
-VALID_STRING_OPERATORS = {'equal', 'not_equal', 'contains', 'not_contains', 'is_empty', 'is_not_empty'}
-VALID_NUMERIC_OPERATORS = {'==', '!=', '<', '<=', '>', '>='}
+
+class ExtendedEnum(enum.Enum):
+    @classmethod
+    def list(cls):
+        return [i.value for i in cls]
+
+
+class Conditions(ExtendedEnum):
+    """An enumeration of valid logical conditions for a priority rule object"""
+    OR = "OR"
+    AND = "AND"
+
+
+class Types(ExtendedEnum):
+    """An enumeration of valid types for a priority rule object"""
+    STRING = "string"
+    INTEGER = "integer"
+    DOUBLE = "double"
+    LONG = "long"
+
+
+class StringOperators(ExtendedEnum):
+    """An enumeration of valid string operators for a priority rule object"""
+    EQUAL = "equal"
+    NOT_EQUAL = "not_equal"
+    CONTAINS = "contains"
+    NOT_CONTAINS = "not_contains"
+    IS_EMPTY = "is_empty"
+    IS_NOT_EMPTY = "is_not_empty"
+
+
+class NumericOperators(ExtendedEnum):
+    """An enumeration of valid numeric operators for a priority rule object"""
+    EQUAL_TO = "=="
+    NOT_EQUAL_TO = "!="
+    LESS_THAN = "<"
+    LESS_THAN_OR_EQUAL = "<="
+    GREATER_THAN = ">"
+    GREATER_THAN_OR_EQUAL = ">="
 
 
 class PriorityRuleModel:
-    """Definition for a MapRoulette priority rule"""
+    """A model for a priority rule definition in MapRoulette.
+
+    :param condition: the logical condition to use to string together multiple rules. The valid options for conditions
+        are defined by the :class:`~maproulette.models.priority_rule.Conditions` enum.
+    :type condition: Conditions or str
+    :param rules: one or more rules to use for the priority rule definition. Rules should be instances of the
+        :class:`~maproulette.models.priority_rule.PriorityRule` class.
+    :type rules: PriorityRule or list
+    """
 
     @property
     def condition(self):
-        """The condition (AND/OR) to use to chain together multiple priority rules"""
+        """The condition to use to chain together multiple priority rules"""
         return self._condition
 
     @condition.setter
     def condition(self, value):
-        if value not in VALID_CONDITIONS:
-            raise ValueError(f"Priority condition must be one of {VALID_CONDITIONS}.")
-        self._condition = value
+        if isinstance(value, Conditions):
+            self._condition = value.value
+        else:
+            if value not in Conditions.list():
+                raise ValueError(f"Priority condition must be one of {Conditions.list()}.")
+            self._condition = value
 
     @property
     def rules(self):
@@ -32,14 +79,18 @@ class PriorityRuleModel:
         self._rules = value
 
     def __init__(self, condition, rules):
+        """The constructor for the PriorityRuleModel class"""
         self.condition = condition
         self.rules = list()
         if isinstance(rules, list):
-            for i in rules:
-                if isinstance(i, PriorityRule):
-                    self.rules.append(i.to_dict())
-                else:
-                    raise ValueError("Rules must be PriorityRule instances")
+            if len(rules) > 0:
+                for i in rules:
+                    if isinstance(i, PriorityRule):
+                        self.rules.append(i.to_dict())
+                    else:
+                        raise ValueError("Rules must be PriorityRule instances")
+            else:
+                ValueError("Rule list cannot be empty")
         elif isinstance(rules, PriorityRule):
             self.rules.append(rules.to_dict())
         else:
@@ -58,7 +109,57 @@ class PriorityRuleModel:
 
 
 class PriorityRule:
-    """Definition for a single priority rule"""
+    """Definition for a single priority rule
+
+    :param priority_type: the data type for the priority rule. The valid options are defined by the
+        :class:`~maproulette.models.priority_rule.Types` enum.
+    :type priority_type: Types or str
+    :param priority_operator: the operator to use for the priority rule. The valid options for string-type priority
+        rules are defined by the :class:`~maproulette.models.priority_rule.StringOperators` enum and the valid options
+        for numeric-type priority rules are defined by the :class:`~maproulette.models.priority_rule.NumericOperators`
+        enum.
+    :type priority_operator: NumericOperators or StringOperators or str
+    :param priority_value: the value to use for the priority rule. This should be formatted like 'highway.footway' to
+        indicate that any task with a 'highway' property equal to 'footway' should be considered for this rule. Multiple
+        values can be specified using commas. Example: 'highway.footway,pedestrian'.
+    :type priority_value: str
+    """
+
+    @property
+    def priority_type(self):
+        """The type for the priority rule"""
+        return self._priority_type
+
+    @priority_type.setter
+    def priority_type(self, value):
+        if isinstance(value, Types):
+            self._priority_type = value.value
+        elif value in Types.list():
+            self._priority_type = value
+        else:
+            raise ValueError(f"Priority types must be one of {Types.list()}.")
+
+    @property
+    def priority_operator(self):
+        """The operator to use for the priority rule"""
+        return self._priority_operator
+
+    @priority_operator.setter
+    def priority_operator(self, value):
+        if self._priority_type == 'string':
+            if isinstance(value, StringOperators):
+                self._priority_operator = value.value
+            elif value in StringOperators.list():
+                self._priority_operator = value
+            else:
+                raise ValueError(f"String type priority operators must be one of {StringOperators.list()}.")
+        else:
+            if isinstance(value, NumericOperators):
+                self._priority_operator = value.value
+            elif value in NumericOperators.list():
+                self._priority_operator = value
+            else:
+                raise ValueError(f"Numeric type priority operators must be one of {NumericOperators.list()}.")
 
     @property
     def priority_value(self):
@@ -69,36 +170,11 @@ class PriorityRule:
     def priority_value(self, value):
         self._priority_value = value
 
-    @property
-    def priority_type(self):
-        """The type for the priority rule"""
-        return self._priority_type
-
-    @priority_type.setter
-    def priority_type(self, value):
-        if value not in VALID_TYPES:
-            raise ValueError(f"Priority type must be one of {VALID_TYPES}.")
-        self._priority_type = value
-
-    @property
-    def priority_operator(self):
-        """The type for the priority rule"""
-        return self._priority_operator
-
-    @priority_operator.setter
-    def priority_operator(self, value):
-        if self.priority_type == 'string':
-            if value not in VALID_STRING_OPERATORS:
-                raise ValueError(f"Priority operator must be one of {VALID_STRING_OPERATORS}.")
-        else:
-            if value not in VALID_NUMERIC_OPERATORS:
-                raise ValueError(f"Priority operator must be one of {VALID_NUMERIC_OPERATORS}.")
-        self._priority_operator = value
-
-    def __init__(self, priority_value=None, priority_type=None, priority_operator=None):
-        self._priority_value = priority_value
-        self._priority_type = priority_type
-        self._priority_operator = priority_operator
+    def __init__(self, priority_type, priority_operator, priority_value):
+        """The constructor for the PriorityRule class"""
+        self.priority_type = priority_type
+        self.priority_operator = priority_operator
+        self.priority_value = priority_value
 
     def to_dict(self):
         """Converts all properties of a priority rule object into a dictionary"""
