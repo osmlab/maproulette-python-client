@@ -182,13 +182,17 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
-    def delete(self, endpoint):
+    def delete(self, endpoint, params=None):
         """Method that completes a DELETE request to the MapRoulette API
 
         :param endpoint: the server endpoint to use for the DELETE request
+        :param params: the parameters that pertain to the request (optional)
         :returns: a JSON object containing the API response
         """
-        response = self.session.delete(self.url + endpoint)
+        response = self.session.delete(
+            self.url + endpoint,
+            params=params
+        )
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError as e:
