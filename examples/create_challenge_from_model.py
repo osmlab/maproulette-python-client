@@ -18,11 +18,11 @@ challenge_data.instruction = "Do something"
 
 # Let's create a basic rule to classify features with tags 'highway' = 'footway' to be high priority
 rule_1 = maproulette.PriorityRule(priority_value='highway.footway',
-                                  priority_type=maproulette.Types.STRING,
-                                  priority_operator=maproulette.StringOperators.EQUAL)
+                                  priority_type=maproulette.priority_rule.Types.STRING,
+                                  priority_operator=maproulette.priority_rule.StringOperators.EQUAL)
 
 # Create a formal priority rule for the challenge
-challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition=maproulette.Conditions.OR,
+challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition=maproulette.priority_rule.Conditions.OR,
                                                                   rules=rule_1
                                                                   ).to_json()
 

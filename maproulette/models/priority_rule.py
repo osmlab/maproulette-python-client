@@ -1,10 +1,13 @@
 """This module contains the definition of a priority rule object in MapRoulette."""
 
 import json
-import enum
+from enum import Enum, auto
 
 
-class ExtendedEnum(enum.Enum):
+class ExtendedEnum(Enum):
+    def _generate_next_value_(name, start, count, last_values):
+        return name.lower()
+
     @classmethod
     def list(cls):
         return [i.value for i in cls]
@@ -18,20 +21,20 @@ class Conditions(ExtendedEnum):
 
 class Types(ExtendedEnum):
     """An enumeration of valid types for a priority rule object"""
-    STRING = "string"
-    INTEGER = "integer"
-    DOUBLE = "double"
-    LONG = "long"
+    STRING = auto()
+    INTEGER = auto()
+    DOUBLE = auto()
+    LONG = auto()
 
 
 class StringOperators(ExtendedEnum):
     """An enumeration of valid string operators for a priority rule object"""
-    EQUAL = "equal"
-    NOT_EQUAL = "not_equal"
-    CONTAINS = "contains"
-    NOT_CONTAINS = "not_contains"
-    IS_EMPTY = "is_empty"
-    IS_NOT_EMPTY = "is_not_empty"
+    EQUAL = auto()
+    NOT_EQUAL = auto()
+    CONTAINS = auto()
+    NOT_CONTAINS = auto()
+    IS_EMPTY = auto()
+    IS_NOT_EMPTY = auto()
 
 
 class NumericOperators(ExtendedEnum):
@@ -94,7 +97,7 @@ class PriorityRuleModel:
         elif isinstance(rules, PriorityRule):
             self.rules.append(rules.to_dict())
         else:
-            raise ValueError("Rules must PriorityRule instances")
+            raise ValueError("Rules must be PriorityRule instances")
 
     def to_dict(self):
         """Converts all properties of a priority rule model object into a dictionary"""
