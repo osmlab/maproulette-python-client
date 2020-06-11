@@ -17,6 +17,7 @@ Welcome to MapRoulette's documentation!
    usage/models/project
    usage/models/challenge
    usage/models/task
+   usage/models/priority_rule
    usage/exceptions
 
 ---------------
