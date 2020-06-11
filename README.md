@@ -1,6 +1,10 @@
 # MapRoulette - A Python Client for the MapRoulette API
 
-https://maproulette-python-client.readthedocs.io/
+
+https://maproulette-python-client.readthedocs.io
+
+[![PyPI version](https://badge.fury.io/py/maproulette.svg)](https://badge.fury.io/py/maproulette)
+[![Build Status](https://travis-ci.com/osmlab/maproulette-python-client.svg?branch=master)](https://travis-ci.com/osmlab/maproulette-python-client)
 
 This client makes it easy for users to communicate with the MapRoulette API from within
 their Python environment. In the example below, we are able to access a MapRoulette project in just four lines of code:
