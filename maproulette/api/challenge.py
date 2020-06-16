@@ -55,7 +55,7 @@ class Challenge(MapRouletteServer):
         return response
 
     def get_virtual_challenge_by_id(self, challenge_id):
-        """method to retrieve an existing virtual challenge
+        """Method to retrieve an existing virtual challenge
 
         :param challenge_id: the ID corresponding to the virtual challenge
         :return: the API response from the GET request
@@ -96,7 +96,7 @@ class Challenge(MapRouletteServer):
 
     def get_challenge_children(self, challenge_id, limit=10, page=0):
         """Method to retrieve all children from a given challenge in an expanded list. Unlike the
-        :method:`~maproulette.api.challenge.Challenge.get_challenge_tasks` method, this function will wrap the JSON
+        :meth:`~maproulette.api.challenge.Challenge.get_challenge_tasks` method, this function will wrap the JSON
         array list inside of the parent challenge object allowing you to see the full hierarchy.
 
         :param challenge_id: the ID corresponding to the challenge

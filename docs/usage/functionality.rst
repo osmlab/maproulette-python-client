@@ -1,5 +1,6 @@
 Functionality
 =====================================================
+For usage examples check out `this link. <https://github.com/osmlab/maproulette-python-client/tree/dev/examples>`_
 
 Module: project
 -----------------------------------------------------

@@ -1,6 +1,5 @@
 """This module contains the methods that the user will use directly to interact with MapRoulette tasks"""
 
-import json
 from maproulette.api.maproulette_server import MapRouletteServer
 from maproulette.models.task import TaskModel
 
