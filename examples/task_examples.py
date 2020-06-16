@@ -4,7 +4,7 @@ import json
 # Create a configuration object for MapRoulette using your API key:
 config = maproulette.Configuration(api_key="API_KEY")
 
-# Create an API objects with the above config object:
+# Create an API object with the above config object:
 api = maproulette.Task(config)
 
 # To fetch a task, specify the task ID

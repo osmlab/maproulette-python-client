@@ -1,17 +1,12 @@
 """This module contains the basic configuration object that is used to communicate with the MapRoulette API."""
 
-from typing import Union
-
 DEFAULT_HOSTNAME = 'maproulette.org'
 DEFAULT_PROTOCOL = 'https'
 DEFAULT_API_VERSION = '/api/v2'
 
 
 class Configuration:
-    """Class for storing the configuration of the MapRoulette server"""
-    def __init__(self, hostname=DEFAULT_HOSTNAME, protocol=DEFAULT_PROTOCOL, api_version=DEFAULT_API_VERSION,
-                 api_key=None, certs=None, verify=True):
-        """Create a new configuration object to connect to the MapRoulette server.
+    """Configuration object that specifies how to connect to the MapRoulette server.
 
         :param hostname: Optional parameter to specify the hostname of the MapRoulette instance being addressed. Do
             not include the protocol (https, http). Default value is 'maproulette.org'.
@@ -31,7 +26,10 @@ class Configuration:
         :param verify: Optional parameter to specify whether to verify SSL certificates for HTTPS requests. Default
             is True.
         :type verify: bool, optional
-        """
+            """
+    def __init__(self, hostname=DEFAULT_HOSTNAME, protocol=DEFAULT_PROTOCOL, api_version=DEFAULT_API_VERSION,
+                 api_key=None, certs=None, verify=True):
+
         self.api_url = f"{protocol}://{hostname}{api_version}"
         self.base_url = f"{protocol}://{hostname}"
         self.protocol = protocol

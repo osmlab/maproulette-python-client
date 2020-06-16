@@ -24,7 +24,7 @@ class Task(MapRouletteServer):
         """Method to retrieve task history using the corresponding task ID
 
         :param task_id: the ID corresponding with the task
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         response = self.get(
             endpoint=f"/task/{task_id}/history")
@@ -34,7 +34,7 @@ class Task(MapRouletteServer):
         """Method to create a batch of tasks
 
         :param data: a JSON input containing task details
-        :return: the API response from the POST request
+        :returns: the API response from the POST request
         """
         response = self.post(
             endpoint="/tasks",
@@ -45,7 +45,7 @@ class Task(MapRouletteServer):
         """Method to update a batch of tasks
 
         :param data: a JSON input containing task details
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         response = self.put(
             endpoint="/tasks",
@@ -56,7 +56,7 @@ class Task(MapRouletteServer):
         """Method to retrieve the tags for a task using the corresponding task ID
 
         :param task_id: the ID corresponding with the task
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         response = self.get(
             endpoint=f"/task/{task_id}/tags")
@@ -67,7 +67,7 @@ class Task(MapRouletteServer):
 
         :param task_id: the ID corresponding with the task
         :param tags: a comma-separated list of tags to be deleted
-        :return: the API response from the DELETE request
+        :returns: the API response from the DELETE request
         """
         query_params = {
             "tags": str(tags)
@@ -84,7 +84,7 @@ class Task(MapRouletteServer):
         :param tags: a comma-separated list of tags to be searched for
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "tags": str(tags),
@@ -102,7 +102,7 @@ class Task(MapRouletteServer):
 
         :param task_id: the ID corresponding with the task
         :param tags: a comma-separated list of tags to be updated. If empty all tags will be removed.
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "tags": str(tags)
@@ -124,7 +124,7 @@ class Task(MapRouletteServer):
         :param tags: optional tags to associate with this task
         :param request_review: optional boolean indicating if a review is requested on this task
         :param completion_responses: optional key/value JSON to be stored within this task
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         query_params = {
             "comment": str(comment),
@@ -142,7 +142,7 @@ class Task(MapRouletteServer):
         """Method to retrieve the comments for a task using the corresponding task ID
 
         :param task_id: the ID corresponding with the task
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         response = self.get(
             endpoint=f"/task/{task_id}/comments"

@@ -27,7 +27,7 @@ class Challenge(MapRouletteServer):
         """Method to create a new virtual challenge
 
         :param data: a JSON input containing virtual challenge details
-        :return: the API response to the POST request
+        :returns: the API response to the POST request
         """
         # TODO: add model for virtual challenge to aid in posting
         response = self.post(
@@ -58,7 +58,7 @@ class Challenge(MapRouletteServer):
         """Method to retrieve an existing virtual challenge
 
         :param challenge_id: the ID corresponding to the virtual challenge
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         response = self.get(endpoint=f"/virtualchallenge/{challenge_id}")
         return response
@@ -80,7 +80,7 @@ class Challenge(MapRouletteServer):
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
         :param only_enabled: whether or not results should be limited to only enabled challenges. Default is true.
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "projectIds": str(project_ids),
@@ -183,7 +183,7 @@ class Challenge(MapRouletteServer):
             0 - High, 1 - Medium, 2 - Low
         :param export_properties: a comma-separated filter for the properties that should be exported
         :param task_property_search: a filter for the tasks returned using task properties
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "limit": str(limit),
@@ -211,7 +211,7 @@ class Challenge(MapRouletteServer):
         :param priority: a comma-separated filter for the tasks returned by priority value:
             0 - High, 1 - Medium, 2 - Low
         :param task_property_search: a filter for the tasks returned using task properties
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "status": str(status),
@@ -229,7 +229,7 @@ class Challenge(MapRouletteServer):
         """Method to update all the task priorities for a given challenge based on the priority rules in the challenge
 
         :param challenge_id: the ID corresponding to the challenge
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         response = self.put(
             endpoint=f"/challenge/{challenge_id}/updateTaskPriorities"
@@ -240,7 +240,7 @@ class Challenge(MapRouletteServer):
         """Method to reset all the task instructions so that they revert to the challenge instructions
 
         :param challenge_id: the ID corresponding to the challenge
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         response = self.put(
             endpoint=f"/challenge/{challenge_id}/resetTaskInstructions"
@@ -264,7 +264,7 @@ class Challenge(MapRouletteServer):
 
         :param challenge_id: the ID corresponding to the challenge
         :param immediate: whether or not the challenge should be deleted immediately
-        :return: the API response from the DELETE request
+        :returns: the API response from the DELETE request
         """
         query_params = {
             "immediate": str(immediate)
@@ -281,7 +281,7 @@ class Challenge(MapRouletteServer):
         :param challenge_id: the ID corresponding to the challenge
         :param status_filters: a comma separate list of status ID's:
             0 = Created, 1 = Fixed, 2 = False Positive, 3 = Skipped, 4 = Deleted, 5 = Already Fixed, 6 = Too Hard
-        :return: the API response from the DELETE request
+        :returns: the API response from the DELETE request
         """
         query_params = {
             "statusFilters": str(status_filters)
@@ -297,7 +297,7 @@ class Challenge(MapRouletteServer):
 
         :param challenge_id: the ID corresponding to the challenge
         :param data: a JSON input containing challenge details
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         if self.is_challenge_model(data):
             data = ChallengeModel.to_dict(data)
