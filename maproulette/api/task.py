@@ -114,7 +114,41 @@ class Task(MapRouletteServer):
         )
         return response
 
-    
+    def update_task_status(self, task_id, status, comment=None, tags=None, request_review=None,
+                           completion_responses=None):
+        """Method to update a task's status to one of the following:
+        0 - Created, 1 - Fixed, 2 - False Positive, 3 - Skipped, 4 - Deleted, 5 - Already Fixed, 6 - Too Hard.
+
+        :param task_id: the ID corresponding with the task
+        :param status: the status to update the task to
+        :param comment: optional comment that is provided by the user when setting the status
+        :param tags: optional tags to associate with this task
+        :param request_review: optional boolean indicating if a review is requested on this task
+        :param completion_responses: optional key/value JSON to be stored within this task
+        :return: the API response from the PUT request
+        """
+        query_params = {
+            "comment": str(comment),
+            "tags": str(tags),
+            "requestReview": str(request_review)
+        }
+        response = self.put(
+            endpoint=f"/task/{task_id}/{status}",
+            params=query_params,
+            body=completion_responses
+        )
+        return response
+
+    def get_task_comments(self, task_id):
+        """Method to retrieve the comments for a task using the corresponding task ID
+
+        :param task_id: the ID corresponding with the task
+        :return: the API response from the GET request
+        """
+        response = self.get(
+            endpoint=f"/task/{task_id}/comments"
+        )
+        return response
 
     @staticmethod
     def is_task_model(input_object):
