@@ -126,6 +126,15 @@ class ChallengeModel:
         self._high_priority_rule = value
 
     @property
+    def medium_priority_rule(self):
+        """The medium priority for this challenge"""
+        return self._medium_priority_rule
+
+    @medium_priority_rule.setter
+    def high_priority_rule(self, value):
+        self._medium_priority_rule = value
+
+    @property
     def low_priority_rule(self):
         """The low priority of this challenge"""
         return self._low_priority_rule
@@ -289,7 +298,7 @@ class ChallengeModel:
 
     def __init__(self, name, id=None, description=None, parent=None, instruction=None, difficulty=None, blurb=None,
                  enabled=None, challenge_type=None, featured=None, overpassQL=None, default_priority=None,
-                 high_priority_rule=None, low_priority_rule=None, default_zoom=None, min_zoom=None, max_zoom=None,
+                 high_priority_rule=None, medium_priority_rule=None, low_priority_rule=None, default_zoom=None, min_zoom=None, max_zoom=None,
                  osm_id_property=None, cooperative_type=None, popularity=None, check_in_comment=None,
                  check_in_source=None, requires_local=None, default_basemap=None, default_basemap_id=None,
                  custom_basemap=None, update_tasks=None, exportable_properties=None, preferred_tags=None,
@@ -307,6 +316,7 @@ class ChallengeModel:
         self._overpassQL = overpassQL
         self._default_priority = default_priority
         self._high_priority_rule = high_priority_rule
+        self._medium_priority_rule = medium_priority_rule
         self._low_priority_rule = low_priority_rule
         self._default_zoom = default_zoom
         self._min_zoom = min_zoom
@@ -342,6 +352,7 @@ class ChallengeModel:
             "overpassQL": self._overpassQL,
             "defaultPriority": self._default_priority,
             "highPriorityRule": self._high_priority_rule,
+            "mediumPriorityTule": self._medium_priority_rule,
             "lowPriorityRule": self._low_priority_rule,
             "defaultZoom": self._default_zoom,
             "minZoom": self._min_zoom,
