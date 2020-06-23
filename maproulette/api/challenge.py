@@ -48,7 +48,7 @@ class Challenge(MapRouletteServer):
         """Method to retrieve challenge information via the corresponding challenge name and parent (project) ID
 
         :param project_id: the ID of the parent project
-        :param challenge_name: the ID corresponding to the challenge
+        :param challenge_name: the name corresponding to the challenge
         :returns: the API response from the GET request
         """
         response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name}")
