@@ -1,5 +1,7 @@
+import json
 import maproulette
 import unittest
+from tests.sample_data import test_geojson
 from unittest.mock import patch
 
 
@@ -13,4 +15,76 @@ class TestTaskAPI(unittest.TestCase):
         test_task_id = '42914448'
         mock_request.return_value.status_code = '200'
         response = api_instance.get_task_by_id(test_task_id)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_get_task_history(self, mock_request, api_instance=api):
+        test_task_id = '42914448'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.get_task_history(test_task_id)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.post')
+    def test_create_tasks(self, mock_request, api_instance=api):
+        geometries = test_geojson['features'][0]['geometry']
+        test_task_model = maproulette.TaskModel(name='test_task',
+                                                parent='12345',
+                                                geometries=geometries)
+        mock_request.return_value.status_code = '200'
+        response = api_instance.create_tasks(test_task_model)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    def test_update_tasks(self, mock_request, api_instance=api):
+        geometries = test_geojson['features'][0]['geometry']
+        test_task_model = maproulette.TaskModel(name='test_task',
+                                                parent='12345',
+                                                geometries=geometries)
+        mock_request.return_value.status_code = '200'
+        response = api_instance.update_tasks(test_task_model)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_get_task_tags(self, mock_request, api_instance=api):
+        task_id = '42914448'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.get_task_tags(task_id)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.delete')
+    def test_delete_task_tags(self, mock_request, api_instance=api):
+        task_id = '42914448'
+        tags = 'test'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.delete_task_tags(task_id, tags)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_get_tasks_by_tags(self, mock_request, api_instance=api):
+        tags = 'test'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.get_tasks_by_tags(tags)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_update_task_tags(self, mock_request, api_instance=api):
+        task_id = '42914448'
+        tags = 'test'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.update_task_tags(task_id, tags)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    def test_update_task_status(self, mock_request, api_instance=api):
+        task_id = '42914448'
+        status = 3
+        mock_request.return_value.status_code = '200'
+        response = api_instance.update_task_status(task_id, status)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_get_task_comments(self, mock_request, api_instance=api):
+        task_id = '42914448'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.get_task_comments(task_id)
         self.assertEqual(response['status'], '200')
