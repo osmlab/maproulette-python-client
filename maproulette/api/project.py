@@ -90,7 +90,7 @@ class Project(MapRouletteServer):
 
         :param project_id: the id of the virtual project
         :param challenge_id: the id of the challenge being added
-        :return: the API response from the POST request
+        :returns: the API response from the POST request
         """
         response = self.post(
             endpoint=f"/project/{project_id}/challenge/{challenge_id}/add"
@@ -103,7 +103,7 @@ class Project(MapRouletteServer):
 
         :param project_id: the id of the virtual project
         :param challenge_id: the id of the challenge being removed
-        :return: the API response from the POST request
+        :returns: the API response from the POST request
         """
         response = self.post(
             endpoint=f"/project/{project_id}/challenge/{challenge_id}/remove"
@@ -115,7 +115,7 @@ class Project(MapRouletteServer):
         Method to delete a project.
 
         :param project_id: the id of the project being deleted
-        :return: the API response form the DELETE request
+        :returns: the API response form the DELETE request
         """
         response = self.delete(
             endpoint=f"/project/{project_id}"
@@ -128,7 +128,7 @@ class Project(MapRouletteServer):
 
         :param project_id: the id of the project being updated
         :param data: the data to use to update the project
-        :return: the API response from the PUT request
+        :returns: the API response from the PUT request
         """
         if self.is_project_model(data):
             data = ProjectModel.to_dict(data)
@@ -142,7 +142,7 @@ class Project(MapRouletteServer):
         Method to retrieve projects from comma separated list of ids
 
         :param project_ids: comma separated list of project ids to be retrieved
-        :return: the API response from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "projectIds": project_ids
@@ -161,7 +161,7 @@ class Project(MapRouletteServer):
         :param limit: limit amount of results returned
         :param proximity: task to find based on proximity of that task
         :param search: a search parameter object stored in a cookie
-        :return: the API response form the GET request
+        :returns: the API response form the GET request
         """
         query_params = {
             "limit": str(limit),
