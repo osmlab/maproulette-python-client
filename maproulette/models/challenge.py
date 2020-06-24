@@ -352,7 +352,7 @@ class ChallengeModel:
             "overpassQL": self._overpassQL,
             "defaultPriority": self._default_priority,
             "highPriorityRule": self._high_priority_rule,
-            "mediumPriorityTule": self._medium_priority_rule,
+            "mediumPriorityRule": self._medium_priority_rule,
             "lowPriorityRule": self._low_priority_rule,
             "defaultZoom": self._default_zoom,
             "minZoom": self._min_zoom,
