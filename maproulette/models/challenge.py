@@ -296,13 +296,22 @@ class ChallengeModel:
     def remote_geojson(self, value):
         self._remote_geojson = value
 
+    @property
+    def keywords(self):
+        """A string or list of strings pertaining to the keywords of this challenge"""
+        return self._keywords
+
+    @keywords.setter
+    def keywords(self, value):
+        self._keywords = value
+
     def __init__(self, name, id=None, description=None, parent=None, instruction=None, difficulty=None, blurb=None,
                  enabled=None, challenge_type=None, featured=None, overpassQL=None, default_priority=None,
                  high_priority_rule=None, medium_priority_rule=None, low_priority_rule=None, default_zoom=None, min_zoom=None, max_zoom=None,
                  osm_id_property=None, cooperative_type=None, popularity=None, check_in_comment=None,
                  check_in_source=None, requires_local=None, default_basemap=None, default_basemap_id=None,
                  custom_basemap=None, update_tasks=None, exportable_properties=None, preferred_tags=None,
-                 task_styles=None, remote_geojson=None):
+                 task_styles=None, remote_geojson=None, keywords=None):
         self._id = id
         self._name = name
         self._description = description
@@ -335,6 +344,7 @@ class ChallengeModel:
         self._preferred_tags = preferred_tags
         self._task_styles = task_styles
         self._remote_geojson = remote_geojson
+        self._keywords = keywords
 
     def to_dict(self):
         """Converts all non-null properties of a challenge object into a dictionary"""
@@ -370,7 +380,8 @@ class ChallengeModel:
             "exportableProperties": self._exportable_properties,
             "preferredTags": self._preferred_tags,
             "taskStyles": self._task_styles,
-            "remoteGeoJson": self.remote_geojson
+            "remoteGeoJson": self._remote_geojson,
+            "tags": self._keywords
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
