@@ -64,17 +64,17 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
                 raise NotFoundError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(
-                message=json.loads(e.response.text)['message'],
+                message=self.parse_response_message(e.response),
                 status=e.response.status_code
             ) from None
         try:
@@ -105,17 +105,17 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 400:
                 raise InvalidJsonError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             elif e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
@@ -148,17 +148,17 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 400:
                 raise InvalidJsonError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             elif e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
@@ -189,17 +189,17 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             elif e.response.status_code == 404:
                 raise NotFoundError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message=json.loads(e.response.text)['message'],
+                    message=self.parse_response_message(e.response),
                     status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
@@ -227,3 +227,15 @@ class MapRouletteServer:
             return True
         except ValueError:
             return False
+
+    @staticmethod
+    def parse_response_message(response):
+        """Method to determine the message body from a response object. Will return None if message cannot be parsed.
+
+        :param response: the Requests response object
+        :returns: the response message if parsable, otherwise None
+        """
+        try:
+            return json.loads(response.text)['message']
+        except ValueError:
+            return None
