@@ -14,4 +14,4 @@ from .api.challenge import Challenge
 from .api.task import Task
 from .api.user import User
 
-__version__ = '1.3.1'
+__version__ = '1.3.0'
