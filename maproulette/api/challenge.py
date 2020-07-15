@@ -302,7 +302,7 @@ class Challenge(MapRouletteServer):
         if self.is_challenge_model(data):
             data = ChallengeModel.to_dict(data)
         response = self.put(
-            endpoint=f"/challenge{challenge_id}",
+            endpoint=f"/challenge/{challenge_id}",
             body=data)
         return response
 
