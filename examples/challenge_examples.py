@@ -58,4 +58,5 @@ with open('data/Example_Geometry.geojson', 'r') as data_file:
     data = json.loads(data_file.read())
 
 # Printing response:
-print(api.add_tasks_to_challenge(data, challenge_id))
+response = api.add_tasks_to_challenge(data, challenge_id)
+

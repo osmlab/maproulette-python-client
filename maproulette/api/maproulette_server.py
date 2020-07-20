@@ -43,6 +43,7 @@ class MapRouletteServer:
                     return True
             except requests.exceptions.ConnectionError:
                 print(f"Connection not available. Attempt {str(i+1)} out of {str(retries)}")
+                time.sleep(delay)
 
         raise ConnectionUnavailableError(
             message='Specified server unavailable'
