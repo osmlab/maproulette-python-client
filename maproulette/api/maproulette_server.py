@@ -237,5 +237,5 @@ class MapRouletteServer:
         """
         try:
             return json.loads(response.text)['message']
-        except ValueError:
+        except (ValueError, KeyError):
             return None
