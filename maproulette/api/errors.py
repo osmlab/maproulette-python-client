@@ -9,12 +9,12 @@ class MapRouletteBaseException(Exception):
         self.payload = payload
 
     def __str__(self):
-        e = {
+        error = {
                 "status": self.status,
                 "message": self.message,
                 "payload": self.payload
             }
-        return repr({k: v for (k, v) in e.items() if v is not None})
+        return repr({k: v for (k, v) in error.items() if v is not None})
 
 
 class NotFoundError(MapRouletteBaseException):
