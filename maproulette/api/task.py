@@ -30,15 +30,20 @@ class Task(MapRouletteServer):
             endpoint=f"/task/{task_id}/history")
         return response
 
-    def create_tasks(self, data):
-        """Method to create a batch of tasks
+    def create_tasks(self, data, batch_size=100):
+        """Method to create a batch of tasks using the specified batch_size.
 
         :param data: a JSON input containing task details
+        :param batch_size: the number of tasks to post per API call. The default is 100.
+        :type batch_size: int
         :returns: the API response from the POST request
         """
-        response = self.post(
-            endpoint="/tasks",
-            body=data)
+        response = []
+        for batch in self.batch_generator(input_list=data, chunk_size=batch_size):
+            response.append(self.post(
+                endpoint="/tasks",
+                body=batch)
+            )
         return response
 
     def update_tasks(self, data):
@@ -157,3 +162,15 @@ class Task(MapRouletteServer):
         :returns: True if instance of model
         """
         return bool(isinstance(input_object, TaskModel))
+
+    @staticmethod
+    def batch_generator(input_list, chunk_size):
+        """Method to yield successive n-sized chunks from input_list
+
+        :param input_list: the list to break into chunks
+        :param chunk_size: the number of list items to include per chunk
+        :type chunk_size: int
+        :returns: an iterator for the n-sized chunks of the input_list
+        """
+        for i in range(0, len(input_list), chunk_size):
+            yield input_list[i:i + chunk_size]

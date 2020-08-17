@@ -26,13 +26,16 @@ class TestTaskAPI(unittest.TestCase):
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_create_tasks(self, mock_request, api_instance=api):
+        test_tasks = []
         geometries = test_geojson['features'][0]['geometry']
         test_task_model = maproulette.TaskModel(name='test_task',
                                                 parent='12345',
                                                 geometries=geometries)
+        test_tasks.append(test_task_model.to_dict())
         mock_request.return_value.status_code = '200'
-        response = api_instance.create_tasks(test_task_model)
-        self.assertEqual(response['status'], '200')
+        responses = api_instance.create_tasks(test_tasks)
+        for response in responses:
+            self.assertEqual(response['status'], '200')
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_tasks(self, mock_request, api_instance=api):

@@ -1,6 +1,5 @@
 """This module contains the methods that the user will use directly to interact with MapRoulette challenges"""
 
-import geojson
 from maproulette.api.maproulette_server import MapRouletteServer
 from maproulette.models.challenge import ChallengeModel
 
@@ -260,42 +259,6 @@ class Challenge(MapRouletteServer):
             body=data)
         return response
 
-    def add_tasks_to_challenge_batch(self, data, challenge_id, batch_size=100):
-        """Method to add tasks to an existing challenge
-
-        :param data: a GeoJSON containing geometry of tasks to be added to a challenge
-        :param challenge_id: the ID corresponding to the challenge that tasks will be added to
-        :param batch_size: the number of features within the GeoJSON to send to the API at a time. Default is 100.
-        :returns: the API response from the PUT request
-        """
-        if isinstance(data, str):
-            try:
-                geojson.loads(data)
-            except ValueError
-        features = data['features']
-        feature_collection = {'type': 'FeatureCollection'}
-        remaining_features = len(features)
-        bundle = []
-        count = 0
-        for index, feature in enumerate(features):
-            bundle.append(feature)
-            count += 1
-            if count == batch_size:
-                feature_collection['features'] = bundle
-                self.add_tasks_to_challenge(
-                    challenge_id=challenge_id,
-                    data=feature_collection
-                )
-                remaining_features -= count
-                bundle = []
-                count = 0
-        if remaining_features > 0:
-            feature_collection['features'] = bundle
-            self.add_tasks_to_challenge(
-                challenge_id=challenge_id,
-                data=feature_collection
-            )
-
     def delete_challenge(self, challenge_id, immediate="false"):
         """Method to delete a challenge by using the corresponding challenge ID
 
@@ -351,11 +314,3 @@ class Challenge(MapRouletteServer):
         :returns: True if instance of model
         """
         return bool(isinstance(input_object, ChallengeModel))
-
-    @staticmethod
-    def string_to_geojson(input_object):
-        """Converts string to GeoJSON object using the geojson package
-
-        :param input_object: string representing the GeoJSON object
-        :return: a valid
-        """
