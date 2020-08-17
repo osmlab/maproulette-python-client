@@ -91,3 +91,15 @@ class TestTaskAPI(unittest.TestCase):
         mock_request.return_value.status_code = '200'
         response = api_instance.get_task_comments(task_id)
         self.assertEqual(response['status'], '200')
+
+    def test_batch_generator(self, api_instance=api):
+
+        batch_size = 10
+        test_length = 1234
+        test_list = [i for i in range(test_length)]
+        running_total = 0
+        for chunk in api_instance.batch_generator(test_list, batch_size):
+            running_total += len(chunk)
+            self.assertIsInstance(chunk, list)
+            self.assertLessEqual(len(chunk), batch_size)
+        self.assertEqual(test_length, running_total)
