@@ -190,6 +190,7 @@ class TaskModel:
             "id": self._id,
             "name": self._name,
             "parent": self._parent,
+            "geometries": self._geometries,
             "instruction": self._instruction,
             "location": self._location,
             "suggestedFix": self._suggested_fix,
