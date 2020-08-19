@@ -43,6 +43,7 @@ class MapRouletteServer:
                     return True
             except requests.exceptions.ConnectionError:
                 print(f"Connection not available. Attempt {str(i+1)} out of {str(retries)}")
+                time.sleep(delay)
 
         raise ConnectionUnavailableError(
             message='Specified server unavailable'
@@ -64,28 +65,25 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
                 raise NotFoundError(
-                    message='Resource not found',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message='An HTTP error occurred',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(
-                message="Connection Unavailable",
-                status=e.response.status_code,
-                payload=response
+                message=self.parse_response_message(e.response),
+                status=e.response.status_code
             ) from None
         try:
             return {
                 "data": response.json(),
                 "status": response.status_code
             }
-        except json.decoder.JSONDecodeError:
+        except ValueError:
             return {
                 "status": response.status_code
             }
@@ -108,21 +106,18 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 400:
                 raise InvalidJsonError(
-                    message='Invalid JSON payload',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             elif e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message='The user is not authorized to make this request',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message='An HTTP error occurred',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
@@ -131,7 +126,7 @@ class MapRouletteServer:
                 "data": response.json(),
                 "status": response.status_code
             }
-        except json.decoder.JSONDecodeError:
+        except ValueError:
             return {
                 "status": response.status_code
             }
@@ -154,21 +149,18 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 400:
                 raise InvalidJsonError(
-                    message='Invalid JSON payload',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             elif e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message='The user is not authorized to make this request',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message='An HTTP error occurred',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
@@ -177,7 +169,7 @@ class MapRouletteServer:
                 "data": response.json(),
                 "status": response.status_code
             }
-        except json.decoder.JSONDecodeError:
+        except ValueError:
             return {
                 "status": response.status_code
             }
@@ -198,21 +190,18 @@ class MapRouletteServer:
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 401:
                 raise UnauthorizedError(
-                    message='The user is not authorized to make this request',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             elif e.response.status_code == 404:
                 raise NotFoundError(
-                    message='Resource not found',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
             else:
                 raise HttpError(
-                    message='An HTTP error occurred',
-                    status=e.response.status_code,
-                    payload=e.response
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
                 ) from None
         except (requests.ConnectionError, requests.Timeout) as e:
             raise ConnectionUnavailableError(e) from None
@@ -221,7 +210,7 @@ class MapRouletteServer:
                 "data": response.json(),
                 "status": response.status_code
             }
-        except json.decoder.JSONDecodeError:
+        except ValueError:
             return {
                 "status": response.status_code
             }
@@ -239,3 +228,15 @@ class MapRouletteServer:
             return True
         except ValueError:
             return False
+
+    @staticmethod
+    def parse_response_message(response):
+        """Method to determine the message body from a response object. Will return None if message cannot be parsed.
+
+        :param response: the Requests response object
+        :returns: the response message if parsable, otherwise None
+        """
+        try:
+            return json.loads(response.text)['message']
+        except (ValueError, KeyError):
+            return None

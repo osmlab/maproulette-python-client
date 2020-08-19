@@ -26,7 +26,6 @@ class TestAPI(unittest.TestCase):
             server_instance.get(endpoint='')
         assert context.exception.message == 'Resource not found'
         assert context.exception.status == 404
-        assert context.exception.payload == 'error payload'
 
     @patch('maproulette.api.maproulette_server.MapRouletteServer.get')
     @patch('requests.Session.get')
@@ -265,3 +264,20 @@ class TestAPI(unittest.TestCase):
         assert context.exception.message == 'Connection Unavailable'
         assert context.exception.status == 500
         assert context.exception.payload == 'error payload'
+
+    @patch('json.loads')
+    def test_parse_response_message(self, mock_loads, server_instance=server):
+        mock_loads.return_value = {
+            'message': 'some message'
+        }
+        self.assertTrue(server_instance.parse_response_message(mock_loads))
+
+    @patch('json.loads')
+    def test_parse_response_message_value_error(self, mock_loads, server_instance=server):
+        mock_loads.side_effect = ValueError()
+        self.assertIsNone(server_instance.parse_response_message(mock_loads))
+
+    @patch('json.loads')
+    def test_parse_response_message_key_error(self, mock_loads, server_instance=server):
+        mock_loads.side_effect = KeyError()
+        self.assertIsNone(server_instance.parse_response_message(mock_loads))

@@ -250,7 +250,7 @@ class Challenge(MapRouletteServer):
     def add_tasks_to_challenge(self, data, challenge_id):
         """Method to add tasks to an existing challenge
 
-        :param data: a geojson containing geometry of tasks to be added to a challenge
+        :param data: a GeoJSON containing geometry of tasks to be added to a challenge
         :param challenge_id: the ID corresponding to the challenge that tasks will be added to
         :returns: the API response from the PUT request
         """
