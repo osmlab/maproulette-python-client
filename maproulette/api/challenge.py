@@ -54,6 +54,25 @@ class Challenge(MapRouletteServer):
         response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name}")
         return response
 
+    def get_challenges_by_tags(self, challenge_tags, limit=10, page=0):
+        """Method to retrieve challenge information via tags applied to the challenge
+
+        :param challenge_tags: a comma-separated list of tags to search challenges for
+        :param limit: the limit to the number of results returned in the response. Default is 10
+        :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
+        :returns: the API responsse from the GET request
+        """
+        query_params = {
+            "tags": str(challenge_tags),
+            "limit ": str(limit),
+            "page": str(page)
+        }
+        response = self.get(
+            endpoint=f"/challenges/tags",
+            params=query_params
+        )
+        return response
+
     def get_virtual_challenge_by_id(self, challenge_id):
         """Method to retrieve an existing virtual challenge
 
