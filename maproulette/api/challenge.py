@@ -60,7 +60,7 @@ class Challenge(MapRouletteServer):
         :param challenge_tags: a comma-separated list of tags to search challenges for
         :param limit: the limit to the number of results returned in the response. Default is 10
         :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
-        :returns: the API responsse from the GET request
+        :returns: the API response from the GET request
         """
         query_params = {
             "tags": str(challenge_tags),
