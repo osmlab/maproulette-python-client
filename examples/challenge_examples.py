@@ -19,6 +19,10 @@ project_id = '2491'
 print(json.dumps(api.get_challenge_by_name(project_id=project_id,
                                            challenge_name=challenge_name), indent=4, sort_keys=True))
 
+# We can also use challenges' set tags to retrieve them:
+challenge_tags = 'River'
+print(json.dumps(api.get_challenges_by_tags(challenge_tags=challenge_tags), indent=4, sort_keys=True))
+
 # We can access challenge statistics as well:
 print(json.dumps(api.get_challenge_statistics_by_id(challenge_id)))
 

@@ -131,7 +131,7 @@ class ChallengeModel:
         return self._medium_priority_rule
 
     @medium_priority_rule.setter
-    def high_priority_rule(self, value):
+    def medium_priority_rule(self, value):
         self._medium_priority_rule = value
 
     @property

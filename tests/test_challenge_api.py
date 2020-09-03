@@ -67,6 +67,13 @@ class TestChallengeAPI(unittest.TestCase):
         self.assertEqual(response['status'], '200')
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
+    def test_get_challenges_by_tags(self, mock_request, api_instance=api):
+        test_challenge_tag = 'River'
+        mock_request.return_value.status_code = '200'
+        response = api_instance.get_challenges_by_tags(test_challenge_tag)
+        self.assertEqual(response['status'], '200')
+
+    @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_virtual_challenge_by_id(self, mock_request, api_instance=api):
         test_virtual_challenge_id = '12345'
         mock_request.return_value.status_code = '200'
