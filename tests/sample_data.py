@@ -30,3 +30,8 @@ create_challenge_output = json.dumps(
     'description': 'This is a test challenge',
     'instruction': 'Do something',
     'overpassQL': test_overpassQL_query})
+
+test_project = json.loads('''{"name": "Test_Project_Name",
+                           "description": "This is a test project"
+                           }'''
+                          )
