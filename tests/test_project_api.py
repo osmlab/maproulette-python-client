@@ -34,10 +34,10 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.find_project(test_search)
         mock_request.assert_called_once_with(
             f'{self.url}/projects',
-            params={"search": test_search,
-                    "limit": "10",
-                    "page": "0",
-                    "onlyEnabled": "true"
+            params={'search': test_search,
+                    'limit': '10',
+                    'page': '0',
+                    'onlyEnabled': 'true'
                     }
         )
 
@@ -47,8 +47,8 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_project_challenges(test_project_id)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}/challenges',
-            params={"limit": "10",
-                    "page": "0"}
+            params={'limit': '10',
+                    'page': '0'}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
@@ -120,7 +120,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_projects_by_ids(test_project_ids)
         mock_request.assert_called_once_with(
             f'{self.url}/projectsById',
-            params={"projectIds": test_project_ids}
+            params={'projectIds': test_project_ids}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
@@ -131,7 +131,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_random_tasks(test_project_id)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}/tasks',
-            params={"limit": "1",
-                    "proximity": "-1",
-                    "search": ""}
+            params={'limit': '1',
+                    'proximity': '-1',
+                    'search': ''}
         )

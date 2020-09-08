@@ -137,11 +137,11 @@ class TestChallengeAPI(unittest.TestCase):
             f'{self.url}/challenge/{test_challenge_id}/tasks/extract',
             params={'limit': '10',
                     'page': '0',
-                    'status': "",
-                    'reviewStatus': "",
-                    'priority': "",
-                    'exportProperties': "",
-                    'taskPropertySearch': ""}
+                    'status': '',
+                    'reviewStatus': '',
+                    'priority': '',
+                    'exportProperties': '',
+                    'taskPropertySearch': ''}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
@@ -150,10 +150,10 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.get_challenge_geojson(test_challenge_id)
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/view/{test_challenge_id}',
-            params={'status': "",
-                    'reviewStatus': "",
-                    'priority': "",
-                    'taskPropertySearch': ""}
+            params={'status': '',
+                    'reviewStatus': '',
+                    'priority': '',
+                    'taskPropertySearch': ''}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
@@ -191,7 +191,7 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.delete_challenge_tasks(test_challenge_id)
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}/tasks',
-            params={'statusFilters': ""}
+            params={'statusFilters': ''}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')

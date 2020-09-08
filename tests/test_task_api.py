@@ -39,9 +39,9 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.create_tasks(test_tasks)
         input_json_list = []
         for task in test_tasks:
-            input_json_list.append({"name": task["name"],
-                                    "parent": task["parent"],
-                                    "geometries": task["geometries"]})
+            input_json_list.append({'name': task['name'],
+                                    'parent': task['parent'],
+                                    'geometries': task['geometries']})
         mock_request.assert_called_once_with(
             f'{self.url}/tasks',
             json=input_json_list,
@@ -78,7 +78,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.delete_task_tags(task_id, tags)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/tags',
-            params={"tags": tags}
+            params={'tags': tags}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
@@ -87,9 +87,9 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.get_tasks_by_tags(tags)
         mock_request.assert_called_once_with(
             f'{self.url}/tasks/tags',
-            params={"tags": tags,
-                    "limit": "10",
-                    "page": "0"}
+            params={'tags': tags,
+                    'limit': '10',
+                    'page': '0'}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
@@ -99,7 +99,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.update_task_tags(task_id, tags)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/tags/update',
-            params={"tags": tags}
+            params={'tags': tags}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
@@ -109,9 +109,9 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.update_task_status(task_id, status)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/{status}',
-            params={"comment": "None",
-                    "tags": "None",
-                    "requestReview": "None"},
+            params={'comment': 'None',
+                    'tags': 'None',
+                    'requestReview': 'None'},
             json=None
         )
 

@@ -15,8 +15,8 @@ class TestUserAPI(unittest.TestCase):
         api_instance.find_user_by_username(test_username)
         mock_request.assert_called_once_with(
             f'{self.url}/users/find/{test_username}',
-            params={"limit": "10",
-                    "page": "0"
+            params={'limit': '10',
+                    'page': '0'
                     }
         )
 
@@ -32,7 +32,7 @@ class TestUserAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/user/{test_user_id}/project/{test_project_id}/{test_group}',
             json=None,
-            params={"isOSMUserId": "true"}
+            params={'isOSMUserId': 'true'}
         )
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
@@ -46,6 +46,6 @@ class TestUserAPI(unittest.TestCase):
                                                          is_osm_user_id='true')
         mock_request.assert_called_once_with(
             f'{self.url}/user/project/{test_project_id}/{test_group}',
-            params={"isOSMUserId": "true"},
+            params={'isOSMUserId': 'true'},
             json=test_user_ids
         )
