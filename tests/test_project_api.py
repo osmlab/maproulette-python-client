@@ -16,8 +16,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_project_by_id(test_project_id)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_project_by_name(self, mock_request, api_instance=api):
@@ -25,8 +24,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_project_by_name(test_project_name)
         mock_request.assert_called_once_with(
             f'{self.url}/projectByName/{test_project_name}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_find_project(self, mock_request, api_instance=api):
@@ -37,9 +35,7 @@ class TestProjectAPI(unittest.TestCase):
             params={'search': test_search,
                     'limit': '10',
                     'page': '0',
-                    'onlyEnabled': 'true'
-                    }
-        )
+                    'onlyEnabled': 'true'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_project_challenges(self, mock_request, api_instance=api):
@@ -48,8 +44,7 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}/challenges',
             params={'limit': '10',
-                    'page': '0'}
-        )
+                    'page': '0'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_create_project(self, mock_request, api_instance=api):
@@ -59,8 +54,7 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/project',
             json=test_project,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_add_challenge_to_project(self, mock_request, api_instance=api):
@@ -74,8 +68,7 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_virtual_project_id}/challenge/{test_challenge_id}/add',
             json=None,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_remove_challenge_from_project(self, mock_request, api_instance=api):
@@ -88,8 +81,7 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_virtual_project_id}/challenge/{test_challenge_id}/remove',
             json=None,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.delete')
     def test_delete_project(self, mock_request, api_instance=api):
@@ -98,8 +90,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.delete_project(test_project_id)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_project(self, mock_request, api_instance=api):
@@ -111,8 +102,7 @@ class TestProjectAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_model_id}',
             json={'name': test_updated_project_name},
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_project_by_ids(self, mock_request, api_instance=api):
@@ -120,8 +110,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.get_projects_by_ids(test_project_ids)
         mock_request.assert_called_once_with(
             f'{self.url}/projectsById',
-            params={'projectIds': test_project_ids}
-        )
+            params={'projectIds': test_project_ids})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_random_tasks(self, mock_request, api_instance=api):
@@ -133,5 +122,4 @@ class TestProjectAPI(unittest.TestCase):
             f'{self.url}/project/{test_project_id}/tasks',
             params={'limit': '1',
                     'proximity': '-1',
-                    'search': ''}
-        )
+                    'search': ''})

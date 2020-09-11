@@ -33,5 +33,4 @@ create_challenge_output = json.dumps(
 
 test_project = json.loads('''{"name": "Test_Project_Name",
                            "description": "This is a test project"
-                           }'''
-                          )
+                           }''')

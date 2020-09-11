@@ -68,8 +68,7 @@ class TestChallengeAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/virtualchallenge',
             json=test_challenge_model,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_challenge_by_name(self, mock_request, api_instance=api):
@@ -78,8 +77,7 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.get_challenge_by_name(test_project_id, test_challenge_name)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}/challenge/{test_challenge_name}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_virtual_challenge_by_id(self, mock_request, api_instance=api):
@@ -87,8 +85,7 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.get_virtual_challenge_by_id(test_virtual_challenge_id)
         mock_request.assert_called_once_with(
             f'{self.url}/virtualchallenge/{test_virtual_challenge_id}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_challenge_listing(self, mock_request, api_instance=api):
@@ -126,8 +123,7 @@ class TestChallengeAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}/comments/extract',
             params={'limit': '10',
-                    'page': '0'}
-        )
+                    'page': '0'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_extract_task_summaries(self, mock_request, api_instance=api):
@@ -141,8 +137,7 @@ class TestChallengeAPI(unittest.TestCase):
                     'reviewStatus': '',
                     'priority': '',
                     'exportProperties': '',
-                    'taskPropertySearch': ''}
-        )
+                    'taskPropertySearch': ''})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_challenge_geojson(self, mock_request, api_instance=api):
@@ -153,8 +148,7 @@ class TestChallengeAPI(unittest.TestCase):
             params={'status': '',
                     'reviewStatus': '',
                     'priority': '',
-                    'taskPropertySearch': ''}
-        )
+                    'taskPropertySearch': ''})
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_task_priorities(self, mock_request, api_instance=api):
@@ -163,8 +157,7 @@ class TestChallengeAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}/updateTaskPriorities',
             json=None,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_reset_task_instructions(self, mock_request, api_instance=api):
@@ -173,8 +166,7 @@ class TestChallengeAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}/resetTaskInstructions',
             json=None,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.delete')
     def test_delete_challenge(self, mock_request, api_instance=api):
@@ -182,8 +174,7 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.delete_challenge(test_challenge_id)
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}',
-            params={'immediate': 'false'}
-        )
+            params={'immediate': 'false'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.delete')
     def test_delete_challenge_tasks(self, mock_request, api_instance=api):
@@ -191,8 +182,7 @@ class TestChallengeAPI(unittest.TestCase):
         api_instance.delete_challenge_tasks(test_challenge_id)
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}/tasks',
-            params={'statusFilters': ''}
-        )
+            params={'statusFilters': ''})
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_challenge(self, mock_request, api_instance=api):
@@ -205,5 +195,4 @@ class TestChallengeAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/challenge/{test_challenge_id}',
             json=json.loads(create_challenge_output),
-            params=None
-        )
+            params=None)

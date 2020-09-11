@@ -16,9 +16,7 @@ class TestUserAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/users/find/{test_username}',
             params={'limit': '10',
-                    'page': '0'
-                    }
-        )
+                    'page': '0'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_add_user_to_project(self, mock_request, api_instance=api):
@@ -32,8 +30,7 @@ class TestUserAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/user/{test_user_id}/project/{test_project_id}/{test_group}',
             json=None,
-            params={'isOSMUserId': 'true'}
-        )
+            params={'isOSMUserId': 'true'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_add_user_list_to_project(self, mock_request, api_instance=api):
@@ -47,5 +44,4 @@ class TestUserAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/user/project/{test_project_id}/{test_group}',
             params={'isOSMUserId': 'true'},
-            json=test_user_ids
-        )
+            json=test_user_ids)

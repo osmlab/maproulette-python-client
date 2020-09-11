@@ -16,8 +16,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.get_task_by_id(test_task_id)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{test_task_id}',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_task_history(self, mock_request, api_instance=api):
@@ -25,8 +24,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.get_task_history(test_task_id)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{test_task_id}/history',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_create_tasks(self, mock_request, api_instance=api):
@@ -45,8 +43,7 @@ class TestTaskAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/tasks',
             json=input_json_list,
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_tasks(self, mock_request, api_instance=api):
@@ -58,8 +55,7 @@ class TestTaskAPI(unittest.TestCase):
         mock_request.assert_called_once_with(
             f'{self.url}/tasks',
             json=test_task_model,
-            params=None
-        )
+            params=None)
 
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
@@ -68,8 +64,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.get_task_tags(test_task_id)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{test_task_id}/tags',
-            params=None
-        )
+            params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.delete')
     def test_delete_task_tags(self, mock_request, api_instance=api):
@@ -78,8 +73,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.delete_task_tags(task_id, tags)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/tags',
-            params={'tags': tags}
-        )
+            params={'tags': tags})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_tasks_by_tags(self, mock_request, api_instance=api):
@@ -89,8 +83,7 @@ class TestTaskAPI(unittest.TestCase):
             f'{self.url}/tasks/tags',
             params={'tags': tags,
                     'limit': '10',
-                    'page': '0'}
-        )
+                    'page': '0'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_update_task_tags(self, mock_request, api_instance=api):
@@ -99,8 +92,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.update_task_tags(task_id, tags)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/tags/update',
-            params={'tags': tags}
-        )
+            params={'tags': tags})
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_task_status(self, mock_request, api_instance=api):
@@ -112,8 +104,7 @@ class TestTaskAPI(unittest.TestCase):
             params={'comment': 'None',
                     'tags': 'None',
                     'requestReview': 'None'},
-            json=None
-        )
+            json=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_task_comments(self, mock_request, api_instance=api):
@@ -121,8 +112,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.get_task_comments(task_id)
         mock_request.assert_called_once_with(
             f'{self.url}/task/{task_id}/comments',
-            params=None
-        )
+            params=None)
 
     def test_batch_generator(self, api_instance=api):
 
