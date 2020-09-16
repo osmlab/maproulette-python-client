@@ -23,6 +23,14 @@ test_geojson = json.loads('''{
     ]
 }''')
 
-test_overpassQL_query = '''way["name"="Københavns Lufthavn"];
-out body geom qt;'''
+test_overpassQL_query = '''way["name"="Københavns Lufthavn"];\nout body geom qt;'''
 
+create_challenge_output = json.dumps(
+    {'name': 'Test_Challenge_Name',
+    'description': 'This is a test challenge',
+    'instruction': 'Do something',
+    'overpassQL': test_overpassQL_query})
+
+test_project = json.loads('''{"name": "Test_Project_Name",
+                           "description": "This is a test project"
+                           }''')
