@@ -153,19 +153,76 @@ class TaskModel:
     def mapillary_images(self, value):
         self._mapillary_images = value
 
-    @property
-    def cooperative_work(self):
-        """A tag that is or will be used for a new type of task resolution"""
-        return self._cooperative_work
+    """Properties for cooperative challenges"""
 
-    @cooperative_work.setter
-    def cooperative_work(self, value):
-        self._cooperative_work = value
+    @property
+    def version(self):
+        """"""
+        return self._version
+
+    @version.setter
+    def version(self, value):
+        self._version = value
+
+    @property
+    def type(self):
+        """"""
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+
+    @property
+    def operation_type(self):
+        """"""
+        return self._operation_type
+
+    @operation_type.setter
+    def operation_type(self, value):
+        self._operation_type = value
+
+    @property
+    def data(self):
+        """"""
+        return self._data
+
+    @data.setter
+    def data(self, value):
+        self._data = value
+
+    @property
+    def element_type(self):
+        """The element type of the object to which the operation is applied (e.g. 'way', 'node')"""
+        return self._element_type
+
+    @element_type.setter
+    def element_type(self, value):
+        self._element_type = value
+
+    @property
+    def osm_id(self):
+        """The OSM ID of the object to which the operation is applied"""
+        return self._osm_id
+
+    @osm_id.setter
+    def osm_id(self, value):
+        self._osm_id = value
+
+    @property
+    def parent_operations(self):
+        """"""
+        return self.parent_operations
+
+    @parent_operations.setter
+    def parent_operations(self, value):
+        self.parent_operations = value
 
     def __init__(self, name, parent, geometries, id=None, instruction=None, location=None, suggested_fix=None,
                  status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
-                 cooperative_work=None):
+                 cooperative_work=None, version=None, type=None, operation_type=None, data=None,
+                 element_type=None, osm_id=None, parent_operations=None):
         self._id = id
         self._name = name
         self._parent = parent
@@ -183,6 +240,13 @@ class TaskModel:
         self._is_bundle_primary = is_bundle_primary
         self._mapillary_images = mapillary_images
         self._cooperative_work = cooperative_work
+        self._version = version
+        self._type = type
+        self._operation_type = operation_type
+        self._data = data
+        self._element_type = element_type
+        self._osm_id = osm_id
+        self.parent_operations = parent_operations
 
     def to_dict(self):
         """Converts all non-null properties of a task object into a dictionary"""
@@ -203,7 +267,13 @@ class TaskModel:
             "bundleId": self._bundle_id,
             "isBundlePrimary": self._is_bundle_primary,
             "mapillaryImages": self._mapillary_images,
-            "cooperativeWork": self._cooperative_work
+            "cooperativeWork": {
+                "meta": {
+                    "version": self._version,
+                    "type": self._type,
+                },
+                "operations": self._parent_operations
+            }
         }
         return {k: v for (k, v) in properties.items() if v is not None}
 
