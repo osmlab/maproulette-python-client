@@ -3,7 +3,7 @@ import json
 import base64
 
 # Create a configuration object for MapRoulette using your API key:
-config = maproulette.Configuration(api_key="2450|wB+DfON5nZ1p8cclrgtILUaPHtuJAG+2LJ7l5Q4wOSIBmO7Y+wiL4v9P1GAv3EPU")
+config = maproulette.Configuration(api_key="API_KEY")
 
 # Create an API objects with the above config object:
 api = maproulette.Task(config)
