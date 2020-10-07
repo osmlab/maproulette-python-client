@@ -216,13 +216,52 @@ class TaskModel:
 
     @parent_operations.setter
     def parent_operations(self, value):
-        self.parent_operations = value
+        self._parent_operations = value
 
+    @property
+    def content(self):
+        """"""
+        return self.content
+
+    @content.setter
+    def content(self, value):
+        self._content = value
+
+    @property
+    def file_type(self):
+        """"""
+        return self.file_type
+
+    @file_type.setter
+    def file_type(self, value):
+        self._file_type = value
+
+    @property
+    def file_format(self):
+        """"""
+        return self.file_format
+
+    @file_format.setter
+    def file_format(self, value):
+        self._file_format = value
+
+    @property
+    def encoding(self):
+        """"""
+        return self.encoding
+
+    @encoding.setter
+    def encoding(self, value):
+        self._encoding = value
+
+    # file_type, file_format, and encoding defaults are set because they are the only values currently
+    # supported for cooperative work model type 2
     def __init__(self, name, parent, geometries, id=None, instruction=None, location=None, suggested_fix=None,
                  status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
                  cooperative_work=None, version=None, type=None, operation_type=None, data=None,
-                 element_type=None, osm_id=None, parent_operations=None):
+                 element_type=None, osm_id=None, parent_operations=None, file_type="xml", file_format="osc",
+                 encoding="base64", content=None):
         self._id = id
         self._name = name
         self._parent = parent
@@ -246,7 +285,11 @@ class TaskModel:
         self._data = data
         self._element_type = element_type
         self._osm_id = osm_id
-        self.parent_operations = parent_operations
+        self._parent_operations = parent_operations
+        self._file_type = file_type
+        self._file_format = file_format
+        self._encoding = encoding
+        self._content = content
 
     def to_dict(self):
         """Converts all non-null properties of a task object into a dictionary"""
@@ -271,6 +314,12 @@ class TaskModel:
                 "meta": {
                     "version": self._version,
                     "type": self._type,
+                },
+                "file": {
+                    "type": self._file_type,
+                    "format": self._file_format,
+                    "encoding": self._encoding,
+                    "content": self._content
                 },
                 "operations": self._parent_operations
             }

@@ -13,15 +13,6 @@ class ParentOperationModel:
         self._operation_type = value
 
     @property
-    def data(self):
-        """"""
-        return self._data
-
-    @data.setter
-    def data(self, value):
-        self._data = value
-
-    @property
     def element_type(self):
         """The element type of the object to which the operation is applied (e.g. 'way', 'node')"""
         return self._element_type
@@ -48,9 +39,8 @@ class ParentOperationModel:
     def child_operations(self, value):
         self._child_operations = value
 
-    def __init__(self, operation_type=None, data=None, element_type=None, osm_id=None, child_operations=None):
+    def __init__(self, operation_type=None, element_type=None, osm_id=None, child_operations=None):
         self._operation_type = operation_type
-        self._data = data
         self._element_type = element_type
         self._osm_id = osm_id
         self._child_operations = child_operations
@@ -60,10 +50,7 @@ class ParentOperationModel:
             "operationType": self._operation_type,
             "data": {
                 "id": f"{self._element_type}/{self._osm_id}",
-                "operations": [{
-                    "operation": self._child_operations,
-                    "data": self._data
-                }]
+                "operations": self._child_operations
             }
 
         }
