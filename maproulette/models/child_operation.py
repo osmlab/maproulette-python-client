@@ -25,7 +25,6 @@ class ChildOperationModel:
         self._operation = operation
         self._data = data
 
-
     def to_dict(self):
         properties = {
             "operation": self._operation,
@@ -34,5 +33,5 @@ class ChildOperationModel:
         return {k: v for (k, v) in properties.items() if v is not None}
 
     def to_json(self):
-        """Converts all non-null properties of a task object into a JSON object"""
+        """Converts all non-null properties of a child operation object into a JSON object"""
         return json.dumps(self.to_dict())

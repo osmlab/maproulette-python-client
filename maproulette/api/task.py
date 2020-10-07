@@ -30,6 +30,17 @@ class Task(MapRouletteServer):
             endpoint=f"/task/{task_id}/history")
         return response
 
+    def create_task(self, data):
+        """Method to create a single task using an input JSON of task details.
+
+        :param data: a JSON input containing task details
+        :returns: the API response from the POST request
+        """
+        response = self.post(
+            endpoint="/task",
+            body=data)
+        return response
+
     def create_tasks(self, data, batch_size=5000):
         """Method to create a batch of tasks using the specified batch_size.
 
