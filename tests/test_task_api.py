@@ -85,6 +85,30 @@ class TestTaskAPI(unittest.TestCase):
                     'limit': '10',
                     'page': '0'})
 
+    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    def test_get_tasks_by_bounding_box(self, mock_request, api_instance=api):
+        left = -1.22321018
+        bottom = 47.690315
+        right = -122.306191
+        top = 47.706912
+        api_instance.get_tasks_by_bounding_box(
+            left=left,
+            bottom=bottom,
+            right=right,
+            top=top
+        )
+        mock_request.assert_called_once_with(
+            f'{self.url}/tasks/box/{left}/{bottom}/{right}/{top}',
+            json=None,
+            params={
+                "limit": '10000',
+                "page": '0',
+                "excludeLocked": 'false',
+                "order": 'ASC',
+                "includeTotal": 'false',
+                "includeGeometries": 'false',
+                "includeTags": 'false'})
+
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_update_task_tags(self, mock_request, api_instance=api):
         task_id = '42914448'
