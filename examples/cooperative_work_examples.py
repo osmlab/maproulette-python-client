@@ -32,36 +32,24 @@ test_parent_relation = [maproulette.ParentOperationModel(operation_type="modifyE
 print(test_parent_relation)
 print(type(test_parent_relation))
 
+# Now that we have a Parent Operation containing the Child Operations we'd like to implement, we
+# can pass this into our Cooperative Work model:
+
+test_cooperative_work = maproulette.CooperativeWorkModel(version=2,
+                                                         type=1,
+                                                         parent_operations=test_parent_relation).to_dict()
 
 # Now we can create a basic task to apply these suggested changes to:
 with open('data/Example_Geometry.geojson', 'r') as data_file:
     data = json.loads(data_file.read())
 
-test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_1_2",
+test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_1_2_3",
                                   parent=14452,
                                   geometries=data,
-                                  version=2,
-                                  type=1,
-                                  parent_operations=test_parent_relation).to_dict()
+                                  cooperative_work=test_cooperative_work).to_dict()
 
 
 # Finally, we'll pass our task object to into the create_task method to call the /task
 # endpoint, creating this new task with our cooperative work model applied
 print(json.dumps(api.create_task(test_task), indent=4, sort_keys=True))
 
-
-# We can also utilize 'type 2' cooperative work, which allow the changes to be passed
-# in via an osc file rather than explicitly specifying tag operations in the request
-# body:
-osc_test_file = #pending
-
-osc_test_file_encoded = base64.encodebytes(bytes(osc_test_file, 'utf-8'))
-
-test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_3",
-                                  parent=14452,
-                                  geometries=data,
-                                  version=2,
-                                  type=2,
-                                  content=osc_test_file_encoded).to_dict()
-
-print(json.dumps(api.create_task(test_task), indent=4, sort_keys=True))
