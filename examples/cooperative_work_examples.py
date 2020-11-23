@@ -13,11 +13,13 @@ challenge_id = "14452"
 
 # We'll start by creating some 'child' operations to apply to the target objects add them to a list:
 child_operations_list = [maproulette.ChildOperationModel(operation="setTags",
-                                                        data={"test_tag_1": "True"}).to_dict(),
-                        maproulette.ChildOperationModel(operation="setTags",
-                                                        data={"test_tag_2": "True"}).to_dict(),
-                        maproulette.ChildOperationModel(operation="setTags",
-                                                        data={"test_tag_3": "True"}).to_dict()]
+                                                         data={"test_tag_1": "True",
+                                                               "test_tag_2": "True",
+                                                               "test_tag_3": "True"}).to_dict(),
+                         maproulette.ChildOperationModel(operation="setTags",
+                                                         data={"test_tag_4": "True"}).to_dict(),
+                         maproulette.ChildOperationModel(operation="setTags",
+                                                         data={"test_tag_5": "True"}).to_dict()]
 
 print(str(child_operations_list))
 print(type(str(child_operations_list)))
@@ -25,10 +27,11 @@ print(type(str(child_operations_list)))
 # Now we'll pass these operations into a 'parent' operation list to specify the objects to which the changes
 # will be applied:
 test_parent_relation = [maproulette.ParentOperationModel(operation_type="modifyElement",
-                                                        element_type="way",
-                                                        osm_id="31110737",
-                                                        child_operations=child_operations_list).to_dict()]
+                                                         element_type="way",
+                                                         osm_id="31110737",
+                                                         child_operations=child_operations_list).to_dict()]
 
+print("w31110737".isnumeric())
 print(test_parent_relation)
 print(type(test_parent_relation))
 
@@ -43,7 +46,7 @@ test_cooperative_work = maproulette.CooperativeWorkModel(version=2,
 with open('data/Example_Geometry.geojson', 'r') as data_file:
     data = json.loads(data_file.read())
 
-test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_1_2_3",
+test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_1_2_3_4",
                                   parent=14452,
                                   geometries=data,
                                   cooperative_work=test_cooperative_work).to_dict()
