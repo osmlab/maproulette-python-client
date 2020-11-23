@@ -1,11 +1,12 @@
 import json
+from .enums import Operations
 
 
 class ChildOperationModel:
 
     @property
     def operation(self):
-        """"""
+        """The operation to be applied to the OSM object ('setTags', 'deleteTags')"""
         return self._operation
 
     @operation.setter
@@ -14,7 +15,8 @@ class ChildOperationModel:
 
     @property
     def data(self):
-        """"""
+        """Either a dict (key/value pair) of a tag/tags to be set in a 'setTags' operation, or an
+        array of tag keys (as strings) to be deleted in a deleteTags operation"""
         return self._data
 
     @data.setter
@@ -22,7 +24,10 @@ class ChildOperationModel:
         self._data = value
 
     def __init__(self, operation=None, data=None):
-        self._operation = operation
+        if operation in Operations.list():
+            self._operation = operation
+        else:
+            raise ValueError(f"Operation must be one of {Operations.list()}.")
         self._data = data
 
     def to_dict(self):
