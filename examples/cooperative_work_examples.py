@@ -21,19 +21,12 @@ child_operations_list = [maproulette.ChildOperationModel(operation="setTags",
                          maproulette.ChildOperationModel(operation="setTags",
                                                          data={"test_tag_5": "True"}).to_dict()]
 
-print(str(child_operations_list))
-print(type(str(child_operations_list)))
-
 # Now we'll pass these operations into a 'parent' operation list to specify the objects to which the changes
 # will be applied:
 test_parent_relation = [maproulette.ParentOperationModel(operation_type="modifyElement",
                                                          element_type="way",
                                                          osm_id="31110737",
                                                          child_operations=child_operations_list).to_dict()]
-
-print("w31110737".isnumeric())
-print(test_parent_relation)
-print(type(test_parent_relation))
 
 # Now that we have a Parent Operation containing the Child Operations we'd like to implement, we
 # can pass this into our Cooperative Work model:
