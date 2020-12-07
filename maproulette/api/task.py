@@ -102,6 +102,38 @@ class Task(MapRouletteServer):
         )
         return response
 
+    def get_tasks_by_bounding_box(self, left, bottom, right, top, limit=10000, page=0, exclude_locked="false",
+                                  order="ASC", include_total="false", include_geometries="false", include_tags="false"):
+        """Method to retrieve tasks by a bounding box defined by left, bottom, right, and top lat/long values
+
+        :param left: the minimum latitude of the bounding box
+        :param bottom: the minimum longitude of the bounding box
+        :param right: the maximum latitude of the bounding box
+        :param top: the maximum longitude of the bounding box
+        :param limit: the limit to the number of results returned in the response. Default is 10,000.
+        :param page: used in conjunction with the limit parameter to page through X number of responses. Default is 0.
+        :param exclude_locked: boolean indicating whether to exclude locked tasks. Default is 'false'.
+        :param order: the order of the results. Default is 'ASC'
+        :param include_total: whether to include total or not. Default is 'false'
+        :param include_geometries: whether to include geometries or not. Default is 'false'
+        :param include_tags: whether to include tags or not. Default is 'false'
+        :return: the API response from the PUT request
+        """
+        query_params = {
+            "limit": str(limit),
+            "page": str(page),
+            "excludeLocked": str(exclude_locked),
+            "order": str(order),
+            "includeTotal": str(include_total),
+            "includeGeometries": str(include_geometries),
+            "includeTags": str(include_tags)
+        }
+        response = self.put(
+            endpoint=f'/tasks/box/{left}/{bottom}/{right}/{top}',
+            params=query_params
+        )
+        return response
+
     def update_task_tags(self, task_id, tags):
         """Method to update a task's tags using the supplied tags and corresponding task ID
 
