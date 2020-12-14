@@ -84,14 +84,14 @@ class ProjectModel:
 
     def __init__(self, name, id=None, description=None, groups=None, enabled=None,
                  is_virtual=None, display_name=None, featured=None):
-        self._id = id
-        self._name = name
-        self._description = description
-        self._groups = groups
-        self._enabled = enabled
-        self._display_name = display_name
-        self._featured = featured
-        self._is_virtual = is_virtual
+        self.id = id
+        self.name = name
+        self.description = description
+        self.groups = groups
+        self.enabled = enabled
+        self.display_name = display_name
+        self.featured = featured
+        self.is_virtual = is_virtual
 
     def to_dict(self):
         """Converts all non-null properties of a project object into a dictionary"""

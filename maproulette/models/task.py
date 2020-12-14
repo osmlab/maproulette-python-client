@@ -166,23 +166,23 @@ class TaskModel:
                  status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
                  cooperative_work=None):
-        self._id = id
-        self._name = name
-        self._parent = parent
-        self._geometries = geometries
-        self._instruction = instruction
-        self._location = location
-        self._suggested_fix = suggested_fix
-        self._status = status
-        self._mapped_on = mapped_on
-        self._review = review
-        self._priority = priority
-        self._changeset_id = changeset_id
-        self._completion_responses = completion_responses
-        self._bundle_id = bundle_id
-        self._is_bundle_primary = is_bundle_primary
-        self._mapillary_images = mapillary_images
-        self._cooperative_work = cooperative_work
+        self.id = id
+        self.name = name
+        self.parent = parent
+        self.geometries = geometries
+        self.instruction = instruction
+        self.location = location
+        self.suggested_fix = suggested_fix
+        self.status = status
+        self.mapped_on = mapped_on
+        self.review = review
+        self.priority = priority
+        self.changeset_id = changeset_id
+        self.completion_responses = completion_responses
+        self.bundle_id = bundle_id
+        self.is_bundle_primary = is_bundle_primary
+        self.mapillary_images = mapillary_images
+        self.cooperative_work = cooperative_work
 
     def to_dict(self):
         """Converts all non-null properties of a task object into a dictionary"""
