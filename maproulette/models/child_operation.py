@@ -11,7 +11,10 @@ class ChildOperationModel:
 
     @operation.setter
     def operation(self, value):
-        self._operation = value
+        if value in Operations.list():
+            self._operation = value
+        else:
+            raise ValueError(f"Operation must be one of {Operations.list()}.")
 
     @property
     def data(self):
@@ -25,10 +28,10 @@ class ChildOperationModel:
 
     def __init__(self, operation=None, data=None):
         if operation in Operations.list():
-            self._operation = operation
+            self.operation = operation
         else:
             raise ValueError(f"Operation must be one of {Operations.list()}.")
-        self._data = data
+        self.data = data
 
     def to_dict(self):
         properties = {

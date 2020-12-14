@@ -74,13 +74,13 @@ class CooperativeWorkModel:
 
     def __init__(self, version=None, type=None, parent_operations=None, file_type="xml", file_format="osc",
                  encoding="base64", content=None):
-        self._version = version
-        self._type = type
-        self._parent_operations = parent_operations
-        self._file_type = file_type
-        self._file_format = file_format
-        self._encoding = encoding
-        self._content = content
+        self.version = version
+        self.type = type
+        self.parent_operations = parent_operations
+        self.file_type = file_type
+        self.file_format = file_format
+        self.encoding = encoding
+        self.content = content
 
 
     def to_dict(self):
