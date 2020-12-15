@@ -203,7 +203,8 @@ class TaskModel:
             "bundleId": self._bundle_id,
             "isBundlePrimary": self._is_bundle_primary,
             "mapillaryImages": self._mapillary_images,
-            "cooperativeWork": self._cooperative_work}
+            "cooperativeWork": self._cooperative_work
+        }
 
         return {k: v for (k, v) in properties.items() if v is not None}
 
