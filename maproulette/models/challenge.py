@@ -131,7 +131,7 @@ class ChallengeModel:
         return self._medium_priority_rule
 
     @medium_priority_rule.setter
-    def high_priority_rule(self, value):
+    def medium_priority_rule(self, value):
         self._medium_priority_rule = value
 
     @property
@@ -312,7 +312,7 @@ class ChallengeModel:
                  check_in_source=None, requires_local=None, default_basemap=None, default_basemap_id=None,
                  custom_basemap=None, update_tasks=None, exportable_properties=None, preferred_tags=None,
                  task_styles=None, remote_geojson=None, keywords=None):
-        self.id = id
+        self._id = id
         self.name = name
         self.description = description
         self.parent = parent

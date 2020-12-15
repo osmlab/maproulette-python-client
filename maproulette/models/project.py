@@ -44,7 +44,7 @@ class ProjectModel:
 
     @groups.setter
     def groups(self, value):
-        self._description = value
+        self._groups = value
 
     @property
     def enabled(self):
@@ -84,7 +84,7 @@ class ProjectModel:
 
     def __init__(self, name, id=None, description=None, groups=None, enabled=None,
                  is_virtual=None, display_name=None, featured=None):
-        self.id = id
+        self._id = id
         self.name = name
         self.description = description
         self.groups = groups
