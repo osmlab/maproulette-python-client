@@ -45,6 +45,41 @@ class TestTaskAPI(unittest.TestCase):
             json=input_json_list,
             params=None)
 
+    @patch('maproulette.api.maproulette_server.requests.Session.post')
+    def test_create_cooperative_task(self, mock_request, api_instance=api):
+        test_child_operation = maproulette.ChildOperationModel(
+            operation="setTags",
+            data={"test_tag_4": "True"})
+        test_parent_operation = maproulette.ParentOperationModel(
+            operation_type="modifyElement",
+            element_type="way",
+            osm_id="31110737",
+            child_operations=test_child_operation.to_dict())
+        test_cooperative_work = maproulette.CooperativeWorkModel(
+            version=2,
+            type=1,
+            parent_operations=test_parent_operation)
+        test_task = maproulette.TaskModel(
+            name="Test_Coop_Task",
+            parent=1234,
+            geometries=test_geojson['features'][0]['geometry'],
+            cooperative_work=test_cooperative_work)
+        with self.assertRaises(ValueError):
+            test_child_operation.operation = "invalid"
+        with self.assertRaises(ValueError):
+            test_parent_operation.operation_type = "invalid"
+        with self.assertRaises(ValueError):
+            test_parent_operation.element_type = "invalid"
+        with self.assertRaises(ValueError):
+            test_parent_operation.osm_id = "invalid"
+        with self.assertRaises(ValueError):
+            test_cooperative_work.type = "invalid"
+        api_instance.create_task(test_task)
+        mock_request.assert_called_once_with(
+            f'{self.url}/task',
+            json=test_task,
+            params=None)
+
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_tasks(self, mock_request, api_instance=api):
         geometries = test_geojson['features'][0]['geometry']
@@ -56,7 +91,6 @@ class TestTaskAPI(unittest.TestCase):
             f'{self.url}/tasks',
             json=test_task_model,
             params=None)
-
 
     @patch('maproulette.api.maproulette_server.requests.Session.get')
     def test_get_task_tags(self, mock_request, api_instance=api):

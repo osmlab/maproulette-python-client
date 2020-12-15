@@ -9,7 +9,7 @@ config = maproulette.Configuration(api_key="API_KEY")
 api = maproulette.Task(config)
 
 # Setting a challenge ID in which we'll place our cooperative task
-challenge_id = "14452"
+challenge_id = "1234"
 
 # We'll start by creating some 'child' operations to apply to the target objects add them to a list:
 child_operations_list = [maproulette.ChildOperationModel(operation="setTags",
@@ -28,6 +28,13 @@ test_parent_relation = [maproulette.ParentOperationModel(operation_type="modifyE
                                                          osm_id="31110737",
                                                          child_operations=child_operations_list).to_dict()]
 
+# The below flags error when handling is in the constructor, but not when in the setter:
+test_2 = maproulette.ParentOperationModel(operation_type="modifyElement",
+                                element_type="way",
+                                osm_id="31110737",
+                                child_operations=child_operations_list)
+
+
 # Now that we have a Parent Operation containing the Child Operations we'd like to implement, we
 # can pass this into our Cooperative Work model:
 
@@ -39,8 +46,8 @@ test_cooperative_work = maproulette.CooperativeWorkModel(version=2,
 with open('data/Example_Geometry.geojson', 'r') as data_file:
     data = json.loads(data_file.read())
 
-test_task = maproulette.TaskModel(name="Test_Coop_Task_Type_1_2_3_4",
-                                  parent=14452,
+test_task = maproulette.TaskModel(name="Test_Coop_Task",
+                                  parent=challenge_id,
                                   geometries=data,
                                   cooperative_work=test_cooperative_work).to_dict()
 

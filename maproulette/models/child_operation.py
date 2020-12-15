@@ -27,10 +27,7 @@ class ChildOperationModel:
         self._data = value
 
     def __init__(self, operation=None, data=None):
-        if operation in Operations.list():
-            self.operation = operation
-        else:
-            raise ValueError(f"Operation must be one of {Operations.list()}.")
+        self.operation = operation
         self.data = data
 
     def to_dict(self):
