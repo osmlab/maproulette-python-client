@@ -62,3 +62,9 @@ class Operations(ExtendedEnum):
     """An enumeration of valid operations"""
     SET_TAGS = "setTags"
     UNSET_TAGS = "unsetTags"
+
+
+class CooperativeWorkTypes(ExtendedEnum):
+    """An enumeration of valid cooperative work types"""
+    TYPE_ONE = 1
+    TYPE_TWO = 2

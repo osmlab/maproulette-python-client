@@ -1,4 +1,5 @@
 import json
+from .enums import CooperativeWorkTypes
 
 """This module contains the definition of a Cooperative Work object in MapRoulette."""
 
@@ -22,7 +23,10 @@ class CooperativeWorkModel:
 
     @type.setter
     def type(self, value):
-        self._type = value
+        if value in CooperativeWorkTypes.list():
+            self._type = value
+        else:
+            raise ValueError(f"Cooperative work type must be one of {CooperativeWorkTypes.list()}.")
 
     @property
     def parent_operations(self):
@@ -70,9 +74,10 @@ class CooperativeWorkModel:
         self._encoding = value
 
     # file_type, file_format, and encoding defaults are set because they are the only values currently
-    # supported for cooperative work model type 2
+    # supported for cooperative work model type 2. The version default is included as the currently
+    # used format version.
 
-    def __init__(self, version=None, type=None, parent_operations=None, file_type="xml", file_format="osc",
+    def __init__(self, version=2, type=None, parent_operations=None, file_type="xml", file_format="osc",
                  encoding="base64", content=None):
         self.version = version
         self.type = type

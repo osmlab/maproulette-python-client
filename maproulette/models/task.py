@@ -156,7 +156,7 @@ class TaskModel:
     @property
     def cooperative_work(self):
         """"""
-        return self.encoding
+        return self._cooperative_work
 
     @cooperative_work.setter
     def cooperative_work(self, value):
@@ -166,7 +166,7 @@ class TaskModel:
                  status=None, mapped_on=None, review=None, priority=None, changeset_id=None,
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
                  cooperative_work=None):
-        self.id = id
+        self._id = id
         self.name = name
         self.parent = parent
         self.geometries = geometries
