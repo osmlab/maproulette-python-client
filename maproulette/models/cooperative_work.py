@@ -9,7 +9,8 @@ class CooperativeWorkModel:
 
     @property
     def version(self):
-        """"""
+        """The version of maproulette cooperative work format to be processed
+        (currently, only version 2 is supported)"""
         return self._version
 
     @version.setter
@@ -18,7 +19,8 @@ class CooperativeWorkModel:
 
     @property
     def type(self):
-        """"""
+        """The type of cooperative work operation (either 1 for tag fix or 2 for change file)
+        to be contained in the model"""
         return self._type
 
     @type.setter
@@ -30,7 +32,7 @@ class CooperativeWorkModel:
 
     @property
     def parent_operations(self):
-        """"""
+        """A dict containing parent operation details which follows the parent_operation model"""
         return self.parent_operations
 
     @parent_operations.setter
@@ -39,7 +41,7 @@ class CooperativeWorkModel:
 
     @property
     def content(self):
-        """"""
+        """A base64-encoded osc changefile to be used in type 2 cooperative work operations"""
         return self.content
 
     @content.setter
@@ -48,7 +50,8 @@ class CooperativeWorkModel:
 
     @property
     def file_type(self):
-        """"""
+        """The type of changefile to be used in type 2 cooperative work
+        (currently, only xml files are supported"""
         return self.file_type
 
     @file_type.setter
@@ -57,7 +60,8 @@ class CooperativeWorkModel:
 
     @property
     def file_format(self):
-        """"""
+        """The format of changefile to be used in type 2 cooperative work
+        (currently, only osc files are supported"""
         return self.file_format
 
     @file_format.setter
@@ -66,7 +70,8 @@ class CooperativeWorkModel:
 
     @property
     def encoding(self):
-        """"""
+        """The type of encoding used in the changefile for type 2 cooperative work
+        (currently, only base64 encoding is supported)"""
         return self.encoding
 
     @encoding.setter
