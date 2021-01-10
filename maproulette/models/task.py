@@ -155,7 +155,7 @@ class TaskModel:
 
     @property
     def cooperative_work(self):
-        """"""
+        """A dict containing cooperative work information which follows the cooperative_work model"""
         return self._cooperative_work
 
     @cooperative_work.setter
