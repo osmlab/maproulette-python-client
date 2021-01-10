@@ -9,7 +9,7 @@ config = maproulette.Configuration(api_key="API_KEY")
 api = maproulette.Task(config)
 
 # Setting a challenge ID in which we'll place our cooperative task
-challenge_id = "1234"
+challenge_id = 14452
 
 # We'll start by creating some 'child' operations to apply to the target objects add them to a list:
 child_operations_list = [maproulette.ChildOperationModel(operation="setTags",
@@ -25,13 +25,13 @@ child_operations_list = [maproulette.ChildOperationModel(operation="setTags",
 # will be applied:
 test_parent_relation = [maproulette.ParentOperationModel(operation_type="modifyElement",
                                                          element_type="way",
-                                                         osm_id="31110737",
+                                                         osm_id="175208404",
                                                          child_operations=child_operations_list).to_dict()]
 
 # The below flags error when handling is in the constructor, but not when in the setter:
 test_2 = maproulette.ParentOperationModel(operation_type="modifyElement",
                                 element_type="way",
-                                osm_id="31110737",
+                                osm_id="175208404",
                                 child_operations=child_operations_list)
 
 
@@ -46,7 +46,7 @@ test_cooperative_work = maproulette.CooperativeWorkModel(version=2,
 with open('data/Example_Geometry.geojson', 'r') as data_file:
     data = json.loads(data_file.read())
 
-test_task = maproulette.TaskModel(name="Test_Coop_Task",
+test_task = maproulette.TaskModel(name="Test_Coop_Task_Kastellet",
                                   parent=challenge_id,
                                   geometries=data,
                                   cooperative_work=test_cooperative_work).to_dict()
@@ -55,4 +55,20 @@ test_task = maproulette.TaskModel(name="Test_Coop_Task",
 # Finally, we'll pass our task object to into the create_task method to call the /task
 # endpoint, creating this new task with our cooperative work model applied
 print(json.dumps(api.create_task(test_task), indent=4, sort_keys=True))
+
+
+# Alternatively, cooperative work can be populated as in-progress edits via an OSM changefile (osc file)
+# as 'type 2' cooperative work:
+with open('data/ExampleChangefile.osc', 'rb') as data_file:
+    osc_file = base64.b64encode(data_file.read()).decode('ascii')
+
+test_osc_cooperative_work = maproulette.CooperativeWorkModel(type=2,
+                                                             content=osc_file).to_dict()
+
+test_osc_task = maproulette.TaskModel(name="Test_Coop_Task_Kastellet_OSC_2",
+                                  parent=challenge_id,
+                                  geometries=data,
+                                  cooperative_work=test_osc_cooperative_work).to_dict()
+
+print(json.dumps(api.create_task(test_osc_task), indent=4, sort_keys=True))
 
