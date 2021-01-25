@@ -1,0 +1,10 @@
+<osmChange version="0.6" generator="acme osm editor">
+    <create>
+        <node id="-1" changeset="-1" version="1" lat="55.69378277487475" lon="12.593096457148427" />
+        <node id="-2" changeset="-1" version="1" lat="55.689697320811575" lon="12.597881450158676" />
+        <way id="-3" changeset="-1" version="1">
+            <nd ref="-1"/>
+            <nd ref="-2"/>
+        </way>
+    </create>
+</osmChange>

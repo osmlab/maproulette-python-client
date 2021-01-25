@@ -17,6 +17,9 @@ Welcome to MapRoulette's documentation!
    usage/models/project
    usage/models/challenge
    usage/models/task
+   usage/models/cooperative_work
+   usage/models/parent_operation
+   usage/models/child_operation
    usage/models/priority_rule
    usage/exceptions
 
