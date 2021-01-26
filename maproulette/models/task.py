@@ -155,7 +155,7 @@ class TaskModel:
 
     @property
     def cooperative_work(self):
-        """A tag that is or will be used for a new type of task resolution"""
+        """A dict containing cooperative work information which follows the cooperative_work model"""
         return self._cooperative_work
 
     @cooperative_work.setter
@@ -167,22 +167,22 @@ class TaskModel:
                  completion_responses=None, bundle_id=None, is_bundle_primary=None, mapillary_images=None,
                  cooperative_work=None):
         self._id = id
-        self._name = name
-        self._parent = parent
-        self._geometries = geometries
-        self._instruction = instruction
-        self._location = location
-        self._suggested_fix = suggested_fix
-        self._status = status
-        self._mapped_on = mapped_on
-        self._review = review
-        self._priority = priority
-        self._changeset_id = changeset_id
-        self._completion_responses = completion_responses
-        self._bundle_id = bundle_id
-        self._is_bundle_primary = is_bundle_primary
-        self._mapillary_images = mapillary_images
-        self._cooperative_work = cooperative_work
+        self.name = name
+        self.parent = parent
+        self.geometries = geometries
+        self.instruction = instruction
+        self.location = location
+        self.suggested_fix = suggested_fix
+        self.status = status
+        self.mapped_on = mapped_on
+        self.review = review
+        self.priority = priority
+        self.changeset_id = changeset_id
+        self.completion_responses = completion_responses
+        self.bundle_id = bundle_id
+        self.is_bundle_primary = is_bundle_primary
+        self.mapillary_images = mapillary_images
+        self.cooperative_work = cooperative_work
 
     def to_dict(self):
         """Converts all non-null properties of a task object into a dictionary"""
@@ -205,6 +205,7 @@ class TaskModel:
             "mapillaryImages": self._mapillary_images,
             "cooperativeWork": self._cooperative_work
         }
+
         return {k: v for (k, v) in properties.items() if v is not None}
 
     def to_json(self):
