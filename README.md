@@ -41,7 +41,7 @@ that when you create your configuration. For example:
 config = maproulette.Configuration(api_key='{YOUR_API_KEY}')
 ```
 
-Your API KEY is listed at the bottom of https://maproulette.org/user/profile page.
+Your API key is listed at the bottom of https://maproulette.org/user/profile page.
 
 Once you have your configuration object we can create an API object using one of several modules depending on the
 functionality that the user is looking for. For example, creating a Project object allows the user to interact with all
