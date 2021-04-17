@@ -203,3 +203,12 @@ class TestChallengeAPI(unittest.TestCase):
             f'{self.url}/challenge/{test_challenge_id}',
             json=json.loads(create_challenge_output),
             params=None)
+
+    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    def test_rebuild_challenge(self, mock_request, api_instance=api):
+        test_challenge_id = '12345'
+        api_instance.rebuild_challenge(test_challenge_id, True, True)
+        mock_request.assert_called_once_with(
+            f'{self.url}/challenge/{test_challenge_id}/rebuild',
+            params={'removeUnmatched': 'true', 'skipSnapshot': 'true'},
+            json=None)
