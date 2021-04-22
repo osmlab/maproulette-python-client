@@ -54,7 +54,8 @@ class MapRouletteServer:
 
         :param endpoint: the server endpoint to use for the GET request
         :param params: the parameters that pertain to the request (optional)
-        :returns: a JSON object containing the API response
+        :returns: a dictionary containing the API response status code as well as the decoded JSON response if decoding
+            was successful. If not, the response text is returned.
         """
         response = self.session.get(
             self.url + endpoint,
@@ -85,6 +86,7 @@ class MapRouletteServer:
             }
         except ValueError:
             return {
+                "data": response.text,
                 "status": response.status_code
             }
 
@@ -94,7 +96,8 @@ class MapRouletteServer:
         :param endpoint: the server endpoint to use for the POST request
         :param body: the body of the request (optional)
         :param params: the parameters that pertain to the request (optional)
-        :returns: a JSON object containing the API response
+        :returns: a dictionary containing the API response status code as well as the decoded JSON response if decoding
+            was successful. If not, the response text is returned.
         """
         response = self.session.post(
             self.url + endpoint,
@@ -128,6 +131,7 @@ class MapRouletteServer:
             }
         except ValueError:
             return {
+                "data": response.text,
                 "status": response.status_code
             }
 
@@ -137,7 +141,8 @@ class MapRouletteServer:
         :param endpoint: the server endpoint to use for the PUT request
         :param body: the body of the request (optional)
         :param params: the parameters that pertain to the request (optional)
-        :returns: a JSON object containing the response code and the API response if
+        :returns: a dictionary containing the API response status code as well as the decoded JSON response if decoding
+            was successful. If not, the response text is returned.
         """
         response = self.session.put(
             self.url + endpoint,
@@ -171,6 +176,7 @@ class MapRouletteServer:
             }
         except ValueError:
             return {
+                "data": response.text,
                 "status": response.status_code
             }
 
@@ -179,7 +185,8 @@ class MapRouletteServer:
 
         :param endpoint: the server endpoint to use for the DELETE request
         :param params: the parameters that pertain to the request (optional)
-        :returns: a JSON object containing the API response
+        :returns: a dictionary containing the API response status code as well as the decoded JSON response if decoding
+            was successful. If not, the response text is returned.
         """
         response = self.session.delete(
             self.url + endpoint,
@@ -212,6 +219,7 @@ class MapRouletteServer:
             }
         except ValueError:
             return {
+                "data": response.text,
                 "status": response.status_code
             }
 

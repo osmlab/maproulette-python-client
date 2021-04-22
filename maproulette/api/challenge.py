@@ -334,7 +334,7 @@ class Challenge(MapRouletteServer):
             CREATED or SKIPPED status (only) will be removed prior to rebuilding with the assumption that they will be
             recreated if they still appear in the updated source data. If set to false, unmatched existing tasks are
             simply left as-is. Default: False
-        :param skipSnapshot: Whether to skip recording a snapshot before proceeding. Default: False
+        :param skip_snapshot: Whether to skip recording a snapshot before proceeding. Default: False
         """
         response = self.put(
             endpoint=f"/challenge/{challenge_id}/rebuild",
