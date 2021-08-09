@@ -51,7 +51,7 @@ class Challenge(MapRouletteServer):
         :param challenge_name: the name corresponding to the challenge
         :returns: the API response from the GET request
         """
-        response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name}")
+        response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name.replace('/', '%2F')}")
         return response
 
     def get_challenges_by_tags(self, challenge_tags, limit=10, page=0):
