@@ -180,6 +180,51 @@ class MapRouletteServer:
                 "status": response.status_code
             }
 
+    def put_file(self, endpoint, body=None, params=None):
+        """Method that completes a multipart PUT request to the MapRoulette API
+
+        :param endpoint: the server endpoint to use for the PUT request
+        :param body: the body of the request (optional)
+        :param params: the parameters that pertain to the request (optional)
+        :returns: a dictionary containing the API response status code as well as the decoded JSON response if decoding
+            was successful. If not, the response text is returned.
+        """
+        response = self.session.put(
+            self.url + endpoint,
+            params=params,
+            files=body
+        )
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 400:
+                raise InvalidJsonError(
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
+                ) from None
+            elif e.response.status_code == 401:
+                raise UnauthorizedError(
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
+                ) from None
+            else:
+                raise HttpError(
+                    message=self.parse_response_message(e.response),
+                    status=e.response.status_code
+                ) from None
+        except (requests.ConnectionError, requests.Timeout) as e:
+            raise ConnectionUnavailableError(e) from None
+        try:
+            return {
+                "data": response.json(),
+                "status": response.status_code
+            }
+        except ValueError:
+            return {
+                "data": response.text,
+                "status": response.status_code
+            }
+
     def delete(self, endpoint, params=None):
         """Method that completes a DELETE request to the MapRoulette API
 

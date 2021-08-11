@@ -278,6 +278,29 @@ class Challenge(MapRouletteServer):
             body=data)
         return response
 
+    def add_file_tasks_to_challenge(self, data, challenge_id, line_by_line="true", remove_unmatched="false", data_origin_date="", skip_snapshot="false"):
+        """Method to add tasks to an existing challenge with tasks as GeoJSON
+
+        :param data: a GeoJSON containing geometry of tasks to be added to a challenge
+        :param challenge_id: the ID corresponding to the challenge that tasks will be added to
+        :param lineByLine: whether or not the provided data is in line-by-line GeoJSON format
+        :param skipSnapshot: whether or not to skip recording a snapshot before proceeding
+        :returns: the API response from the PUT request
+        """
+        query_params = {
+            "lineByLine": str(line_by_line),
+            "removeUnmatched": str(remove_unmatched),
+            "dataOriginDate": str(data_origin_date),
+            "skipSnapshot": str(skip_snapshot)
+        }
+        body = {'json': ('data', data)} # server only accepts dict with key 'json'
+
+        response = self.put_file(
+            endpoint=f"/challenge/{challenge_id}/addFileTasks",
+            body=body,
+            params=query_params)
+        return response
+
     def delete_challenge(self, challenge_id, immediate="false"):
         """Method to delete a challenge by using the corresponding challenge ID
 
