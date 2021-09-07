@@ -90,7 +90,7 @@ class TestProjectAPI(unittest.TestCase):
         api_instance.delete_project(test_project_id)
         mock_request.assert_called_once_with(
             f'{self.url}/project/{test_project_id}',
-            params=None)
+            params={'immediate': 'false'})
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
     def test_update_project(self, mock_request, api_instance=api):

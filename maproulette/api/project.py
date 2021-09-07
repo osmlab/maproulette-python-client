@@ -110,15 +110,20 @@ class Project(MapRouletteServer):
         )
         return response
 
-    def delete_project(self, project_id):
+    def delete_project(self, project_id, immediate="false"):
         """
         Method to delete a project.
 
         :param project_id: the id of the project being deleted
+        :param immediate: whether or not the project should be deleted immediately
         :returns: the API response form the DELETE request
         """
+        query_params = {
+            "immediate": str(immediate)
+        }
         response = self.delete(
-            endpoint=f"/project/{project_id}"
+            endpoint=f"/project/{project_id}",
+            params=query_params
         )
         return response
 
