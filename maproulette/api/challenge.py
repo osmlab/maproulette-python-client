@@ -51,7 +51,7 @@ class Challenge(MapRouletteServer):
         :param challenge_name: the name corresponding to the challenge
         :returns: the API response from the GET request
         """
-        response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name}")
+        response = self.get(endpoint=f"/project/{project_id}/challenge/{challenge_name.replace('/', '%2F')}")
         return response
 
     def get_challenges_by_tags(self, challenge_tags, limit=10, page=0):
@@ -323,6 +323,23 @@ class Challenge(MapRouletteServer):
         response = self.put(
             endpoint=f"/challenge/{challenge_id}",
             body=data)
+        return response
+
+    def rebuild_challenge(self, challenge_id, remove_unmatched=False, skip_snapshot=False):
+        """Rebuild the challenge by re-creating the tasks from the task data source
+
+        :param challenge_id: the ID corresponding to the challenge
+        :param remove_unmatched: Used to remove incomplete tasks that have been addressed externally since the last
+            rebuild, assuming the source data represents all tasks outstanding. If set to true, all existing tasks in
+            CREATED or SKIPPED status (only) will be removed prior to rebuilding with the assumption that they will be
+            recreated if they still appear in the updated source data. If set to false, unmatched existing tasks are
+            simply left as-is. Default: False
+        :param skip_snapshot: Whether to skip recording a snapshot before proceeding. Default: False
+        """
+        response = self.put(
+            endpoint=f"/challenge/{challenge_id}/rebuild",
+            params={'removeUnmatched': str(remove_unmatched).lower(), 'skipSnapshot': str(skip_snapshot).lower()}
+        )
         return response
 
     @staticmethod
