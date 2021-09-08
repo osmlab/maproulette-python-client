@@ -284,6 +284,8 @@ class Challenge(MapRouletteServer):
         :param data: a GeoJSON containing geometry of tasks to be added to a challenge
         :param challenge_id: the ID corresponding to the challenge that tasks will be added to
         :param lineByLine: whether or not the provided data is in line-by-line GeoJSON format
+        :param remove_unmatched: whether or not the JSON provided includes seperate GeoJSON on each line
+        :param data_origin_date: the date the data was sourced on
         :param skipSnapshot: whether or not to skip recording a snapshot before proceeding
         :returns: the API response from the PUT request
         """
