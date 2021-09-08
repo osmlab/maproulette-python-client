@@ -57,6 +57,22 @@ class TestChallengeAPI(unittest.TestCase):
             json=test_geojson,
             params=None)
 
+    @patch('maproulette.api.maproulette_server.requests.Session.put')
+    def test_add_file_tasks_to_challenge(self, mock_request, api_instance=api):
+        test_challenge_id = '12978'
+        data = {'json': ('data', test_geojson)}
+        query_params = {
+            "lineByLine": "true",
+            "removeUnmatched": "false",
+            "dataOriginDate": "",
+            "skipSnapshot": "false"
+        }
+        api_instance.add_file_tasks_to_challenge(test_geojson, test_challenge_id)
+        mock_request.assert_called_once_with(
+            f'{self.url}/challenge/12978/addFileTasks',
+            files=data,
+            params=query_params)
+
     @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_create_virtual_challenge(self, mock_request, api_instance=api):
         # TODO: add model for virtual challenge to aid in posting
