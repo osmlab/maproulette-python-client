@@ -278,7 +278,8 @@ class Challenge(MapRouletteServer):
             body=data)
         return response
 
-    def add_file_tasks_to_challenge(self, data, challenge_id, line_by_line="true", remove_unmatched="false", data_origin_date="", skip_snapshot="false"):
+    def add_file_tasks_to_challenge(self, data, challenge_id, line_by_line="true", remove_unmatched="false",
+                                    data_origin_date="", skip_snapshot="false"):
         """Method to add tasks to an existing challenge with tasks as GeoJSON
 
         :param data: a GeoJSON containing geometry of tasks to be added to a challenge
