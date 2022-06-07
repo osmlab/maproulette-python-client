@@ -36,6 +36,8 @@ class Task(MapRouletteServer):
         :param data: a JSON input containing task details
         :returns: the API response from the POST request
         """
+        if self.is_task_model(data):
+            data = TaskModel.to_dict(data)
         response = self.post(
             endpoint="/task",
             body=data)
