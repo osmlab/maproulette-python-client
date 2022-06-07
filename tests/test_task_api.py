@@ -34,8 +34,8 @@ class TestTaskAPI(unittest.TestCase):
                                                 geometries=geometries)
         api_instance.create_task(test_task_model)
         mock_request.assert_called_once_with(
-            f'{self.url}/tasks',
-            json=test_task_model,
+            f'{self.url}/task',
+            json=test_task_model.to_dict(),
             params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
@@ -89,7 +89,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.create_task(test_task)
         mock_request.assert_called_once_with(
             f'{self.url}/task',
-            json=test_task,
+            json=test_task.to_dict(),
             params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
