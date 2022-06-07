@@ -27,6 +27,18 @@ class TestTaskAPI(unittest.TestCase):
             params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.post')
+    def test_create_task(self, mock_request, api_instance=api):
+        geometries = test_geojson['features'][0]['geometry']
+        test_task_model = maproulette.TaskModel(name='test_task',
+                                                parent='12345',
+                                                geometries=geometries)
+        api_instance.create_task(test_task_model)
+        mock_request.assert_called_once_with(
+            f'{self.url}/task',
+            json=test_task_model.to_dict(),
+            params=None)
+
+    @patch('maproulette.api.maproulette_server.requests.Session.post')
     def test_create_tasks(self, mock_request, api_instance=api):
         test_tasks = []
         geometries = test_geojson['features'][0]['geometry']
@@ -77,7 +89,7 @@ class TestTaskAPI(unittest.TestCase):
         api_instance.create_task(test_task)
         mock_request.assert_called_once_with(
             f'{self.url}/task',
-            json=test_task,
+            json=test_task.to_dict(),
             params=None)
 
     @patch('maproulette.api.maproulette_server.requests.Session.put')
