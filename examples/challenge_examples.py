@@ -49,7 +49,7 @@ challenge_data.high_priority_rule = maproulette.PriorityRuleModel(condition=mapr
                                                                   ).to_json()
 
 # Adding example overpass QL input for challenge
-challenge_data.overpassQL = open('data/Example_OverpassQL_Query', 'r').read()
+challenge_data.overpassQL = open('data/Example_OverpassQL_Query.overpassql', 'r').read()
 
 # Create challenge
 print(json.dumps(api.create_challenge(challenge_data)))
