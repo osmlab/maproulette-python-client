@@ -34,6 +34,12 @@ Import the package:
 import maproulette
 ```
 
+import `json` for nice json printing:
+
+```
+import json
+```
+
 From there, create a configuration object. Depending on your use case, you may need to pass your API key. Specify
 that when you create your configuration. For example:
 
