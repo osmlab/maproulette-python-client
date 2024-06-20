@@ -29,8 +29,8 @@ This client makes it easy for users to communicate with the MapRoulette API from
 their Python environment. In the example below, we are able to access a MapRoulette project in just four lines of code:
 
    >>> import maproulette
-   >>> config = maproulette.Configuration()
-   >>> api = maproulette.Api(config)
+   >>> config = maproulette.Configuration(api_key='{YOUR_API_KEY}')
+   >>> api = maproulette.Project(config)
    >>> api.get_project_by_id(4719)
    {'data': {'id': 4719, 'owner': 4785024, 'name': 'health_facilities_in_india',...}
 
